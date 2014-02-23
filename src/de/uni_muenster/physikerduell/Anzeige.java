@@ -552,7 +552,7 @@ public class Anzeige extends JFrame implements GameListener {
 	 * wird abgeblendet.
 	 */
 	public void playOutro() {
-		if (pause == false) {
+		if (!pause) {
 			pause();
 		}
 	}

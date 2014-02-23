@@ -42,16 +42,6 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 
 	// Frame/Fenster der Bediener/Benutzeroberfläche des Physikerduells
 	private JFrame frmBedienoberflche;
-	// Die verschiedenen Componenten auf der obigen Oberflüchen
-	private JLabel lblHeadline;
-	private JLabel lblTeam1Name;
-	private JLabel lblTeam1GPunkte;
-	private JLabel lblTeam2Name;
-	private JLabel lblTeam2GPunkte;
-	private JLabel lblAktuellesTeam;
-	private JLabel lblAPunkte;
-	private JLabel lblALeben;
-	private JLabel lblRundenauswahl;
 	private JTextField txtTeam1Name;
 	private JTextField txtTeam2Name;
 	private JTextField txtTeam1GPunkte;
@@ -65,7 +55,6 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 	private JButton btnOpenLog;
 	private JComboBox<String> cbFragenauswahl;
 	private JPanel pTeamauswahl;
-	private JPanel pRundenauswahl;
 	private JCheckBox chckbxAntwort1;
 	private JCheckBox chckbxAntwort2;
 	private JCheckBox chckbxAntwort3;
@@ -233,6 +222,7 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 	 */
 	@Override
 	public void itemStateChanged(ItemEvent e) {
+		// 1.) CheckBoxes
 		Question curr = duell.getCurrentQuestion();
 		// Kein Sound, wenn die Runde vorbei ist!
 		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
@@ -247,6 +237,7 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 				updateCurrentScore();
 			}
 		}
+		// 2.) ComboBox
 		if (e.getSource().equals(cbFragenauswahl)) {
 			eventQuestionSelected(e);
 		}
@@ -533,13 +524,13 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		btnFalscheAntwort.setBounds(10, 610, 492, 30);
 		frmBedienoberflche.getContentPane().setLayout(null);
 
-		lblHeadline = new JLabel("Bedienoberfläche des Physikerduells");
+		JLabel lblHeadline = new JLabel("Bedienoberfläche des Physikerduells");
 		lblHeadline.setBounds(0, 0, 1018, 38);
 		lblHeadline.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblHeadline.setHorizontalAlignment(SwingConstants.CENTER);
 		frmBedienoberflche.getContentPane().add(lblHeadline);
 
-		lblTeam1Name = new JLabel("Teamname von Team 1");
+		JLabel lblTeam1Name = new JLabel("Teamname von Team 1");
 		lblTeam1Name.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblTeam1Name.setBounds(10, 38, 150, 25);
 		frmBedienoberflche.getContentPane().add(lblTeam1Name);
@@ -552,7 +543,7 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		txtTeam1Name.setText("");
 		frmBedienoberflche.getContentPane().add(txtTeam1Name);
 
-		lblTeam1GPunkte = new JLabel("Gesamtpunkte von Team 1");
+		JLabel lblTeam1GPunkte = new JLabel("Gesamtpunkte von Team 1");
 		lblTeam1GPunkte.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblTeam1GPunkte.setBounds(10, 100, 180, 25);
 		frmBedienoberflche.getContentPane().add(lblTeam1GPunkte);
@@ -566,7 +557,7 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		txtTeam1GPunkte.setColumns(1);
 		frmBedienoberflche.getContentPane().add(txtTeam1GPunkte);
 
-		lblTeam2Name = new JLabel("Teamname von Team 2");
+		JLabel lblTeam2Name = new JLabel("Teamname von Team 2");
 		lblTeam2Name.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblTeam2Name.setBounds(522, 38, 150, 25);
 		frmBedienoberflche.getContentPane().add(lblTeam2Name);
@@ -579,7 +570,7 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		txtTeam2Name.setText("");
 		frmBedienoberflche.getContentPane().add(txtTeam2Name);
 
-		lblTeam2GPunkte = new JLabel("Gesamtpunkte von Team 2");
+		JLabel lblTeam2GPunkte = new JLabel("Gesamtpunkte von Team 2");
 		lblTeam2GPunkte.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblTeam2GPunkte.setBounds(522, 100, 180, 25);
 		frmBedienoberflche.getContentPane().add(lblTeam2GPunkte);
@@ -598,12 +589,12 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		btnStart.setBounds(10, 150, 390, 50);
 		frmBedienoberflche.getContentPane().add(btnStart);
 
-		btnAbspannWechsel = new JButton("Abspann und Teamwechsel");
+		btnAbspannWechsel = new JButton("Abspann");
 		btnAbspannWechsel.setEnabled(false);
 		btnAbspannWechsel.setBounds(10, 211, 390, 50);
 		frmBedienoberflche.getContentPane().add(btnAbspannWechsel);
 
-		lblAktuellesTeam = new JLabel("Aktuelles Team");
+		JLabel lblAktuellesTeam = new JLabel("Aktuelles Team");
 		lblAktuellesTeam.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAktuellesTeam.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblAktuellesTeam.setBounds(410, 150, 100, 25);
@@ -622,10 +613,10 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		rdbtnTeam2.setEnabled(false);
 		pTeamauswahl.add(rdbtnTeam2);
 
-		lblAPunkte = new JLabel("Punkte des Aktuellen Teams");
-		lblAPunkte.setHorizontalAlignment(SwingConstants.CENTER);
+		JLabel lblAPunkte = new JLabel("Punkte des Aktuellen Teams");
+		lblAPunkte.setHorizontalAlignment(SwingConstants.LEFT);
 		lblAPunkte.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblAPunkte.setBounds(522, 150, 180, 25);
+		lblAPunkte.setBounds(522, 150, 210, 25);
 		frmBedienoberflche.getContentPane().add(lblAPunkte);
 
 		txtAPunkte = new JTextField();
@@ -638,10 +629,10 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		txtAPunkte.setColumns(1);
 		frmBedienoberflche.getContentPane().add(txtAPunkte);
 
-		lblALeben = new JLabel("Leben des Aktuellen Teams");
-		lblALeben.setHorizontalAlignment(SwingConstants.CENTER);
+		JLabel lblALeben = new JLabel("Leben des Aktuellen Teams");
+		lblALeben.setHorizontalAlignment(SwingConstants.LEFT);
 		lblALeben.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblALeben.setBounds(522, 202, 180, 25);
+		lblALeben.setBounds(522, 202, 210, 25);
 		frmBedienoberflche.getContentPane().add(lblALeben);
 
 		txtALeben = new JTextField();
@@ -654,12 +645,12 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		txtALeben.setColumns(1);
 		frmBedienoberflche.getContentPane().add(txtALeben);
 
-		pRundenauswahl = new JPanel();
+		JPanel pRundenauswahl = new JPanel();
 		pRundenauswahl.setBounds(10, 280, 1000, 90);
 		frmBedienoberflche.getContentPane().add(pRundenauswahl);
 		pRundenauswahl.setLayout(null);
 
-		lblRundenauswahl = new JLabel("Rundenauswahl");
+		JLabel lblRundenauswahl = new JLabel("Rundenauswahl");
 		lblRundenauswahl.setBounds(412, 5, 174, 14);
 		lblRundenauswahl.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRundenauswahl.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -668,27 +659,27 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		rdbtnRunde1 = new JRadioButton("Runde 1");
 		rdbtnRunde1.setSelected(true);
 		rdbtnRunde1.setEnabled(false);
-		rdbtnRunde1.setBounds(110, 32, 80, 25);
+		rdbtnRunde1.setBounds(110, 32, 100, 25);
 		pRundenauswahl.add(rdbtnRunde1);
 
 		rdbtnRunde2 = new JRadioButton("Runde 2");
 		rdbtnRunde2.setEnabled(false);
-		rdbtnRunde2.setBounds(288, 33, 80, 25);
+		rdbtnRunde2.setBounds(288, 33, 100, 25);
 		pRundenauswahl.add(rdbtnRunde2);
 
 		rdbtnRunde3 = new JRadioButton("Runde 3");
 		rdbtnRunde3.setEnabled(false);
-		rdbtnRunde3.setBounds(466, 33, 80, 25);
+		rdbtnRunde3.setBounds(466, 33, 100, 25);
 		pRundenauswahl.add(rdbtnRunde3);
 
 		rdbtnRunde4 = new JRadioButton("Runde 4");
 		rdbtnRunde4.setEnabled(false);
-		rdbtnRunde4.setBounds(644, 33, 80, 25);
+		rdbtnRunde4.setBounds(644, 33, 100, 25);
 		pRundenauswahl.add(rdbtnRunde4);
 
 		rdbtnRunde5 = new JRadioButton("Runde 5");
 		rdbtnRunde5.setEnabled(false);
-		rdbtnRunde5.setBounds(822, 33, 80, 25);
+		rdbtnRunde5.setBounds(822, 33, 100, 25);
 		pRundenauswahl.add(rdbtnRunde5);
 
 		frmBedienoberflche.getContentPane().add(cbFragenauswahl);
@@ -895,8 +886,53 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		return score;
 	}
 
+	/**
+	 * Update UI if the game state changes.
+	 */
 	@Override
 	public void gameUpdate() {
-		// TODO Auto-generated method stub
+		// Insert team data into TextFields
+		txtTeam1Name.setText(duell.getTeam1Name());
+		txtTeam2Name.setText(duell.getTeam2Name());
+		txtTeam1GPunkte.setText(String.valueOf(duell.getTeam1Score()));
+		txtTeam2GPunkte.setText(String.valueOf(duell.getTeam2Score()));
+		// Insert current team data into TextFields
+		txtALeben.setText(String.valueOf(duell.getCurrentLives()));
+		txtAPunkte.setText(String.valueOf(duell.getCurrentScore()));
+		// Select team RadioButton according to selected team
+		switch (duell.getCurrentTeam()) {
+		case 1:
+			activeTeam.setSelected(rdbtnTeam1.getModel(), true);
+			break;
+		case 2:
+			activeTeam.setSelected(rdbtnTeam2.getModel(), true);
+			break;
+		case -1:
+			activeTeam.setSelected(rdbtnNoTeam.getModel(), true);
+			break;
+		}
+		// Select round RadioButton according to selected round
+		JRadioButton rdoRound = (JRadioButton) getComponentByName("rdbtnRunde"
+			+ duell.getCurrentRound());
+		activeRound.setSelected(rdoRound.getModel(), true);
+		// Set answer CheckBox text and score Label text
+		int cbSelected = cbFragenauswahl.getSelectedIndex();
+		Question currQuestion = duell.getCurrentQuestion();
+		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
+			JCheckBox chkAns = (JCheckBox) getComponentByName("chckbxAntwort"
+				+ (i + 1));
+			JLabel lblAns = (JLabel) getComponentByName("lblAntwort" + (i + 1));
+			Answer ans = currQuestion.getAnswer(i);
+			String chkText = ans.getText();
+			String lblText = String.valueOf(currQuestion.getAnswer(i).getScore());
+			// No text if question 0 (test question)
+			if (cbSelected == 0) {
+				chkText = lblText = "";
+			}
+			chkAns.setText(chkText);
+			lblAns.setText(lblText);
+		}
+		// Enable or disable answer CheckBoxes
+		setAnswerCheckBoxes();
 	}
 }
