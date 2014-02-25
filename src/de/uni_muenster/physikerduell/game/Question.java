@@ -1,4 +1,4 @@
-package de.uni_muenster.physikerduell;
+package de.uni_muenster.physikerduell.game;
 
 import java.util.ArrayList;
 import java.util.Collections;

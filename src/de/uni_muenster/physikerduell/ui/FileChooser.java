@@ -1,4 +1,4 @@
-package de.uni_muenster.physikerduell;
+package de.uni_muenster.physikerduell.ui;
 
 import java.io.File;
 import java.io.FileInputStream;

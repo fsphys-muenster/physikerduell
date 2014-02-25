@@ -1,4 +1,4 @@
-package de.uni_muenster.physikerduell;
+package de.uni_muenster.physikerduell.ui;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -22,6 +22,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import de.uni_muenster.physikerduell.game.Answer;
+import de.uni_muenster.physikerduell.game.Game;
+import de.uni_muenster.physikerduell.game.GameListener;
+import de.uni_muenster.physikerduell.game.Question;
 import javazoom.jl.player.PlayerApplet;
 
 /**
@@ -31,7 +35,7 @@ import javazoom.jl.player.PlayerApplet;
  * @author Lutz Althüser
  * @author Simon May
  */
-public class Anzeige extends JFrame implements GameListener {
+public class Display extends JFrame implements GameListener {
 
 	private static final long serialVersionUID = 1L;
 	private static final String nl = System.getProperty("line.separator");
@@ -88,8 +92,9 @@ public class Anzeige extends JFrame implements GameListener {
 		setName("Anzeige");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		DisplayMode dm = GraphicsEnvironment.getLocalGraphicsEnvironment()
-			.getDefaultScreenDevice().getDisplayMode();
+		DisplayMode dm =
+			GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice()
+				.getDisplayMode();
 		setBounds(100, 100, dm.getWidth(), dm.getHeight());
 		setLocationRelativeTo(null);
 
@@ -114,8 +119,8 @@ public class Anzeige extends JFrame implements GameListener {
 		GridBagConstraints gbc = new GridBagConstraints();
 		outerPanel.add(contentPane, gbc);
 
-		lab = new JLabel(new ImageIcon(getClass()
-			.getResource("/res/Physikerduell-0.png")));
+		lab =
+			new JLabel(new ImageIcon(getClass().getResource("/res/Physikerduell-0.png")));
 		lab.setBounds(0, 0, 1024, 768);
 		lab.setVisible(true);
 		contentPaneLabel.add(lab);
@@ -286,7 +291,7 @@ public class Anzeige extends JFrame implements GameListener {
 	 * @param G
 	 *            Ein Objekt vom Typ Game.
 	 */
-	public Anzeige(Game G) {
+	public Display(Game G) {
 		duell = G;
 		soundplayer = new PlayerApplet();
 		lastline = null;
@@ -322,18 +327,21 @@ public class Anzeige extends JFrame implements GameListener {
 
 			// Text wird in den Stream geschrieben
 			Question curr = duell.getCurrentQuestion();
-			newLine = "|" + duell.getTeam1Name() + ": "
-				+ String.valueOf(duell.getTeam1Score()) + " |" + duell.getTeam2Name()
-				+ ": " + String.valueOf(duell.getTeam2Score()) + "| CurrentScore: "
-				+ String.valueOf(duell.getCurrentScore()) + " | CurrentTeam: "
-				+ String.valueOf(duell.getCurrentTeam()) + " | CurrentLives: "
-				+ String.valueOf(duell.getCurrentLives()) + " | CurrentRound: "
-				+ String.valueOf(duell.getCurrentRound()) + " | CurrentQuestion: "
-				+ curr.getText();
+			newLine =
+				"|" + duell.getTeam1Name() + ": "
+					+ String.valueOf(duell.getTeam1Score()) + " |"
+					+ duell.getTeam2Name() + ": "
+					+ String.valueOf(duell.getTeam2Score()) + "| CurrentScore: "
+					+ String.valueOf(duell.getCurrentScore()) + " | CurrentTeam: "
+					+ String.valueOf(duell.getCurrentTeam()) + " | CurrentLives: "
+					+ String.valueOf(duell.getCurrentLives()) + " | CurrentRound: "
+					+ String.valueOf(duell.getCurrentRound()) + " | CurrentQuestion: "
+					+ curr.getText();
 			for (int i = 0; i < Game.MAX_ANSWERS; i++) {
 				Answer ans = curr.getAnswer(i);
-				newLine += " | " + ans.isRevealed() + " " + ans.getText() + " "
-					+ ans.getScore() + " | ";
+				newLine +=
+					" | " + ans.isRevealed() + " " + ans.getText() + " "
+						+ ans.getScore() + " | ";
 			}
 			if (lastline != null && !lastline.equals(newLine)) {
 				// Platformunabhängiger Zeilenumbruch wird in den Stream geschrieben
@@ -479,7 +487,7 @@ public class Anzeige extends JFrame implements GameListener {
 	}
 
 	/**
-	 * Returns the value of a field in this instance, specified by a String.
+	 * Returns the value of a field in this instance, specified by name (as a String).
 	 * 
 	 * @param name
 	 *            The name of the field

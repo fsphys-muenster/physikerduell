@@ -7,7 +7,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
-import de.uni_muenster.physikerduell.Game.GameException;
+import de.uni_muenster.physikerduell.game.Answer;
+import de.uni_muenster.physikerduell.game.Game;
+import de.uni_muenster.physikerduell.game.Question;
+import de.uni_muenster.physikerduell.game.Game.GameException;
 
 public class GameTest {
 

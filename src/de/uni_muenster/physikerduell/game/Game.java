@@ -1,4 +1,4 @@
-package de.uni_muenster.physikerduell;
+package de.uni_muenster.physikerduell.game;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -180,6 +180,16 @@ public class Game {
 	 */
 	public int getCurrentRound() {
 		return currentRound;
+	}
+
+	/**
+	 * Returns the total score accumulated by the playing team in the current round that
+	 * would be awarded at the end of the round. This score includes the round multiplier.
+	 * 
+	 * @return The current score (with round multiplier)
+	 */
+	public int totalCurrentScore() {
+		return currentScore * roundMultiplier();
 	}
 
 	/**
@@ -402,7 +412,7 @@ public class Game {
 	/**
 	 * Updates all attached <code>GameListener</code>s.
 	 */
-	private void update() {
+	void update() {
 		for (GameListener listener : listeners) {
 			listener.gameUpdate();
 		}

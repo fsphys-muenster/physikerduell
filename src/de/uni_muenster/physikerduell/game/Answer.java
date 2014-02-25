@@ -1,4 +1,4 @@
-package de.uni_muenster.physikerduell;
+package de.uni_muenster.physikerduell.game;
 
 /**
  * The Answer class contains the information about an answer to a question, i.e. the
@@ -11,7 +11,17 @@ public class Answer implements Comparable<Answer> {
 
 	private final String text;
 	private final int score;
+	private Game game;
 	private boolean revealed;
+
+	Answer(Game game, String text, int score) {
+		if (score < 0) {
+			throw new IllegalArgumentException("Score < 0, was " + score);
+		}
+		this.game = game;
+		this.text = text;
+		this.score = score;
+	}
 
 	/**
 	 * Constructs an Answer with the given text and score.
@@ -22,11 +32,7 @@ public class Answer implements Comparable<Answer> {
 	 *            The Answer's score
 	 */
 	public Answer(String text, int score) {
-		if (score < 0) {
-			throw new IllegalArgumentException("Score < 0, was " + score);
-		}
-		this.text = text;
-		this.score = score;
+		this(null, text, score);
 	}
 
 	/**
@@ -64,6 +70,9 @@ public class Answer implements Comparable<Answer> {
 	 */
 	public void setRevealed(boolean revealed) {
 		this.revealed = revealed;
+		if (game != null) {
+			game.update();
+		}
 	}
 
 	@Override

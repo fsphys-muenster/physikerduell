@@ -1,4 +1,4 @@
-package de.uni_muenster.physikerduell;
+package de.uni_muenster.physikerduell.ui;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -25,7 +25,11 @@ import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javazoom.jl.player.PlayerApplet;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
-import de.uni_muenster.physikerduell.Game.GameException;
+import de.uni_muenster.physikerduell.game.Answer;
+import de.uni_muenster.physikerduell.game.Game;
+import de.uni_muenster.physikerduell.game.GameListener;
+import de.uni_muenster.physikerduell.game.Question;
+import de.uni_muenster.physikerduell.game.Game.GameException;
 
 /**
  * Hauptklasse des Physikerduells der Fachschaft Physik an der WWU Münster am <br>
@@ -46,7 +50,7 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 	private JTextField txtTeam2Name;
 	private JTextField txtTeam1GPunkte;
 	private JTextField txtTeam2GPunkte;
-	private JTextField txtAPunkte;
+	private JLabel txtAPunkte;
 	private JTextField txtALeben;
 	private JButton btnFalscheAntwort;
 	private JButton btnAbspannWechsel;
@@ -81,7 +85,7 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 	private ButtonGroup activeRound;
 	// Die beiden Objekte der Spielmechanik
 	private Game duell;
-	private Anzeige fenster;
+	private Display fenster;
 	// Das Objekt des SoundPlayers
 	private PlayerApplet soundplayer;
 	// Verschiedene Variablen der Spielmechanik
@@ -104,7 +108,7 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 					window.frmBedienoberflche.setVisible(true);
 				}
 				catch (GameException ex) {
-					System.err.println("Spiel konnte nicht gestartet werden: " + ex);
+					System.err.println("Game could not be started: " + ex);
 					System.exit(1);
 				}
 			}
@@ -135,11 +139,14 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 			cbFragenauswahl.addItem(duell.getQuestion(i).getText());
 		}
 		// Spielfenster erstellen
-		fenster = new Anzeige(duell);
+		fenster = new Display(duell);
 		// Fenster.dispose();
 		fenster.setUndecorated(true);
 		fenster.setAlwaysOnTop(!frmBedienoberflche.isAlwaysOnTop());
 		fenster.setVisible(true);
+		// Anzeige und Bedienoberfläche erhalten Spiel-Updates
+		duell.addListener(fenster);
+		duell.addListener(this);
 	}
 
 	/**
@@ -150,12 +157,8 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		if (e.getSource() == btnStart) {
 			btnAbspannWechsel.setEnabled(true);
 			fenster.playIntro();
-			// Wird automatisch aufgerufen: Fenster.resume();
-			duell.addListener(fenster);
-			fenster.gameUpdate();
 		}
 		else if (e.getSource() == btnAbspannWechsel) {
-			// Resetten der Werte - Fragenindex bleibt erhalten
 			fenster.playOutro();
 		}
 		else if (e.getSource() == btnFalscheAntwort) {
@@ -172,17 +175,11 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 				duell.setCurrentTeam(2);
 			}
 			duell.setCurrentLives(Game.MAX_LIVES);
-			txtALeben.setText(String.valueOf(duell.getCurrentLives()));
-			setAnswerCheckBoxes();
 		}
 		else if (e.getSource() == rdbtnNoTeam) {
 			duell.setCurrentTeam(-1);
 			duell.setCurrentScore(0);
-			txtAPunkte.setText(String.valueOf(duell.getCurrentScore()));
 			duell.setCurrentLives(0);
-			txtALeben.setText(String.valueOf(duell.getCurrentLives()));
-			// Alle Checkboxen deaktivieren
-			setAnswerCheckBoxes();
 		}
 		else if (e.getSource() == txtTeam1Name || e.getSource() == txtTeam2Name) {
 			checkTeamNameInput();
@@ -193,9 +190,6 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		else if (e.getSource() == txtTeam2GPunkte) {
 			duell.setTeam2Score(Integer.parseInt(txtTeam2GPunkte.getText()));
 		}
-		else if (e.getSource() == txtAPunkte) {
-			duell.setCurrentScore(Integer.parseInt(txtAPunkte.getText()));
-		}
 		else if (e.getSource() == txtALeben) {
 			duell.setCurrentLives(Integer.parseInt(txtALeben.getText()));
 		}
@@ -203,15 +197,14 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 			try {
 				Desktop.getDesktop().open(new File("Physikerduell-Log.txt"));
 			}
-			catch (Exception eLog) {
-				System.err.println("Error creating log file: " + eLog);
+			catch (Exception ex) {
+				System.err.println("Error creating log file: " + ex);
 			}
 		}
 		for (int i = 1; i <= Game.NUM_ROUNDS; i++) {
 			JRadioButton rdo = (JRadioButton) getComponentByName("rdbtnRunde" + i);
 			if (e.getSource().equals(rdo)) {
 				duell.setCurrentRound(i);
-				setAnswerCheckBoxes();
 				break;
 			}
 		}
@@ -223,18 +216,18 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		// 1.) CheckBoxes
-		Question curr = duell.getCurrentQuestion();
-		// Kein Sound, wenn die Runde vorbei ist!
 		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
 			JCheckBox chkbx = (JCheckBox) getComponentByName("chckbxAntwort" + (i + 1));
 			if (e.getSource() == chkbx) {
-				Answer ans = curr.getAnswer(i);
+				Answer ans = duell.getCurrentQuestion().getAnswer(i);
 				ans.setRevealed(chkbx.isSelected());
 				// Wenn richtig den Sound abspielen
+				// Kein Sound, wenn die Runde vorbei ist!
 				if (ans.isRevealed() && !rundenende) {
 					playSound("Right.mp3");
 				}
-				updateCurrentScore();
+				// Bei Punkteklau: Erfolgreich geklaut, sonst normale richtige Antwort
+				updateCurrentScore(punkteklau);
 			}
 		}
 		// 2.) ComboBox
@@ -258,10 +251,8 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 			rdbtnTeam1.setEnabled(true);
 			rdbtnTeam2.setEnabled(true);
 			rdbtnNoTeam.setEnabled(true);
-			txtAPunkte.setEnabled(true);
 			txtALeben.setEnabled(true);
 			cbFragenauswahl.setEnabled(true);
-			cbFragenauswahl.setSelectedIndex(0);
 			for (int i = 1; i <= Game.NUM_ROUNDS; i++) {
 				JRadioButton rdo = (JRadioButton) getComponentByName("rdbtnRunde" + i);
 				rdo.setEnabled(true);
@@ -287,32 +278,16 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 	 *            The event's ActionEvent
 	 */
 	private void eventNextQuestion(ActionEvent e) {
-		// XXX Meiner Meinung nach ist dieser ganze Teil für rundenende == true nicht
-		// wirklich sinnvoll bzw. richtig - Simon
 		if (rundenende) {
 			vorherigeFrage = duell.getCurrentQuestionIndex();
-			duell.setCurrentQuestionIndex(0);
 			duell.setCurrentTeam(-1);
-			activeTeam.setSelected(rdbtnNoTeam.getModel(), true);
-			txtAPunkte.setText("0");
 			duell.setCurrentScore(0);
-			txtALeben.setText("0");
 			duell.setCurrentLives(0);
-			setAnswerCheckBoxes();
 			int round = duell.getCurrentRound();
-			JRadioButton roundRdo;
-			if (round == Game.NUM_ROUNDS) {
-				duell.setCurrentRound(1);
-				roundRdo = (JRadioButton) getComponentByName("rdbtnRunde" + 1);
-			}
-			else {
-				duell.setCurrentRound(round + 1);
-				roundRdo = (JRadioButton) getComponentByName("rdbtnRunde" + (round + 1));
-			}
-			activeRound.setSelected(roundRdo.getModel(), true);
+			duell.setCurrentRound(round % Game.NUM_ROUNDS + 1);
 			rundenende = false;
 		}
-		if ((vorherigeFrage + 1) < duell.questionCount()) {
+		if (vorherigeFrage + 1 < duell.questionCount()) {
 			// Einführen der nächsten Frage
 			duell.setCurrentQuestionIndex(vorherigeFrage + 1);
 			cbFragenauswahl.setSelectedIndex(vorherigeFrage + 1);
@@ -332,42 +307,16 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		if (selected < 0) {
 			return;
 		}
-		Question curr = duell.getCurrentQuestion();
 		// Ausgewählte Frage übernehmen
 		vorherigeFrage = duell.getCurrentQuestionIndex();
 		duell.setCurrentQuestionIndex(selected);
-		curr = duell.getCurrentQuestion();
-		// Text für Checkbox und Label (Punkte) setzen
+		// Neue Frage => Keine Antwort aufgedeckt
 		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
-			JCheckBox chckbxAntw = (JCheckBox) getComponentByName("chckbxAntwort"
-				+ (i + 1));
-			JLabel lblAntw = (JLabel) getComponentByName("lblAntwort" + (i + 1));
-			Answer ans = curr.getAnswer(i);
-			// Neue Frage => Keine Antwort ausgewählt
-			ans.setRevealed(false);
-			chckbxAntw.setSelected(false);
-			// Antworttext und Punkte im GUI anzeigen
-			String chkbxText = ans.getText();
-			String lblText = String.valueOf(curr.getAnswer(i).getScore());
-			// Bei Frage 0 (Testfrage) kein Text
-			if (selected == 0) {
-				chkbxText = lblText = "";
-			}
-			chckbxAntw.setText(chkbxText);
-			lblAntw.setText(lblText);
+			duell.getCurrentQuestion().getAnswer(i).setRevealed(false);
 		}
-		// Checkboxen aktivieren oder deaktivieren
-		setAnswerCheckBoxes();
 		btnStart.setEnabled(true);
-		if ((duell.getCurrentQuestionIndex() + 1) < duell.questionCount()) {
-			btnNaechsteFrage.setEnabled(true);
-		}
-		else {
-			btnNaechsteFrage.setEnabled(false);
-		}
-		if (selected == 0) {
-			activeTeam.setSelected(rdbtnNoTeam.getModel(), true);
-		}
+		boolean nextQ = duell.getCurrentQuestionIndex() + 1 < duell.questionCount();
+		btnNaechsteFrage.setEnabled(nextQ);
 		rundenende = false;
 	}
 
@@ -381,48 +330,29 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		// Leben runtersetzen; wenn kein Leben: Teamwechsel
 		if (duell.getCurrentLives() > 1 && !punkteklau) {
 			duell.setCurrentLives(duell.getCurrentLives() - 1);
-			txtALeben.setText(String.valueOf(duell.getCurrentLives()));
 		}
 		else if (punkteklau) {
-			// Punkte updaten
-			if (duell.getCurrentTeam() == 1) {
-				duell.setTeam2Score(duell.getTeam2Score() + updatedScore());
-				txtTeam2GPunkte.setText(String.valueOf(duell.getTeam2Score()));
-			}
-			else if (duell.getCurrentTeam() == 2) {
-				duell.setTeam1Score(duell.getTeam1Score() + updatedScore());
-				txtTeam1GPunkte.setText(String.valueOf(duell.getTeam1Score()));
-			}
-			duell.setCurrentTeam(-1);
-			activeTeam.setSelected(rdbtnNoTeam.getModel(), true);
-			duell.setCurrentLives(0);
-			txtALeben.setText("0");
-			duell.setCurrentScore(0);
-			txtAPunkte.setText("0");
-			punkteklau = false;
-			rundenende = true;
+			// Punkteklau nicht erfolgreich; Punkte aktualisieren
+			updateCurrentScore(false);
 		}
 		else {
 			// Müssen noch iwie angezeigt werden, eventuell in zwei getrennten
 			// Lebensanzeigen
 			duell.setCurrentLives(0);
 			duell.setCurrentLives(3);
-			txtALeben.setText(String.valueOf(duell.getCurrentLives()));
 			punkteklau = true;
 			if (duell.getCurrentTeam() == 1) {
 				duell.setCurrentTeam(2);
-				activeTeam.setSelected(rdbtnTeam2.getModel(), true);
 			}
 			else if (duell.getCurrentTeam() == 2) {
 				duell.setCurrentTeam(1);
-				activeTeam.setSelected(rdbtnTeam1.getModel(), true);
 			}
 		}
 		playSound("Wrong.mp3");
 	}
 
 	/**
-	 * Returns the value of a field in this instance, specified by a String.
+	 * Returns the value of a field in this instance, specified by name (as a String).
 	 * 
 	 * @param name
 	 *            The name of the field
@@ -606,7 +536,6 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 
 		rdbtnTeam1 = new JRadioButton("Team 1");
 		rdbtnTeam1.setEnabled(false);
-		rdbtnTeam1.setSelected(true);
 		pTeamauswahl.add(rdbtnTeam1);
 
 		rdbtnTeam2 = new JRadioButton("Team 2");
@@ -619,14 +548,13 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		lblAPunkte.setBounds(522, 150, 210, 25);
 		frmBedienoberflche.getContentPane().add(lblAPunkte);
 
-		txtAPunkte = new JTextField();
-		txtAPunkte.setToolTipText("Mit ENTER die Eingabe bestätigen!");
-		txtAPunkte.setEnabled(false);
+		txtAPunkte = new JLabel();
+		txtAPunkte.setToolTipText("");
 		txtAPunkte.setHorizontalAlignment(SwingConstants.CENTER);
 		txtAPunkte.setText("0");
 		txtAPunkte.setFont(new Font("Tahoma", Font.BOLD, 15));
 		txtAPunkte.setBounds(562, 175, 100, 25);
-		txtAPunkte.setColumns(1);
+		// txtAPunkte.setColumns(1);
 		frmBedienoberflche.getContentPane().add(txtAPunkte);
 
 		JLabel lblALeben = new JLabel("Leben des Aktuellen Teams");
@@ -692,14 +620,15 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		frmBedienoberflche.getContentPane().add(btnNaechsteFrage);
 
 		rdbtnNoTeam = new JRadioButton("Kein Team");
+		rdbtnNoTeam.setSelected(true);
 		rdbtnNoTeam.setEnabled(false);
 		pTeamauswahl.add(rdbtnNoTeam);
 
 		// Gruppierung der RadioButtons zur Auswahl des Teams
 		activeTeam = new ButtonGroup();
+		activeTeam.add(rdbtnNoTeam);
 		activeTeam.add(rdbtnTeam1);
 		activeTeam.add(rdbtnTeam2);
-		activeTeam.add(rdbtnNoTeam);
 
 		// Gruppierung der RadioButtons zur Auswahl der Runde
 		activeRound = new ButtonGroup();
@@ -734,7 +663,7 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		txtTeam2Name.addActionListener(this);
 		txtTeam1GPunkte.addActionListener(this);
 		txtTeam2GPunkte.addActionListener(this);
-		txtAPunkte.addActionListener(this);
+		// txtAPunkte.addActionListener(this);
 		txtALeben.addActionListener(this);
 		rdbtnRunde1.addActionListener(this);
 		rdbtnRunde2.addActionListener(this);
@@ -810,80 +739,54 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 	}
 
 	/**
-	 * Enables or disables checkboxes according to the number of answers in the current
-	 * round.
-	 */
-	private void setAnswerCheckBoxes() {
-		int numberOfAnswers = duell.numberOfAnswers();
-		int currentQuestion = duell.getCurrentQuestionIndex();
-		int currentTeam = duell.getCurrentTeam();
-		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
-			boolean enabled = i < numberOfAnswers;
-			// Checkboxen deaktivieren bei Frage 0 (Testfrage) oder falls kein Team
-			// gewählt 
-			if (currentQuestion == 0 || currentTeam == -1) {
-				enabled = false;
-			}
-			JCheckBox chk = (JCheckBox) getComponentByName("chckbxAntwort" + (i + 1));
-			chk.setEnabled(enabled);
-		}
-	}
-
-	/**
 	 * Updates the current round's accumulated score or the teams' scores at the end of a
 	 * round.
 	 */
-	private void updateCurrentScore() {
+	private void updateCurrentScore(boolean stealSuccess) {
 		Question curr = duell.getCurrentQuestion();
-		int antworten = duell.numberOfAnswers();
+		int answers = duell.numberOfAnswers();
 		int score = 0;
 		int revealedanswers = 0;
 		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
-			// Iteration über die Antworten
 			if (curr.getAnswer(i).isRevealed()) {
 				revealedanswers++;
 				score += curr.getAnswerScore(i);
 			}
 		}
 		duell.setCurrentScore(score);
-		txtAPunkte.setText(String.valueOf(score));
-		// Bei Rundenende
-		if (punkteklau || revealedanswers == antworten) {
-			if (duell.getCurrentTeam() == 1) {
-				duell.setTeam1Score(duell.getTeam1Score() + updatedScore());
+		boolean allAnswers = revealedanswers == answers;
+		// Punkte updaten
+		// Bei falscher Antwort und Punkteklau erhält das andere Team die Punkte,
+		// bei richtiger Antwort und Punkteklau oder bei bei Rundenende erhält das
+		// aktuelle Team die Punkte
+		if (punkteklau || allAnswers) {
+			int team = duell.getCurrentTeam();
+			int updScore = duell.totalCurrentScore();
+			if (stealSuccess || allAnswers) {
+				if (team == 1) {
+					duell.setTeam1Score(duell.getTeam1Score() + updScore);
+				}
+				else if (team == 2) {
+					duell.setTeam2Score(duell.getTeam2Score() + updScore);
+				}
 			}
-			else if (duell.getCurrentTeam() == 2) {
-				duell.setTeam2Score(duell.getTeam2Score() + updatedScore());
+			// Punkteklau fehlgeschlagen => anderes Team erhält Punkte
+			else {
+				if (team == 1) {
+					duell.setTeam2Score(duell.getTeam2Score() + updScore);
+				}
+				else if (team == 2) {
+					duell.setTeam1Score(duell.getTeam1Score() + updScore);
+				}
 			}
 			duell.setCurrentTeam(-1);
-			activeTeam.setSelected(rdbtnNoTeam.getModel(), true);
-			txtTeam1GPunkte.setText(String.valueOf(duell.getTeam1Score()));
-			txtTeam2GPunkte.setText(String.valueOf(duell.getTeam2Score()));
 			rundenende = true;
-			if (punkteklau) {
+			if (stealSuccess) {
+				duell.setCurrentLives(0);
+				duell.setCurrentScore(0);
 				punkteklau = false;
 			}
 		}
-	}
-
-	/**
-	 * Gibt die aktualisierte Punktzahl zurück.
-	 * 
-	 * @return Aktuelle Punktzahl (mit Multiplikator)
-	 */
-	private int updatedScore() {
-		int antworten = duell.numberOfAnswers();
-		int multiplikator = duell.roundMultiplier();
-		int score = 0;
-		Question curr = duell.getCurrentQuestion();
-		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
-			// Iteration über die Antworten
-			Answer ans = curr.getAnswer(i);
-			if (i < antworten && ans.isRevealed()) {
-				score += ans.getScore() * multiplikator;
-			}
-		}
-		return score;
 	}
 
 	/**
@@ -912,27 +815,36 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 			break;
 		}
 		// Select round RadioButton according to selected round
-		JRadioButton rdoRound = (JRadioButton) getComponentByName("rdbtnRunde"
-			+ duell.getCurrentRound());
+		JRadioButton rdoRound =
+			(JRadioButton) getComponentByName("rdbtnRunde" + duell.getCurrentRound());
 		activeRound.setSelected(rdoRound.getModel(), true);
 		// Set answer CheckBox text and score Label text
 		int cbSelected = cbFragenauswahl.getSelectedIndex();
 		Question currQuestion = duell.getCurrentQuestion();
 		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
-			JCheckBox chkAns = (JCheckBox) getComponentByName("chckbxAntwort"
-				+ (i + 1));
+			JCheckBox chkAns = (JCheckBox) getComponentByName("chckbxAntwort" + (i + 1));
 			JLabel lblAns = (JLabel) getComponentByName("lblAntwort" + (i + 1));
 			Answer ans = currQuestion.getAnswer(i);
 			String chkText = ans.getText();
 			String lblText = String.valueOf(currQuestion.getAnswer(i).getScore());
-			// No text if question 0 (test question)
-			if (cbSelected == 0) {
+			// No text if question 0 (test question) or no selection
+			if (cbSelected == 0 || cbSelected == -1) {
 				chkText = lblText = "";
 			}
 			chkAns.setText(chkText);
 			lblAns.setText(lblText);
 		}
-		// Enable or disable answer CheckBoxes
-		setAnswerCheckBoxes();
+		// Enable/disable and select/deselect answer CheckBoxes
+		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
+			boolean enabled = i < duell.numberOfAnswers();
+			// Checkboxen deaktivieren bei Frage 0 (Testfrage) oder falls kein Team
+			// gewählt 
+			if (duell.getCurrentQuestionIndex() == 0 || duell.getCurrentTeam() == -1) {
+				enabled = false;
+			}
+			JCheckBox chk = (JCheckBox) getComponentByName("chckbxAntwort" + (i + 1));
+			chk.setEnabled(enabled);
+			chk.setSelected(duell.getCurrentQuestion().getAnswer(i).isRevealed());
+		}
 	}
 }

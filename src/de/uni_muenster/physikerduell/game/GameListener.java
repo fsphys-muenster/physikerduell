@@ -1,4 +1,4 @@
-package de.uni_muenster.physikerduell;
+package de.uni_muenster.physikerduell.game;
 
 /**
  * A class implementing the GameListener interface can be registered to a Game instance to
