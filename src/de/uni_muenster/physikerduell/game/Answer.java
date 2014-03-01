@@ -98,7 +98,7 @@ public class Answer implements Comparable<Answer> {
 
 	@Override
 	public String toString() {
-		return "[Answer] " + text;
+		return "[Answer] " + text + " [" + score + "]";
 	}
 
 	/**

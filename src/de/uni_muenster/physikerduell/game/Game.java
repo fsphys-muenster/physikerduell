@@ -78,21 +78,21 @@ public class Game {
 		String questionText = "";
 		List<Answer> answers = new ArrayList<>();
 		for (int row = 0; row < csv.getRowCount(); row++) {
-			if (questionRow) {
-				questionText = csv.getItem(row, 0);
-				questionRow = false;
-				continue;
-			}
-			else if (csv.getItem(row, 0).isEmpty() && csv.getItem(row, 1).isEmpty()) {
+			if (csv.getItem(row, 0).isEmpty() && csv.getItem(row, 1).isEmpty()) {
 				questionRow = true;
 				questions.add(new Question(questionText, answers));
 				answers.clear();
+			}
+			else if (questionRow) {
+				questionText = csv.getItem(row, 0);
+				questionRow = false;
+				continue;
 			}
 			else {
 				try {
 					String answerText = csv.getItem(row, 0);
 					int answerScore = Integer.parseInt(csv.getItem(row, 1));
-					answers.add(new Answer(answerText, answerScore));
+					answers.add(new Answer(this, answerText, answerScore));
 				}
 				catch (NumberFormatException ex) {
 					throw new GameException("Incorrect score field in CSV file, line "
@@ -100,47 +100,6 @@ public class Game {
 				}
 			}
 		}
-	}
-
-	/**
-	 * Returns the score multiplier for the current round. Scores are multiplied with this
-	 * value before they are awarded.
-	 * 
-	 * @return The current score multiplier
-	 */
-	public int roundMultiplier() {
-		int multiplier = 1;
-		switch (currentRound) {
-		case 3:
-		case 4:
-			multiplier = 2;
-			break;
-		case 5:
-			multiplier = 3;
-			break;
-		}
-		return multiplier;
-	}
-
-	/**
-	 * Returns the number of answers which have to be found in the current round.
-	 * 
-	 * @return Current number of answers to be found
-	 */
-	public int numberOfAnswers() {
-		int answers = MAX_ANSWERS;
-		switch (currentRound) {
-		case 3:
-			answers = 5;
-			break;
-		case 4:
-			answers = 4;
-			break;
-		case 5:
-			answers = 3;
-			break;
-		}
-		return answers;
 	}
 
 	/**
@@ -194,16 +153,6 @@ public class Game {
 	}
 
 	/**
-	 * Returns the total score accumulated by the playing team in the current round that
-	 * would be awarded at the end of the round. This score includes the round multiplier.
-	 * 
-	 * @return The current score (with round multiplier)
-	 */
-	public int totalCurrentScore() {
-		return currentScore * roundMultiplier();
-	}
-
-	/**
 	 * Returns the score accumulated by the playing team in the current round.
 	 * 
 	 * @return The current score
@@ -231,15 +180,6 @@ public class Game {
 	 */
 	public Question getQuestion(int index) {
 		return questions.get(index);
-	}
-
-	/**
-	 * Returns the total number of questions loaded in this Game instance.
-	 * 
-	 * @return The number of questions
-	 */
-	public int questionCount() {
-		return questions.size();
 	}
 
 	/**
@@ -278,6 +218,40 @@ public class Game {
 		return team2Score;
 	}
 
+	public boolean isLogging() {
+		return logWriter != null;
+	}
+
+	/**
+	 * Returns the number of answers which have to be found in the current round.
+	 * 
+	 * @return Current number of answers to be found
+	 */
+	public int numberOfAnswers() {
+		int answers = MAX_ANSWERS;
+		switch (currentRound) {
+		case 3:
+			answers = 5;
+			break;
+		case 4:
+			answers = 4;
+			break;
+		case 5:
+			answers = 3;
+			break;
+		}
+		return answers;
+	}
+
+	/**
+	 * Returns the total number of questions loaded in this Game instance.
+	 * 
+	 * @return The number of questions
+	 */
+	public int questionCount() {
+		return questions.size();
+	}
+
 	/**
 	 * Removes a <code>GameListener</code> from this <code>Game</code> instance so that it
 	 * will no longer receive updates about the game state.
@@ -287,6 +261,26 @@ public class Game {
 	 */
 	public void removeListener(GameListener listener) {
 		listeners.remove(listener);
+	}
+
+	/**
+	 * Returns the score multiplier for the current round. Scores are multiplied with this
+	 * value before they are awarded.
+	 * 
+	 * @return The current score multiplier
+	 */
+	public int roundMultiplier() {
+		int multiplier = 1;
+		switch (currentRound) {
+		case 3:
+		case 4:
+			multiplier = 2;
+			break;
+		case 5:
+			multiplier = 3;
+			break;
+		}
+		return multiplier;
 	}
 
 	/**
@@ -371,6 +365,43 @@ public class Game {
 	}
 
 	/**
+	 * Activate or deactivate logging changes to the game to a file (
+	 * <code>LOG_FILE_PATH</code>). If logging is activated, the log file is created in
+	 * the current working directory. If it already exists, it is appended to.
+	 * 
+	 * @param logging
+	 *            Activate (true) or deactivate (false) logging
+	 */
+	public void setLogging(boolean logging) {
+		if (logging) {
+			File logFile = new File(LOG_FILE_PATH);
+			try {
+				// append if file exists
+				logWriter = new FileWriter(logFile, true);
+				String timeStamp =
+					new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss").format(Calendar
+						.getInstance().getTime());
+				String newLine = "\n\n\n[" + timeStamp + "]\n----- Neues Spiel -----\n";
+				logWriter.write(newLine);
+				logWriter.flush();
+			}
+			catch (IOException ex) {
+				logWriter = null;
+				System.err.println("Error starting log: " + ex);
+			}
+		}
+		else if (logWriter != null) {
+			try {
+				logWriter.close();
+			}
+			catch (IOException ex) {
+				System.err.println("Error closing log: " + ex);
+			}
+			logWriter = null;
+		}
+	}
+
+	/**
 	 * Sets the name of the first team.
 	 * 
 	 * @param team1Name
@@ -378,7 +409,7 @@ public class Game {
 	 */
 	public void setTeam1Name(String team1Name) {
 		if (team1Name == null) {
-			throw new IllegalArgumentException("Team name was null");
+			throw new IllegalArgumentException("Team 1 name was null");
 		}
 		this.team1Name = team1Name;
 		update();
@@ -406,7 +437,7 @@ public class Game {
 	 */
 	public void setTeam2Name(String team2Name) {
 		if (team1Name == null) {
-			throw new IllegalArgumentException("Team name was null");
+			throw new IllegalArgumentException("Team 2 name was null");
 		}
 		this.team2Name = team2Name;
 		update();
@@ -427,58 +458,13 @@ public class Game {
 	}
 
 	/**
-	 * Updates all attached <code>GameListener</code>s.
-	 */
-	void update() {
-		if (!updating) {
-			return;
-		}
-		for (GameListener listener : listeners) {
-			listener.gameUpdate();
-		}
-		if (isLogging()) {
-			updateLog();
-		}
-	}
-
-	public boolean isLogging() {
-		return logWriter != null;
-	}
-
-	/**
-	 * Activate or deactivate logging changes to the game to a file (
-	 * <code>LOG_FILE_PATH</code>). If logging is activated, the log file is created in
-	 * the current working directory. If it already exists, it is appended to.
+	 * Returns the total score accumulated by the playing team in the current round that
+	 * would be awarded at the end of the round. This score includes the round multiplier.
 	 * 
-	 * @param logging
-	 *            Activate (true) or deactivate (false) logging
+	 * @return The current score (with round multiplier)
 	 */
-	public void setLogging(boolean logging) {
-		if (logging) {
-			File logFile = new File(LOG_FILE_PATH);
-			try {
-				// append if file exists
-				logWriter = new FileWriter(logFile, true);
-				String timeStamp = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss")
-					.format(Calendar.getInstance().getTime());
-				String newLine = "\n\n\n[" + timeStamp + "]\n----- Neues Spiel -----\n";
-				logWriter.write(newLine);
-				logWriter.flush();
-			}
-			catch (IOException ex) {
-				logWriter = null;
-				System.err.println("Error starting log: " + ex);
-			}
-		}
-		else if (logWriter != null) {
-			try {
-				logWriter.close();
-			}
-			catch (IOException ex) {
-				System.err.println("Error closing log: " + ex);
-			}
-			logWriter = null;
-		}
+	public int totalCurrentScore() {
+		return currentScore * roundMultiplier();
 	}
 
 	/**
@@ -486,16 +472,17 @@ public class Game {
 	 */
 	private void updateLog() {
 		Question curr = getCurrentQuestion();
-		String timeStamp = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss").format(Calendar
-			.getInstance().getTime());
-		String newLine = "[" + timeStamp + "]\n" + team1Name + ": "
-			+ String.valueOf(team1Score) + " | " + team2Name + ": "
-			+ String.valueOf(team2Score) + " | CurrentScore:    "
-			+ String.valueOf(currentScore) + " | CurrentTeam:     "
-			+ String.valueOf(currentTeam) + " | CurrentLives:    "
-			+ String.valueOf(currentLives) + " | CurrentRound:    "
-			+ String.valueOf(currentRound) + " | CurrentQuestion: " + curr.getText()
-			+ "\n";
+		String timeStamp =
+			new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss").format(Calendar.getInstance()
+				.getTime());
+		String newLine =
+			"[" + timeStamp + "]\n" + team1Name + ": " + String.valueOf(team1Score)
+				+ " | " + team2Name + ": " + String.valueOf(team2Score)
+				+ " | CurrentScore:    " + String.valueOf(currentScore)
+				+ " | CurrentTeam:     " + String.valueOf(currentTeam)
+				+ " | CurrentLives:    " + String.valueOf(currentLives)
+				+ " | CurrentRound:    " + String.valueOf(currentRound)
+				+ " | CurrentQuestion: " + curr.getText() + "\n";
 		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
 			Answer ans = curr.getAnswer(i);
 			String revealed = ans.isRevealed() ? "X" : " ";
@@ -515,6 +502,21 @@ public class Game {
 			System.err.println("Error writing to log: " + ex);
 		}
 		lastLine = newLine;
+	}
+
+	/**
+	 * Updates all attached <code>GameListener</code>s.
+	 */
+	void update() {
+		if (!updating) {
+			return;
+		}
+		if (isLogging()) {
+			updateLog();
+		}
+		for (GameListener listener : listeners) {
+			listener.gameUpdate();
+		}
 	}
 
 	/**

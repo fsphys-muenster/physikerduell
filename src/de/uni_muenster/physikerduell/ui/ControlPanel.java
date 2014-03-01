@@ -8,8 +8,6 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.io.File;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -43,7 +41,7 @@ import de.uni_muenster.physikerduell.game.Question;
  * @author Lutz Althüser
  * @author Simon May
  */
-public class ControlPanel implements ActionListener, ItemListener, GameListener {
+public class ControlPanel implements ActionListener, GameListener {
 
 	// Frame/Fenster der Bediener/Benutzeroberfläche des Physikerduells
 	private JFrame frmBedienoberflche;
@@ -203,6 +201,15 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 					"Could not read log file!");
 			}
 		}
+		else if (e.getSource() == cbFragenauswahl) {
+			int selected = cbFragenauswahl.getSelectedIndex();
+			// Ausgewählte Frage übernehmen, wenn andere Frage ausgewählt wurde
+			if (selected >= 0 && selected != duell.getCurrentQuestionIndex()) {
+				duell.setCurrentQuestionIndex(selected);
+				rundenende = false;
+			}
+		}
+		// RadioButtons (rounds)
 		for (int i = 1; i <= Game.NUM_ROUNDS; i++) {
 			JRadioButton rdo = (JRadioButton) getComponentByName("rdbtnRunde" + i);
 			if (e.getSource().equals(rdo)) {
@@ -210,39 +217,80 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 				break;
 			}
 		}
-	}
-
-	/**
-	 * Handler für itemStateChanged (für Checkbox oder ComboBox).
-	 */
-	@Override
-	public void itemStateChanged(ItemEvent e) {
-		// 1.) CheckBoxes
+		// CheckBoxes (answers)
 		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
 			JCheckBox chkbx = (JCheckBox) getComponentByName("chckbxAntwort" + (i + 1));
 			if (e.getSource() == chkbx) {
 				Answer ans = duell.getCurrentQuestion().getAnswer(i);
 				ans.setRevealed(chkbx.isSelected());
-				// Wenn richtig den Sound abspielen
-				// Kein Sound, wenn die Runde vorbei ist!
+				// Wenn richtig: Sound abspielen; Kein Sound, wenn die Runde vorbei ist!
 				if (ans.isRevealed() && !rundenende) {
 					playSound("Right.mp3");
 				}
 				// Bei Punkteklau: Erfolgreich geklaut, sonst normale richtige Antwort
 				updateCurrentScore(punkteklau);
+				break;
 			}
 		}
-		// 2.) ComboBox
-		if (e.getSource().equals(cbFragenauswahl)) {
-			int selected = cbFragenauswahl.getSelectedIndex();
-			if (selected < 0) {
-				return;
-			}
-			// Ausgewählte Frage übernehmen
-			duell.setCurrentQuestionIndex(selected);
-			btnStart.setEnabled(true);
-			rundenende = false;
+	}
+
+	/**
+	 * Update UI if the game state changes.
+	 */
+	@Override
+	public void gameUpdate() {
+		// Insert team data into TextFields
+		txtTeam1Name.setText(duell.getTeam1Name());
+		txtTeam2Name.setText(duell.getTeam2Name());
+		txtTeam1GPunkte.setText(String.valueOf(duell.getTeam1Score()));
+		txtTeam2GPunkte.setText(String.valueOf(duell.getTeam2Score()));
+		// Insert current team data into TextFields
+		txtALeben.setText(String.valueOf(duell.getCurrentLives()));
+		txtAPunkte.setText(String.valueOf(duell.getCurrentScore()));
+		// Select team RadioButton according to selected team
+		int currTeam = duell.getCurrentTeam();
+		switch (currTeam) {
+		case 1:
+			activeTeam.setSelected(rdbtnTeam1.getModel(), true);
+			break;
+		case 2:
+			activeTeam.setSelected(rdbtnTeam2.getModel(), true);
+			break;
+		case -1:
+			activeTeam.setSelected(rdbtnNoTeam.getModel(), true);
+			break;
 		}
+		// Select round RadioButton according to selected round
+		JRadioButton rdoRound =
+			(JRadioButton) getComponentByName("rdbtnRunde" + duell.getCurrentRound());
+		activeRound.setSelected(rdoRound.getModel(), true);
+		// Select ComboBox item according to selected question
+		int currIndex = duell.getCurrentQuestionIndex();
+		cbFragenauswahl.setSelectedIndex(currIndex);
+		// Set answer CheckBox text and score Label text
+		// Enable/disable and select/deselect answer CheckBoxes
+		Question currQuestion = duell.getCurrentQuestion();
+		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
+			JCheckBox chkAns = (JCheckBox) getComponentByName("chckbxAntwort" + (i + 1));
+			JLabel lblAns = (JLabel) getComponentByName("lblAntwort" + (i + 1));
+			Answer ans = currQuestion.getAnswer(i);
+			String chkText = ans.getText();
+			String lblText = String.valueOf(ans.getScore());
+			boolean enabled = i < duell.numberOfAnswers();
+			// No text if question 0 (test question)
+			if (currIndex == 0) {
+				chkText = lblText = "";
+			}
+			// Deactivate if question 0 (test question) or if no team is selected
+			enabled = currIndex != 0 && currTeam != -1;
+			chkAns.setText(chkText);
+			chkAns.setEnabled(enabled);
+			chkAns.setSelected(ans.isRevealed());
+			lblAns.setText(lblText);
+		}
+		// Enable/disable button for next question
+		boolean nextQ = duell.getCurrentQuestionIndex() + 1 < duell.questionCount();
+		btnNaechsteFrage.setEnabled(nextQ);
 	}
 
 	/**
@@ -268,6 +316,7 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 			}
 			btnFalscheAntwort.setEnabled(true);
 			btnNaechsteFrage.setEnabled(true);
+			btnStart.setEnabled(true);
 		}
 		else {
 			btnStart.setEnabled(false);
@@ -291,15 +340,13 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 			duell.setCurrentTeam(-1);
 			duell.setCurrentScore(0);
 			duell.setCurrentLives(0);
-			int round = duell.getCurrentRound();
-			duell.setCurrentRound(round % Game.NUM_ROUNDS + 1);
+			duell.setCurrentRound(duell.getCurrentRound() % Game.NUM_ROUNDS + 1);
 			rundenende = false;
 		}
 		int currIndex = duell.getCurrentQuestionIndex();
 		if (currIndex + 1 < duell.questionCount()) {
 			// Einführen der nächsten Frage
 			duell.setCurrentQuestionIndex(currIndex + 1);
-			cbFragenauswahl.setSelectedIndex(currIndex + 1);
 		}
 	}
 
@@ -369,7 +416,7 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		cbFragenauswahl.setEnabled(false);
 		cbFragenauswahl.setBounds(10, 380, 492, 30);
 		cbFragenauswahl.setModel(new DefaultComboBoxModel<String>(new String[] {
-			"Was ist denn die Frage?", "A?", "B?", "C?", "D?", "E?" }));
+			"Was ist denn die Frage?", "A?", "B?", "C?", "D?", "E?"}));
 
 		JPanel pAntwortmoeglichkeiten = new JPanel();
 		pAntwortmoeglichkeiten.setBounds(10, 415, 492, 190);
@@ -534,7 +581,6 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		txtAPunkte.setText("0");
 		txtAPunkte.setFont(new Font("Tahoma", Font.BOLD, 15));
 		txtAPunkte.setBounds(562, 175, 100, 25);
-		// txtAPunkte.setColumns(1);
 		frmBedienoberflche.getContentPane().add(txtAPunkte);
 
 		JLabel lblALeben = new JLabel("Leben des Aktuellen Teams");
@@ -643,7 +689,6 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		txtTeam2Name.addActionListener(this);
 		txtTeam1GPunkte.addActionListener(this);
 		txtTeam2GPunkte.addActionListener(this);
-		// txtAPunkte.addActionListener(this);
 		txtALeben.addActionListener(this);
 		rdbtnRunde1.addActionListener(this);
 		rdbtnRunde2.addActionListener(this);
@@ -652,14 +697,14 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		rdbtnRunde5.addActionListener(this);
 		rdbtnNoTeam.addActionListener(this);
 
-		chckbxAntwort1.addItemListener(this);
-		chckbxAntwort2.addItemListener(this);
-		chckbxAntwort3.addItemListener(this);
-		chckbxAntwort4.addItemListener(this);
-		chckbxAntwort5.addItemListener(this);
-		chckbxAntwort6.addItemListener(this);
+		chckbxAntwort1.addActionListener(this);
+		chckbxAntwort2.addActionListener(this);
+		chckbxAntwort3.addActionListener(this);
+		chckbxAntwort4.addActionListener(this);
+		chckbxAntwort5.addActionListener(this);
+		chckbxAntwort6.addActionListener(this);
 
-		cbFragenauswahl.addItemListener(this);
+		cbFragenauswahl.addActionListener(this);
 
 		btnOpenLog = new JButton("Open Logfile");
 		btnOpenLog.setBounds(628, 649, 100, 23);
@@ -689,20 +734,20 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		tytpnImpressum.setBounds(512, 651, 496, 25);
 		frmBedienoberflche.getContentPane().add(tytpnImpressum);
 		frmBedienoberflche.getContentPane().setFocusTraversalPolicy(
-			new FocusTraversalOnArray(new Component[] { lblHeadline, lblTeam1Name,
+			new FocusTraversalOnArray(new Component[] {lblHeadline, lblTeam1Name,
 				txtTeam1Name, lblTeam1GPunkte, txtTeam1GPunkte, lblTeam2Name,
 				txtTeam2Name, lblTeam2GPunkte, txtTeam2GPunkte, btnStart,
 				btnAbspannWechsel, lblAktuellesTeam, pTeamauswahl, lblAPunkte,
 				txtAPunkte, lblALeben, txtALeben, pRundenauswahl, lblRundenauswahl,
 				cbFragenauswahl, pAntwortmoeglichkeiten, chckbxAntwort1, chckbxAntwort2,
 				chckbxAntwort3, chckbxAntwort4, chckbxAntwort5, chckbxAntwort6,
-				btnFalscheAntwort, btnNaechsteFrage }));
+				btnFalscheAntwort, btnNaechsteFrage}));
 		frmBedienoberflche.setFocusTraversalPolicy(new FocusTraversalOnArray(
-			new Component[] { txtTeam1Name, txtTeam2Name, txtTeam1GPunkte,
+			new Component[] {txtTeam1Name, txtTeam2Name, txtTeam1GPunkte,
 				txtTeam2GPunkte, btnStart, btnAbspannWechsel, txtAPunkte, txtALeben,
 				cbFragenauswahl, chckbxAntwort1, chckbxAntwort2, chckbxAntwort3,
 				chckbxAntwort4, chckbxAntwort5, chckbxAntwort6, btnFalscheAntwort,
-				btnNaechsteFrage }));
+				btnNaechsteFrage}));
 	}
 
 	/**
@@ -738,11 +783,11 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 			}
 		}
 		duell.setCurrentScore(score);
-		boolean allAnswers = revealedanswers == answers;
-		// Punkte updaten
+		// Gesamtpunkte updaten
 		// Bei falscher Antwort und Punkteklau erhält das andere Team die Punkte,
 		// bei richtiger Antwort und Punkteklau oder bei bei Rundenende erhält das
 		// aktuelle Team die Punkte
+		boolean allAnswers = revealedanswers == answers;
 		if (punkteklau || allAnswers) {
 			int team = duell.getCurrentTeam();
 			int updScore = duell.totalCurrentScore();
@@ -771,66 +816,5 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 				punkteklau = false;
 			}
 		}
-	}
-
-	/**
-	 * Update UI if the game state changes.
-	 */
-	@Override
-	public void gameUpdate() {
-		// Insert team data into TextFields
-		txtTeam1Name.setText(duell.getTeam1Name());
-		txtTeam2Name.setText(duell.getTeam2Name());
-		txtTeam1GPunkte.setText(String.valueOf(duell.getTeam1Score()));
-		txtTeam2GPunkte.setText(String.valueOf(duell.getTeam2Score()));
-		// Insert current team data into TextFields
-		txtALeben.setText(String.valueOf(duell.getCurrentLives()));
-		txtAPunkte.setText(String.valueOf(duell.getCurrentScore()));
-		// Select team RadioButton according to selected team
-		switch (duell.getCurrentTeam()) {
-		case 1:
-			activeTeam.setSelected(rdbtnTeam1.getModel(), true);
-			break;
-		case 2:
-			activeTeam.setSelected(rdbtnTeam2.getModel(), true);
-			break;
-		case -1:
-			activeTeam.setSelected(rdbtnNoTeam.getModel(), true);
-			break;
-		}
-		// Select round RadioButton according to selected round
-		JRadioButton rdoRound = (JRadioButton) getComponentByName("rdbtnRunde"
-			+ duell.getCurrentRound());
-		activeRound.setSelected(rdoRound.getModel(), true);
-		// Set answer CheckBox text and score Label text
-		int cbSelected = cbFragenauswahl.getSelectedIndex();
-		Question currQuestion = duell.getCurrentQuestion();
-		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
-			JCheckBox chkAns = (JCheckBox) getComponentByName("chckbxAntwort" + (i + 1));
-			JLabel lblAns = (JLabel) getComponentByName("lblAntwort" + (i + 1));
-			Answer ans = currQuestion.getAnswer(i);
-			String chkText = ans.getText();
-			String lblText = String.valueOf(currQuestion.getAnswer(i).getScore());
-			// No text if question 0 (test question) or no selection
-			if (cbSelected == 0 || cbSelected == -1) {
-				chkText = lblText = "";
-			}
-			chkAns.setText(chkText);
-			lblAns.setText(lblText);
-		}
-		// Enable/disable and select/deselect answer CheckBoxes
-		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
-			boolean enabled = i < duell.numberOfAnswers();
-			// Deactivate if question 0 (test question) or if no team is selected
-			if (duell.getCurrentQuestionIndex() == 0 || duell.getCurrentTeam() == -1) {
-				enabled = false;
-			}
-			JCheckBox chk = (JCheckBox) getComponentByName("chckbxAntwort" + (i + 1));
-			chk.setEnabled(enabled);
-			chk.setSelected(duell.getCurrentQuestion().getAnswer(i).isRevealed());
-		}
-		// Enable/disable button for next question
-		boolean nextQ = duell.getCurrentQuestionIndex() + 1 < duell.questionCount();
-		btnNaechsteFrage.setEnabled(nextQ);
 	}
 }

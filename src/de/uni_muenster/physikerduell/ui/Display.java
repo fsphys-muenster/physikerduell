@@ -81,8 +81,9 @@ public class Display extends JFrame implements GameListener {
 		setName("Anzeige");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		DisplayMode dm = GraphicsEnvironment.getLocalGraphicsEnvironment()
-			.getDefaultScreenDevice().getDisplayMode();
+		DisplayMode dm =
+			GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice()
+				.getDisplayMode();
 		setBounds(100, 100, dm.getWidth(), dm.getHeight());
 		setLocationRelativeTo(null);
 
@@ -101,14 +102,14 @@ public class Display extends JFrame implements GameListener {
 		outerPanelLabel.add(contentPaneLabel, gbcLabel);
 
 		GridBagLayout gbl_outerPanel = new GridBagLayout();
-		gbl_outerPanel.columnWeights = new double[] { 0.0 };
+		gbl_outerPanel.columnWeights = new double[] {0.0};
 		outerPanel = new JPanel(gbl_outerPanel);
 		outerPanel.setBackground(Color.BLACK);
 		GridBagConstraints gbc = new GridBagConstraints();
 		outerPanel.add(contentPane, gbc);
 
-		JLabel lab = new JLabel(
-			new ImageIcon(getClass().getResource("/res/Physikerduell-0.png")));
+		JLabel lab =
+			new JLabel(new ImageIcon(getClass().getResource("/res/Physikerduell-0.png")));
 		lab.setBounds(0, 0, 1024, 768);
 		lab.setVisible(true);
 		contentPaneLabel.add(lab);
