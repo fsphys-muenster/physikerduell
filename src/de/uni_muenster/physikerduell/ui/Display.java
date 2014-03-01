@@ -11,8 +11,6 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -22,11 +20,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import de.uni_muenster.physikerduell.game.Answer;
+import javazoom.jl.player.PlayerApplet;
 import de.uni_muenster.physikerduell.game.Game;
 import de.uni_muenster.physikerduell.game.GameListener;
 import de.uni_muenster.physikerduell.game.Question;
-import javazoom.jl.player.PlayerApplet;
 
 /**
  * Die eigentliche Spielanzeige des Physikerduells der Fachschaft Physik an der WWU <br>
@@ -38,7 +35,6 @@ import javazoom.jl.player.PlayerApplet;
 public class Display extends JFrame implements GameListener {
 
 	private static final long serialVersionUID = 1L;
-	private static final String nl = System.getProperty("line.separator");
 	private JPanel contentPaneLabel;
 	private ImagePanel contentPane;
 	private JTextField txtFTeam1;
@@ -61,22 +57,15 @@ public class Display extends JFrame implements GameListener {
 	private JLabel lblLeben;
 	private JLabel lblTeam1;
 	private JLabel lblTeam2;
-	private JLabel lab;
 	private JPanel outerPanel;
 	private JPanel outerPanelLabel;
 	private PlayerApplet soundplayer;
-	private JLabel lbltxtPunkte;
 	private Image team1;
 	private Image team2;
 	private Image noteam;
 	private Boolean pause = true;
 	private Boolean musikPlayer = false;
 	private Game duell;
-
-	private String lastline;
-	private String newLine;
-	private FileWriter Logwriter;
-	private File Logfile;
 
 	/**
 	 * (Automatisch generiert) Hilfsmethode des Konstruktors. Erzeugt die Elemente der
@@ -92,9 +81,8 @@ public class Display extends JFrame implements GameListener {
 		setName("Anzeige");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		DisplayMode dm =
-			GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice()
-				.getDisplayMode();
+		DisplayMode dm = GraphicsEnvironment.getLocalGraphicsEnvironment()
+			.getDefaultScreenDevice().getDisplayMode();
 		setBounds(100, 100, dm.getWidth(), dm.getHeight());
 		setLocationRelativeTo(null);
 
@@ -113,14 +101,14 @@ public class Display extends JFrame implements GameListener {
 		outerPanelLabel.add(contentPaneLabel, gbcLabel);
 
 		GridBagLayout gbl_outerPanel = new GridBagLayout();
-		gbl_outerPanel.columnWeights = new double[] {0.0};
+		gbl_outerPanel.columnWeights = new double[] { 0.0 };
 		outerPanel = new JPanel(gbl_outerPanel);
 		outerPanel.setBackground(Color.BLACK);
 		GridBagConstraints gbc = new GridBagConstraints();
 		outerPanel.add(contentPane, gbc);
 
-		lab =
-			new JLabel(new ImageIcon(getClass().getResource("/res/Physikerduell-0.png")));
+		JLabel lab = new JLabel(
+			new ImageIcon(getClass().getResource("/res/Physikerduell-0.png")));
 		lab.setBounds(0, 0, 1024, 768);
 		lab.setVisible(true);
 		contentPaneLabel.add(lab);
@@ -231,14 +219,14 @@ public class Display extends JFrame implements GameListener {
 		lblSumme.setBounds(685, 420, 190, 45);
 		contentPane.add(lblSumme);
 
-		lbltxtPunkte = new JLabel("Summe:");
+		JLabel lbltxtPunkte = new JLabel("Summe:");
 		lbltxtPunkte.setHorizontalAlignment(SwingConstants.CENTER);
 		lbltxtPunkte.setForeground(Color.YELLOW);
 		lbltxtPunkte.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lbltxtPunkte.setBounds(600, 420, 120, 45);
 		contentPane.add(lbltxtPunkte);
 
-		lblLeben = new JLabel("Leben\n");
+		lblLeben = new JLabel("Leben");
 		lblLeben.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLeben.setForeground(Color.YELLOW);
 		lblLeben.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -294,9 +282,6 @@ public class Display extends JFrame implements GameListener {
 	public Display(Game G) {
 		duell = G;
 		soundplayer = new PlayerApplet();
-		lastline = null;
-		newLine = null;
-		newLog();
 		try {
 			team1 = ImageIO.read(getClass().getResource("/res/Physikerduell-21.png"));
 			team2 = ImageIO.read(getClass().getResource("/res/Physikerduell-22.png"));
@@ -309,104 +294,14 @@ public class Display extends JFrame implements GameListener {
 	}
 
 	/**
-	 * Schreibt den aktuellen Zustand aller Game bzw. Duell-Objekte in eine Logdatei. In
-	 * jeder Zeile kann dort ein Spielzustand abgelesen werden. Das Logfile kann über
-	 * einen Button auf der Bedienoberfläche aufgerufen werden.
-	 * 
-	 * Existiert das Logfile nicht, so wird ein neues erstellt, andernfalls wird an das
-	 * existierende unten angefügt.
-	 */
-	private void updateLog() {
-		Logfile = new File("Physikerduell-Log.txt");
-		try {
-			// new FileWriter(file, true) - falls die Datei bereits existiert,
-			// werden die Bytes an das Ende der Datei geschrieben
-			// new FileWriter(file) - falls die Datei bereits existiert
-			// wird diese überschrieben
-			Logwriter = new FileWriter(Logfile, true);
-
-			// Text wird in den Stream geschrieben
-			Question curr = duell.getCurrentQuestion();
-			newLine =
-				"|" + duell.getTeam1Name() + ": "
-					+ String.valueOf(duell.getTeam1Score()) + " |"
-					+ duell.getTeam2Name() + ": "
-					+ String.valueOf(duell.getTeam2Score()) + "| CurrentScore: "
-					+ String.valueOf(duell.getCurrentScore()) + " | CurrentTeam: "
-					+ String.valueOf(duell.getCurrentTeam()) + " | CurrentLives: "
-					+ String.valueOf(duell.getCurrentLives()) + " | CurrentRound: "
-					+ String.valueOf(duell.getCurrentRound()) + " | CurrentQuestion: "
-					+ curr.getText();
-			for (int i = 0; i < Game.MAX_ANSWERS; i++) {
-				Answer ans = curr.getAnswer(i);
-				newLine +=
-					" | " + ans.isRevealed() + " " + ans.getText() + " "
-						+ ans.getScore() + " | ";
-			}
-			if (lastline != null && !lastline.equals(newLine)) {
-				// Platformunabhängiger Zeilenumbruch wird in den Stream geschrieben
-				Logwriter.write(nl);
-				Logwriter.write(newLine);
-				lastline = newLine.toString();
-			}
-			else if (lastline == null) {
-				Logwriter.write(newLine);
-				lastline = newLine.toString();
-			}
-
-			// Schreibt den Stream in die Datei
-			// Sollte immer am Ende ausgeführt werden, sodass der Stream 
-			// leer ist und alles in der Datei steht.
-			Logwriter.flush();
-			// Schließt den Stream
-			Logwriter.close();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Markiert im Logfile die Stelle, an der ein neues Spiel und damit ein neuer
-	 * Logfileabschnitt gestartet wurde.
-	 * 
-	 * Erweitert wird dieses mit der Methode <code>updateLog</code>.
-	 */
-	private void newLog() {
-		Logfile = new File("Physikerduell-Log.txt");
-		try {
-			// new FileWriter(file, true) - falls die Datei bereits existiert
-			// werden die Bytes an das Ende der Datei geschrieben
-			// new FileWriter(file) - falls die Datei bereits existiert
-			// wird diese überschrieben
-			Logwriter = new FileWriter(Logfile, true);
-
-			// Text wird in den Stream geschrieben
-			newLine = (nl + nl + "----- Neues Spiel -----" + nl);
-			Logwriter.write(newLine);
-
-			// Schreibt den Stream in die Datei
-			// Sollte immer am Ende ausgeführt werden, sodass der Stream 
-			// leer ist und alles in der Datei steht.
-			Logwriter.flush();
-			// Schließt den Stream
-			Logwriter.close();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Ruft zum einen <code>updateLog</code> auf und aktualisiert zum anderen die auf dem
-	 * Anzeigefenster befindlichen Objekte. Es wird der aktuelle Spielzustand übernommen.
+	 * Aktualisiert zum anderen die auf dem Anzeigefenster befindlichen Objekte. Es wird
+	 * der aktuelle Spielzustand übernommen.
 	 * 
 	 * Zusätzlich wird ein <code>repaint</code> aufgerufen.
 	 */
 	@Override
 	public void gameUpdate() {
 		Question curr = duell.getCurrentQuestion();
-		updateLog();
 		if (duell.getCurrentTeam() == 1) {
 			contentPane.setImage(team1);
 		}

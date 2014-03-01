@@ -18,6 +18,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -27,9 +28,9 @@ import javazoom.jl.player.PlayerApplet;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 import de.uni_muenster.physikerduell.game.Answer;
 import de.uni_muenster.physikerduell.game.Game;
+import de.uni_muenster.physikerduell.game.Game.GameException;
 import de.uni_muenster.physikerduell.game.GameListener;
 import de.uni_muenster.physikerduell.game.Question;
-import de.uni_muenster.physikerduell.game.Game.GameException;
 
 /**
  * Hauptklasse des Physikerduells der Fachschaft Physik an der WWU Münster am <br>
@@ -91,7 +92,6 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 	// Verschiedene Variablen der Spielmechanik
 	private boolean punkteklau = false;
 	private boolean rundenende = false;
-	private int vorherigeFrage = 0;
 
 	/**
 	 * Die <code>main</code>-Methode soll zum Anstoß geben, dass die Objekte initialisiert
@@ -132,6 +132,7 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		duell.setTeam1Score(0);
 		duell.setTeam2Score(0);
 		duell.setCurrentTeam(-1);
+		duell.setLogging(true);
 		soundplayer = new PlayerApplet();
 		// ComboBox mit Fragen auffüllen
 		cbFragenauswahl.removeAllItems();
@@ -140,7 +141,6 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		}
 		// Spielfenster erstellen
 		fenster = new Display(duell);
-		// Fenster.dispose();
 		fenster.setUndecorated(true);
 		fenster.setAlwaysOnTop(!frmBedienoberflche.isAlwaysOnTop());
 		fenster.setVisible(true);
@@ -195,10 +195,12 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		}
 		else if (e.getSource() == btnOpenLog) {
 			try {
-				Desktop.getDesktop().open(new File("Physikerduell-Log.txt"));
+				Desktop.getDesktop().open(new File(Game.LOG_FILE_PATH));
 			}
 			catch (Exception ex) {
-				System.err.println("Error creating log file: " + ex);
+				System.err.println("Error reading log file: " + ex);
+				JOptionPane.showMessageDialog(frmBedienoberflche,
+					"Could not read log file!");
 			}
 		}
 		for (int i = 1; i <= Game.NUM_ROUNDS; i++) {
@@ -232,7 +234,14 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		}
 		// 2.) ComboBox
 		if (e.getSource().equals(cbFragenauswahl)) {
-			eventQuestionSelected(e);
+			int selected = cbFragenauswahl.getSelectedIndex();
+			if (selected < 0) {
+				return;
+			}
+			// Ausgewählte Frage übernehmen
+			duell.setCurrentQuestionIndex(selected);
+			btnStart.setEnabled(true);
+			rundenende = false;
 		}
 	}
 
@@ -279,7 +288,6 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 	 */
 	private void eventNextQuestion(ActionEvent e) {
 		if (rundenende) {
-			vorherigeFrage = duell.getCurrentQuestionIndex();
 			duell.setCurrentTeam(-1);
 			duell.setCurrentScore(0);
 			duell.setCurrentLives(0);
@@ -287,37 +295,12 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 			duell.setCurrentRound(round % Game.NUM_ROUNDS + 1);
 			rundenende = false;
 		}
-		if (vorherigeFrage + 1 < duell.questionCount()) {
+		int currIndex = duell.getCurrentQuestionIndex();
+		if (currIndex + 1 < duell.questionCount()) {
 			// Einführen der nächsten Frage
-			duell.setCurrentQuestionIndex(vorherigeFrage + 1);
-			cbFragenauswahl.setSelectedIndex(vorherigeFrage + 1);
-			// Damit wird automatisch auch ein update() des Fensters ausgeführt!
-			// btnNaechsteFrage soll disabled werden, wenn es keine nächste Frage gibt
-			if ((duell.getCurrentQuestionIndex() + 1) >= duell.questionCount()) {
-				btnNaechsteFrage.setEnabled(false);
-			}
+			duell.setCurrentQuestionIndex(currIndex + 1);
+			cbFragenauswahl.setSelectedIndex(currIndex + 1);
 		}
-	}
-
-	/**
-	 * itemStateChanged für ComboBox.
-	 */
-	private void eventQuestionSelected(ItemEvent e) {
-		int selected = cbFragenauswahl.getSelectedIndex();
-		if (selected < 0) {
-			return;
-		}
-		// Ausgewählte Frage übernehmen
-		vorherigeFrage = duell.getCurrentQuestionIndex();
-		duell.setCurrentQuestionIndex(selected);
-		// Neue Frage => Keine Antwort aufgedeckt
-		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
-			duell.getCurrentQuestion().getAnswer(i).setRevealed(false);
-		}
-		btnStart.setEnabled(true);
-		boolean nextQ = duell.getCurrentQuestionIndex() + 1 < duell.questionCount();
-		btnNaechsteFrage.setEnabled(nextQ);
-		rundenende = false;
 	}
 
 	/**
@@ -336,10 +319,7 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 			updateCurrentScore(false);
 		}
 		else {
-			// Müssen noch iwie angezeigt werden, eventuell in zwei getrennten
-			// Lebensanzeigen
-			duell.setCurrentLives(0);
-			duell.setCurrentLives(3);
+			duell.setCurrentLives(Game.MAX_LIVES);
 			punkteklau = true;
 			if (duell.getCurrentTeam() == 1) {
 				duell.setCurrentTeam(2);
@@ -389,7 +369,7 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		cbFragenauswahl.setEnabled(false);
 		cbFragenauswahl.setBounds(10, 380, 492, 30);
 		cbFragenauswahl.setModel(new DefaultComboBoxModel<String>(new String[] {
-			"Was ist denn die Frage?", "A?", "B?", "C?", "D?", "E?"}));
+			"Was ist denn die Frage?", "A?", "B?", "C?", "D?", "E?" }));
 
 		JPanel pAntwortmoeglichkeiten = new JPanel();
 		pAntwortmoeglichkeiten.setBounds(10, 415, 492, 190);
@@ -638,7 +618,7 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		activeRound.add(rdbtnRunde4);
 		activeRound.add(rdbtnRunde5);
 
-		//Initialisierung der verschiedenen Componenten 
+		// Initialisierung der verschiedenen Komponenten 
 		chckbxAntwort1.setText("");
 		chckbxAntwort2.setText("");
 		chckbxAntwort3.setText("");
@@ -709,24 +689,28 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		tytpnImpressum.setBounds(512, 651, 496, 25);
 		frmBedienoberflche.getContentPane().add(tytpnImpressum);
 		frmBedienoberflche.getContentPane().setFocusTraversalPolicy(
-			new FocusTraversalOnArray(new Component[] {lblHeadline, lblTeam1Name,
+			new FocusTraversalOnArray(new Component[] { lblHeadline, lblTeam1Name,
 				txtTeam1Name, lblTeam1GPunkte, txtTeam1GPunkte, lblTeam2Name,
 				txtTeam2Name, lblTeam2GPunkte, txtTeam2GPunkte, btnStart,
 				btnAbspannWechsel, lblAktuellesTeam, pTeamauswahl, lblAPunkte,
 				txtAPunkte, lblALeben, txtALeben, pRundenauswahl, lblRundenauswahl,
 				cbFragenauswahl, pAntwortmoeglichkeiten, chckbxAntwort1, chckbxAntwort2,
 				chckbxAntwort3, chckbxAntwort4, chckbxAntwort5, chckbxAntwort6,
-				btnFalscheAntwort, btnNaechsteFrage}));
+				btnFalscheAntwort, btnNaechsteFrage }));
 		frmBedienoberflche.setFocusTraversalPolicy(new FocusTraversalOnArray(
-			new Component[] {txtTeam1Name, txtTeam2Name, txtTeam1GPunkte,
+			new Component[] { txtTeam1Name, txtTeam2Name, txtTeam1GPunkte,
 				txtTeam2GPunkte, btnStart, btnAbspannWechsel, txtAPunkte, txtALeben,
 				cbFragenauswahl, chckbxAntwort1, chckbxAntwort2, chckbxAntwort3,
 				chckbxAntwort4, chckbxAntwort5, chckbxAntwort6, btnFalscheAntwort,
-				btnNaechsteFrage}));
+				btnNaechsteFrage }));
 	}
 
 	/**
-	 * Spielt die angegebene Audiodatei ab.
+	 * 
+	 * Plays the specified audio file.
+	 * 
+	 * @param name
+	 *            Audio file name (in the "res" directory)
 	 */
 	private void playSound(String name) {
 		final String resource = "/res/" + name;
@@ -815,8 +799,8 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 			break;
 		}
 		// Select round RadioButton according to selected round
-		JRadioButton rdoRound =
-			(JRadioButton) getComponentByName("rdbtnRunde" + duell.getCurrentRound());
+		JRadioButton rdoRound = (JRadioButton) getComponentByName("rdbtnRunde"
+			+ duell.getCurrentRound());
 		activeRound.setSelected(rdoRound.getModel(), true);
 		// Set answer CheckBox text and score Label text
 		int cbSelected = cbFragenauswahl.getSelectedIndex();
@@ -837,8 +821,7 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 		// Enable/disable and select/deselect answer CheckBoxes
 		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
 			boolean enabled = i < duell.numberOfAnswers();
-			// Checkboxen deaktivieren bei Frage 0 (Testfrage) oder falls kein Team
-			// gewählt 
+			// Deactivate if question 0 (test question) or if no team is selected
 			if (duell.getCurrentQuestionIndex() == 0 || duell.getCurrentTeam() == -1) {
 				enabled = false;
 			}
@@ -846,5 +829,8 @@ public class ControlPanel implements ActionListener, ItemListener, GameListener 
 			chk.setEnabled(enabled);
 			chk.setSelected(duell.getCurrentQuestion().getAnswer(i).isRevealed());
 		}
+		// Enable/disable button for next question
+		boolean nextQ = duell.getCurrentQuestionIndex() + 1 < duell.questionCount();
+		btnNaechsteFrage.setEnabled(nextQ);
 	}
 }

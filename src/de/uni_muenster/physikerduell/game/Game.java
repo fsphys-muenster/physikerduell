@@ -1,8 +1,12 @@
 package de.uni_muenster.physikerduell.game;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import de.uni_muenster.physikerduell.csv.CSVReader;
 
@@ -27,6 +31,10 @@ public class Game {
 	 * Number of rounds which have to be played.
 	 */
 	public static final int NUM_ROUNDS = 5;
+	/**
+	 * File path for the log file.
+	 */
+	public static final String LOG_FILE_PATH = "Physikerduell-Log.txt";
 	private final List<GameListener> listeners = new ArrayList<>();
 	private final List<Question> questions = new ArrayList<>();
 	private String team1Name = "Team 1";
@@ -38,6 +46,9 @@ public class Game {
 	private int currentScore;
 	private int currentQuestionIndex;
 	private int currentTeam;
+	private String lastLine;
+	private FileWriter logWriter;
+	private boolean updating = true;
 
 	/**
 	 * Creates the Game instance and reads the questions from the specified stream. The
@@ -302,10 +313,16 @@ public class Game {
 	 */
 	public void setCurrentQuestionIndex(int currentQuestionIndex) {
 		if (currentQuestionIndex < 0 || currentQuestionIndex > questions.size()) {
-			throw new IndexOutOfBoundsException("Invalid index, was "
+			throw new IndexOutOfBoundsException("Invalid question index: "
 				+ currentQuestionIndex);
 		}
 		this.currentQuestionIndex = currentQuestionIndex;
+		updating = false;
+		// New question => no answer revealed
+		for (int i = 0; i < MAX_ANSWERS; i++) {
+			getCurrentQuestion().getAnswer(i).setRevealed(false);
+		}
+		updating = true;
 		update();
 	}
 
@@ -317,7 +334,7 @@ public class Game {
 	 */
 	public void setCurrentRound(int currentRound) {
 		if (currentRound < 0) {
-			throw new IllegalArgumentException("Round < 0, was " + currentRound);
+			throw new IllegalArgumentException("Invalid round number: " + currentRound);
 		}
 		this.currentRound = currentRound;
 		update();
@@ -331,7 +348,7 @@ public class Game {
 	 */
 	public void setCurrentScore(int currentScore) {
 		if (currentScore < 0) {
-			throw new IllegalArgumentException("Current score < 0, was " + team1Score);
+			throw new IllegalArgumentException("Current score < 0, was " + currentScore);
 		}
 		this.currentScore = currentScore;
 		update();
@@ -413,9 +430,91 @@ public class Game {
 	 * Updates all attached <code>GameListener</code>s.
 	 */
 	void update() {
+		if (!updating) {
+			return;
+		}
 		for (GameListener listener : listeners) {
 			listener.gameUpdate();
 		}
+		if (isLogging()) {
+			updateLog();
+		}
+	}
+
+	public boolean isLogging() {
+		return logWriter != null;
+	}
+
+	/**
+	 * Activate or deactivate logging changes to the game to a file (
+	 * <code>LOG_FILE_PATH</code>). If logging is activated, the log file is created in
+	 * the current working directory. If it already exists, it is appended to.
+	 * 
+	 * @param logging
+	 *            Activate (true) or deactivate (false) logging
+	 */
+	public void setLogging(boolean logging) {
+		if (logging) {
+			File logFile = new File(LOG_FILE_PATH);
+			try {
+				// append if file exists
+				logWriter = new FileWriter(logFile, true);
+				String timeStamp = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss")
+					.format(Calendar.getInstance().getTime());
+				String newLine = "\n\n\n[" + timeStamp + "]\n----- Neues Spiel -----\n";
+				logWriter.write(newLine);
+				logWriter.flush();
+			}
+			catch (IOException ex) {
+				logWriter = null;
+				System.err.println("Error starting log: " + ex);
+			}
+		}
+		else if (logWriter != null) {
+			try {
+				logWriter.close();
+			}
+			catch (IOException ex) {
+				System.err.println("Error closing log: " + ex);
+			}
+			logWriter = null;
+		}
+	}
+
+	/**
+	 * Updates the log file with the current state of the game.
+	 */
+	private void updateLog() {
+		Question curr = getCurrentQuestion();
+		String timeStamp = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss").format(Calendar
+			.getInstance().getTime());
+		String newLine = "[" + timeStamp + "]\n" + team1Name + ": "
+			+ String.valueOf(team1Score) + " | " + team2Name + ": "
+			+ String.valueOf(team2Score) + " | CurrentScore:    "
+			+ String.valueOf(currentScore) + " | CurrentTeam:     "
+			+ String.valueOf(currentTeam) + " | CurrentLives:    "
+			+ String.valueOf(currentLives) + " | CurrentRound:    "
+			+ String.valueOf(currentRound) + " | CurrentQuestion: " + curr.getText()
+			+ "\n";
+		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
+			Answer ans = curr.getAnswer(i);
+			String revealed = ans.isRevealed() ? "X" : " ";
+			newLine += revealed + " " + ans.getText() + " [" + ans.getScore() + "]\n";
+		}
+		try {
+			if (!newLine.equals(lastLine)) {
+				logWriter.write("\n\n");
+				logWriter.write(newLine);
+			}
+			else {
+				logWriter.write(newLine);
+			}
+			logWriter.flush();
+		}
+		catch (IOException ex) {
+			System.err.println("Error writing to log: " + ex);
+		}
+		lastLine = newLine;
 	}
 
 	/**
@@ -428,10 +527,6 @@ public class Game {
 	public static class GameException extends Exception {
 
 		private static final long serialVersionUID = 1L;
-
-		public GameException() {
-			super();
-		}
 
 		public GameException(String message) {
 			super(message);
