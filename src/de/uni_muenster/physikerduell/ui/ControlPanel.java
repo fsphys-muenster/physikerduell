@@ -176,8 +176,7 @@ public class ControlPanel implements ActionListener, GameListener {
 		}
 		else if (e.getSource() == rdbtnNoTeam) {
 			duell.setCurrentTeam(-1);
-			duell.setCurrentScore(0);
-			duell.setCurrentLives(0);
+			duell.setCurrentLives(Game.MAX_LIVES);
 		}
 		else if (e.getSource() == txtTeam1Name || e.getSource() == txtTeam2Name) {
 			checkTeamNameInput();
@@ -357,6 +356,10 @@ public class ControlPanel implements ActionListener, GameListener {
 	 *            The event's ActionEvent
 	 */
 	private void eventWrongAnswer(ActionEvent e) {
+		// Keine Aktion wenn kein Team ausgewählt
+		if (duell.getCurrentTeam() == -1) {
+			return;
+		}
 		// Leben runtersetzen; wenn kein Leben: Teamwechsel
 		if (duell.getCurrentLives() > 1 && !punkteklau) {
 			duell.setCurrentLives(duell.getCurrentLives() - 1);
@@ -810,11 +813,7 @@ public class ControlPanel implements ActionListener, GameListener {
 			}
 			duell.setCurrentTeam(-1);
 			rundenende = true;
-			if (stealSuccess) {
-				duell.setCurrentLives(0);
-				duell.setCurrentScore(0);
-				punkteklau = false;
-			}
+			punkteklau = false;
 		}
 	}
 }
