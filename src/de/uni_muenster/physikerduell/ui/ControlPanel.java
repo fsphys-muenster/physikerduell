@@ -90,7 +90,6 @@ public class ControlPanel implements ActionListener, GameListener {
 	// Verschiedene Variablen der Spielmechanik
 	private boolean punkteklau = false;
 	private boolean rundenende;
-	private int roundEndCtr;
 
 	/**
 	 * Die <code>main</code>-Methode soll zum Anstoß geben, dass die Objekte initialisiert
@@ -276,13 +275,14 @@ public class ControlPanel implements ActionListener, GameListener {
 			Answer ans = currQuestion.getAnswer(i);
 			String chkText = ans.getText();
 			String lblText = String.valueOf(ans.getScore());
-			boolean enabled = i < duell.numberOfAnswers();
 			// No text if question 0 (test question)
 			if (currIndex == 0) {
 				chkText = lblText = "";
 			}
-			// Deactivate if question 0 (test question) or if no team is selected
-			enabled = currIndex != 0 && currTeam != -1;
+			boolean validAnswer = i < duell.numberOfAnswers() && currIndex != 0;
+			// Activate if valid answer and during a round with a team selected
+			// or at round end (so the  answers can still be revealed to the audience)
+			boolean enabled = validAnswer && ((!rundenende && currTeam != -1) || rundenende);
 			chkAns.setText(chkText);
 			chkAns.setEnabled(enabled);
 			chkAns.setSelected(ans.isRevealed());
@@ -336,12 +336,11 @@ public class ControlPanel implements ActionListener, GameListener {
 	 *            The event's ActionEvent
 	 */
 	private void eventNextQuestion(ActionEvent e) {
-		if (rundenende && roundEndCtr == 2) {
+		if (rundenende) {
+			duell.setCurrentRound(duell.getCurrentRound() % Game.NUM_ROUNDS + 1);
 			duell.setCurrentTeam(-1);
 			duell.setCurrentLives(Game.MAX_LIVES);
-			duell.setCurrentRound(duell.getCurrentRound() % Game.NUM_ROUNDS + 1);
 			rundenende = false;
-			roundEndCtr = 0;
 		}
 		int currIndex = duell.getCurrentQuestionIndex();
 		if (currIndex + 1 < duell.questionCount()) {
@@ -369,6 +368,7 @@ public class ControlPanel implements ActionListener, GameListener {
 			// Punkteklau nicht erfolgreich; Punkte aktualisieren
 			updateCurrentScore(false);
 		}
+		// 3 Leben verloren
 		else {
 			duell.setCurrentLives(Game.MAX_LIVES);
 			punkteklau = true;
@@ -814,8 +814,9 @@ public class ControlPanel implements ActionListener, GameListener {
 			}
 			duell.setCurrentTeam(-1);
 			rundenende = true;
-			roundEndCtr++;
 			punkteklau = false;
+			gameUpdate();
 		}
 	}
+
 }
