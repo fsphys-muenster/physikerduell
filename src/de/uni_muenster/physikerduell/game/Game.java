@@ -310,13 +310,16 @@ public class Game {
 			throw new IndexOutOfBoundsException("Invalid question index: "
 				+ currentQuestionIndex);
 		}
-		this.currentQuestionIndex = currentQuestionIndex;
-		updating = false;
-		// New question => no answer revealed
-		for (int i = 0; i < MAX_ANSWERS; i++) {
-			getCurrentQuestion().getAnswer(i).setRevealed(false);
+		if (currentQuestionIndex != this.currentQuestionIndex) {
+			this.currentQuestionIndex = currentQuestionIndex;
+			updating = false;
+			// New question => no answer revealed
+			currentScore = 0;
+			for (int i = 0; i < MAX_ANSWERS; i++) {
+				getCurrentQuestion().getAnswer(i).setRevealed(false);
+			}
+			updating = true;
 		}
-		updating = true;
 		update();
 	}
 

@@ -89,7 +89,8 @@ public class ControlPanel implements ActionListener, GameListener {
 	private PlayerApplet soundplayer;
 	// Verschiedene Variablen der Spielmechanik
 	private boolean punkteklau = false;
-	private boolean rundenende = false;
+	private boolean rundenende;
+	private int roundEndCtr;
 
 	/**
 	 * Die <code>main</code>-Methode soll zum Anstoß geben, dass die Objekte initialisiert
@@ -335,12 +336,12 @@ public class ControlPanel implements ActionListener, GameListener {
 	 *            The event's ActionEvent
 	 */
 	private void eventNextQuestion(ActionEvent e) {
-		if (rundenende) {
+		if (rundenende && roundEndCtr == 2) {
 			duell.setCurrentTeam(-1);
-			duell.setCurrentScore(0);
-			duell.setCurrentLives(0);
+			duell.setCurrentLives(Game.MAX_LIVES);
 			duell.setCurrentRound(duell.getCurrentRound() % Game.NUM_ROUNDS + 1);
 			rundenende = false;
+			roundEndCtr = 0;
 		}
 		int currIndex = duell.getCurrentQuestionIndex();
 		if (currIndex + 1 < duell.questionCount()) {
@@ -813,6 +814,7 @@ public class ControlPanel implements ActionListener, GameListener {
 			}
 			duell.setCurrentTeam(-1);
 			rundenende = true;
+			roundEndCtr++;
 			punkteklau = false;
 		}
 	}
