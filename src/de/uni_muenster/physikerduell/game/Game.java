@@ -42,10 +42,12 @@ public class Game {
 	private int team1Score;
 	private int team2Score;
 	private int currentLives;
-	private int currentRound;
+	private int currentRound = 1;
 	private int currentScore;
 	private int currentQuestionIndex;
-	private int currentTeam;
+	private int currentTeam = -1;
+	private boolean roundEnd;
+	private boolean stealingPoints;
 	private String lastLine;
 	private FileWriter logWriter;
 	private boolean updating = true;
@@ -130,7 +132,7 @@ public class Game {
 	 * 
 	 * @return The current question
 	 */
-	public Question getCurrentQuestion() {
+	public Question currentQuestion() {
 		return questions.get(currentQuestionIndex);
 	}
 
@@ -157,7 +159,7 @@ public class Game {
 	 * 
 	 * @return The current score
 	 */
-	public int getCurrentScore() {
+	public int currentScore() {
 		return currentScore;
 	}
 
@@ -218,6 +220,11 @@ public class Game {
 		return team2Score;
 	}
 
+	/**
+	 * Returns whether the game is being logged.
+	 * 
+	 * @return The logging status
+	 */
 	public boolean isLogging() {
 		return logWriter != null;
 	}
@@ -250,6 +257,49 @@ public class Game {
 	 */
 	public int questionCount() {
 		return questions.size();
+	}
+
+	/**
+	 * Updates the game if a correct answer to the current question has been given.
+	 * 
+	 * @param index
+	 *            The index of the correctly given answer to the current question
+	 */
+	public void correctAnswer(int index) {
+		currentQuestion().answer(index).setRevealed(true);
+		updateCurrentScore();
+		// Bei Punkteklau: Erfolgreich geklaut, sonst normale richtige Antwort
+		if (stealingPoints) {
+			endRound(true);
+		}
+		update();
+	}
+
+	public void wrongAnswer() {
+		// no action if no team selected
+		if (currentTeam == -1) {
+			return;
+		}
+		// decrease lives; if no lives: change team
+		if (currentLives > 1 && !stealingPoints) {
+			currentLives--;
+		}
+		else if (stealingPoints) {
+			// points could not be stolen; update score
+			endRound(false);
+		}
+		// 3 lives lost
+		else {
+			currentLives = MAX_LIVES;
+			stealingPoints = true;
+			if (currentTeam == 1) {
+				currentTeam = 2;
+			}
+			else if (currentTeam == 2) {
+				currentTeam = 1;
+			}
+		}
+		update();
 	}
 
 	/**
@@ -316,10 +366,20 @@ public class Game {
 			// New question => no answer revealed
 			currentScore = 0;
 			for (int i = 0; i < MAX_ANSWERS; i++) {
-				getCurrentQuestion().getAnswer(i).setRevealed(false);
+				currentQuestion().answer(i).setRevealed(false);
 			}
 			updating = true;
 		}
+		if (roundEnd) {
+			currentRound++;
+			if (currentRound > NUM_ROUNDS) {
+				currentRound = NUM_ROUNDS;
+			}
+			currentTeam = -1;
+			currentLives = MAX_LIVES;
+			stealingPoints = false;
+		}
+		roundEnd = false;
 		update();
 	}
 
@@ -334,20 +394,6 @@ public class Game {
 			throw new IllegalArgumentException("Invalid round number: " + currentRound);
 		}
 		this.currentRound = currentRound;
-		update();
-	}
-
-	/**
-	 * Sets the score accumulated by the playing team in the current round.
-	 * 
-	 * @param currentScore
-	 *            The new score (&ge; 0)
-	 */
-	public void setCurrentScore(int currentScore) {
-		if (currentScore < 0) {
-			throw new IllegalArgumentException("Current score < 0, was " + currentScore);
-		}
-		this.currentScore = currentScore;
 		update();
 	}
 
@@ -474,7 +520,7 @@ public class Game {
 	 * Updates the log file with the current state of the game.
 	 */
 	private void updateLog() {
-		Question curr = getCurrentQuestion();
+		Question curr = currentQuestion();
 		String timeStamp =
 			new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss").format(Calendar.getInstance()
 				.getTime());
@@ -485,20 +531,20 @@ public class Game {
 				+ " | CurrentTeam:     " + String.valueOf(currentTeam)
 				+ " | CurrentLives:    " + String.valueOf(currentLives)
 				+ " | CurrentRound:    " + String.valueOf(currentRound)
-				+ " | CurrentQuestion: " + curr.getText() + "\n";
+				+ " | CurrentQuestion: " + curr.text() + "\n";
 		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
-			Answer ans = curr.getAnswer(i);
+			Answer ans = curr.answer(i);
 			String revealed = ans.isRevealed() ? "X" : " ";
-			newLine += revealed + " " + ans.getText() + " [" + ans.getScore() + "]\n";
+			newLine += revealed + " " + ans.text() + " [" + ans.score() + "]\n";
 		}
 		try {
 			if (!newLine.equals(lastLine)) {
 				logWriter.write("\n\n");
 				logWriter.write(newLine);
 			}
-			else {
-				logWriter.write(newLine);
-			}
+			//else {
+			//	logWriter.write(newLine);
+			//}
 			logWriter.flush();
 		}
 		catch (IOException ex) {
@@ -508,7 +554,8 @@ public class Game {
 	}
 
 	/**
-	 * Updates all attached <code>GameListener</code>s.
+	 * Called when the game state has changed. Updates all attached
+	 * <code>GameListener</code>s and the log.
 	 */
 	void update() {
 		if (!updating) {
@@ -520,6 +567,97 @@ public class Game {
 		for (GameListener listener : listeners) {
 			listener.gameUpdate();
 		}
+	}
+
+	/**
+	 * Returns whether the current round has ended (after all answers were found or points
+	 * were successfully or unsuccessully stolen).
+	 * 
+	 * @return The round status
+	 */
+	public boolean roundEnded() {
+		return roundEnd;
+	}
+
+	/**
+	 * Returns whether the currently selected team can steal the current round's points by
+	 * answering correctly.
+	 * 
+	 * @return Whether points can be stolen
+	 */
+	public boolean isStealingPoints() {
+		return stealingPoints;
+	}
+
+	/**
+	 * Sets whether the currently selected team can steal the current round's points by
+	 * answering correctly.
+	 * 
+	 * @param stealingPoints
+	 *            Whether points can be stolen
+	 */
+	public void setStealingPoints(boolean stealingPoints) {
+		this.stealingPoints = stealingPoints;
+		update();
+	}
+
+	/**
+	 * 
+	 * Updates the current round's accumulated score.
+	 */
+	private void updateCurrentScore() {
+		Question curr = currentQuestion();
+		int score = 0;
+		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
+			if (curr.answer(i).isRevealed()) {
+				score += curr.answerScore(i);
+			}
+		}
+		currentScore = score;
+	}
+
+	/**
+	 * 
+	 * Ends the current round and updates the teams' scores.
+	 * 
+	 * @param stealSuccess
+	 *            Whether points have successfully been stolen
+	 */
+	private void endRound(boolean stealSuccess) {
+		Question curr = currentQuestion();
+		int revealedanswers = 0;
+		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
+			if (curr.answer(i).isRevealed()) {
+				revealedanswers++;
+			}
+		}
+		// Gesamtpunkte updaten
+		boolean allAnswers = revealedanswers == numberOfAnswers();
+		if (stealingPoints || allAnswers) {
+			int updScore = totalCurrentScore();
+			// Punkteklau erfolgreich oder alle Antworten => aktuelles Team erhält Punkte
+			if (stealSuccess || allAnswers) {
+				if (currentTeam == 1) {
+					team1Score += updScore;
+				}
+				else if (currentTeam == 2) {
+					team2Score += updScore;
+				}
+			}
+			// Punkteklau fehlgeschlagen => anderes Team erhält Punkte
+			else {
+				if (currentTeam == 1) {
+					team2Score += updScore;
+				}
+				else if (currentTeam == 2) {
+					team1Score += updScore;
+				}
+			}
+			currentTeam = -1;
+			roundEnd = true;
+			stealingPoints = false;
+		}
+		update();
 	}
 
 	/**

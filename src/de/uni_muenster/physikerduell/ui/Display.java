@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.DisplayMode;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -66,6 +65,231 @@ public class Display extends JFrame implements GameListener {
 	private Boolean pause = true;
 	private Boolean musikPlayer = false;
 	private Game duell;
+	private JLabel lblMultiplikator;
+	private JLabel lblPunkteklau1;
+	private JLabel lblPunkteklau2;
+
+	/**
+	 * Initialisieren des Anzeigefensters.
+	 * 
+	 * @param G
+	 *            Ein Objekt vom Typ Game.
+	 */
+	public Display(Game G) {
+		duell = G;
+		soundplayer = new PlayerApplet();
+		try {
+			team1 = ImageIO.read(getClass().getResource("/res/Physikerduell-21.png"));
+			team2 = ImageIO.read(getClass().getResource("/res/Physikerduell-22.png"));
+			noteam = ImageIO.read(getClass().getResource("/res/Physikerduell-1.png"));
+		}
+		catch (IOException ex) {
+			System.err.println("Error reading images: " + ex);
+		}
+		initializeUI();
+	}
+
+	/**
+	 * Aktualisiert zum anderen die auf dem Anzeigefenster befindlichen Objekte. Es wird
+	 * der aktuelle Spielzustand übernommen.
+	 * 
+	 * Zusätzlich wird ein <code>repaint</code> aufgerufen.
+	 */
+	@Override
+	public void gameUpdate() {
+		if (duell.getCurrentTeam() == 1) {
+			contentPane.setImage(team1);
+		}
+		else if (duell.getCurrentTeam() == 2) {
+			contentPane.setImage(team2);
+		}
+		else {
+			contentPane.setImage(noteam);
+		}
+		contentPane.repaint();
+		// Anzeige der Labels der Antworten
+		showAnswerLabels();
+		Question curr = duell.currentQuestion();
+		// Anzeigen der Antworten
+		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
+			if (curr.answer(i).isRevealed()) {
+				revealAnswer(i);
+			}
+			else {
+				showBlank(i);
+			}
+		}
+		switch (duell.getCurrentLives()) {
+		case 0:
+			lblLeben.setText("XXX");
+			break;
+		case 1:
+			lblLeben.setText("XX ");
+			break;
+		case 2:
+			lblLeben.setText("X  ");
+			break;
+		case 3:
+			lblLeben.setText("   ");
+			break;
+		}
+		lblSumme.setText(String.valueOf(duell.currentScore()));
+		txtFTeam1.setText(String.valueOf(duell.getTeam1Score()));
+		txtFTeam2.setText(String.valueOf(duell.getTeam2Score()));
+		lblTeam1.setText(duell.getTeam1Name());
+		lblTeam2.setText(duell.getTeam2Name());
+		String currText = curr.text();
+		if (duell.getCurrentQuestionIndex() != 0) {
+			if (currText.length() > 50) {
+				int schnitt = 50;
+				String sub = currText.substring(0, schnitt);
+				if (sub.contains(" ")) {
+					schnitt = sub.lastIndexOf(" ");
+				}
+				lblFrageZ1.setText(currText.substring(0, schnitt));
+				lblFrageZ2.setText(currText.substring(schnitt));
+			}
+			else {
+				lblFrageZ1.setText(currText);
+				lblFrageZ2.setText("");
+			}
+		}
+		else {
+			lblFrageZ1.setText("Physikerduell");
+			lblFrageZ2.setText("");
+		}
+		lblMultiplikator.setText(String.format("×%d", duell.roundMultiplier()));
+		if (duell.isStealingPoints() && duell.getCurrentTeam() != -1) {
+			if (duell.getCurrentTeam() == 1) {
+				lblPunkteklau1.setVisible(true);
+				lblPunkteklau2.setVisible(false);
+			}
+			else if (duell.getCurrentTeam() == 2) {
+				lblPunkteklau1.setVisible(false);
+				lblPunkteklau2.setVisible(true);
+			}
+		}
+		else {
+			lblPunkteklau1.setVisible(false);
+			lblPunkteklau2.setVisible(false);
+		}
+		repaint();
+	}
+
+	/**
+	 * Zeigt auf der Spielanzeige für ein mit dem Parameter bestimmte Antwortmöglichkeit
+	 * nur die Maske für eine unbekannte Antwort an.
+	 * 
+	 * @param index
+	 *            Der Index der Antwortmöglichkeit von 0 bis 5
+	 */
+	private void showBlank(int index) {
+		JLabel antwort = (JLabel) getComponentByName("lblAntwort" + (index + 1));
+		JLabel punkte = (JLabel) getComponentByName("lblPunkte" + (index + 1));
+		antwort.setText("_______________________________");
+		punkte.setText("____");
+	}
+
+	/**
+	 * Returns the value of a field in this instance, specified by name (as a String).
+	 * 
+	 * @param name
+	 *            The name of the field
+	 * @return The field's value, or null if the field was not found or could not be
+	 *         accessed.
+	 */
+	private Object getComponentByName(String name) {
+		try {
+			return getClass().getDeclaredField(name).get(this);
+		}
+		catch (Exception ex) {
+			System.err.println("Could not get UI component: " + ex);
+		}
+		return null;
+	}
+
+	/**
+	 * Zeigt die Antwort und Punkte einer Antwortmöglichkeit auf der Spielanzeige an.
+	 * 
+	 * @param index
+	 *            Index der Antwortmöglichkeit von 0 bis 5.
+	 */
+	private void revealAnswer(int index) {
+		Question curr = duell.currentQuestion();
+		JLabel antwort = (JLabel) getComponentByName("lblAntwort" + (index + 1));
+		JLabel punkte = (JLabel) getComponentByName("lblPunkte" + (index + 1));
+		antwort.setText(curr.answerText(index));
+		punkte.setText(String.valueOf(curr.answerScore(index)));
+	}
+
+	/**
+	 * Blendet die entsprechende Anzahl an Antwortmöglichkeiten ein. Dies geschieht
+	 * abgestimmt auf die Rundenzahl.
+	 */
+	private void showAnswerLabels() {
+		int numberOfAnswers = duell.numberOfAnswers();
+		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
+			boolean visible = i < numberOfAnswers;
+			JLabel antwort = (JLabel) getComponentByName("lblAntwort" + (i + 1));
+			JLabel punkte = (JLabel) getComponentByName("lblPunkte" + (i + 1));
+			antwort.setVisible(visible);
+			punkte.setVisible(visible);
+		}
+	}
+
+	/**
+	 * Die Methode <code>playIntro</code> ist der Methode <code>resume</code> übergeordnet
+	 * und spielt die Intromusik ab, bzw. wechselt von dem Pausenbild oder auch Startbild
+	 * zur Spielanzeige.
+	 */
+	public void playIntro() {
+		if (pause) {
+			if (musikPlayer == false) {
+				soundplayer.start(getClass().getResourceAsStream("/res/Intro.mp3"));
+				musikPlayer = true;
+			}
+			else {
+				resume();
+				musikPlayer = false;
+			}
+		}
+		else {
+			soundplayer.stop();
+			musikPlayer = false;
+		}
+	}
+
+	/**
+	 * Die Methode <code>playOutro</code> versetzt die Anzeige in einen Pausenbildschirm.
+	 * Es wird abgeblendet.
+	 */
+	public void playOutro() {
+		if (!pause) {
+			pause();
+		}
+	}
+
+	/**
+	 * Methode zum Anzeigen des Pausenlabels.
+	 */
+	public void pause() {
+		setContentPane(outerPanelLabel);
+		//outerPanelLabel.setVisible(true);
+		outerPanelLabel.repaint();
+		outerPanelLabel.revalidate();
+		pause = true;
+	}
+
+	/**
+	 * Methode zum Anzeigen der Spielanzeige.
+	 */
+	public void resume() {
+		setContentPane(outerPanel);
+		//outerPanel.setVisible(true);
+		outerPanel.repaint();
+		outerPanel.revalidate();
+		pause = false;
+	}
 
 	/**
 	 * (Automatisch generiert) Hilfsmethode des Konstruktors. Erzeugt die Elemente der
@@ -224,7 +448,7 @@ public class Display extends JFrame implements GameListener {
 		lbltxtPunkte.setHorizontalAlignment(SwingConstants.CENTER);
 		lbltxtPunkte.setForeground(Color.YELLOW);
 		lbltxtPunkte.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lbltxtPunkte.setBounds(600, 420, 120, 45);
+		lbltxtPunkte.setBounds(585, 420, 135, 45);
 		contentPane.add(lbltxtPunkte);
 
 		lblLeben = new JLabel("Leben");
@@ -270,257 +494,31 @@ public class Display extends JFrame implements GameListener {
 		lblFrageZ2.setBounds(0, 55, 1000, 45);
 		contentPane.add(lblFrageZ2);
 
+		lblMultiplikator = new JLabel("Multiplikator");
+		lblMultiplikator.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMultiplikator.setForeground(Color.YELLOW);
+		lblMultiplikator.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblMultiplikator.setBounds(887, 420, 66, 45);
+		contentPane.add(lblMultiplikator);
+
+		lblPunkteklau1 = new GradientLabel("Punkteklau möglich!");
+		lblPunkteklau1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPunkteklau1.setForeground(Color.RED);
+		lblPunkteklau1.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		lblPunkteklau1.setBounds(100, 465, 320, 55);
+		lblPunkteklau1.setVisible(false);
+		contentPane.add(lblPunkteklau1);
+
+		lblPunkteklau2 = new GradientLabel("Punkteklau möglich!");
+		lblPunkteklau2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPunkteklau2.setForeground(Color.RED);
+		lblPunkteklau2.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		lblPunkteklau2.setBounds(624, 465, 320, 55);
+		lblPunkteklau2.setVisible(false);
+		contentPane.add(lblPunkteklau2);
+
 		//setContentPane(contentPaneLabel);
 		setContentPane(outerPanelLabel);
 	}
 
-	/**
-	 * Initialisieren des Anzeigefensters.
-	 * 
-	 * @param G
-	 *            Ein Objekt vom Typ Game.
-	 */
-	public Display(Game G) {
-		duell = G;
-		soundplayer = new PlayerApplet();
-		try {
-			team1 = ImageIO.read(getClass().getResource("/res/Physikerduell-21.png"));
-			team2 = ImageIO.read(getClass().getResource("/res/Physikerduell-22.png"));
-			noteam = ImageIO.read(getClass().getResource("/res/Physikerduell-1.png"));
-		}
-		catch (IOException ex) {
-			System.err.println("Error reading images: " + ex);
-		}
-		initializeUI();
-	}
-
-	/**
-	 * Aktualisiert zum anderen die auf dem Anzeigefenster befindlichen Objekte. Es wird
-	 * der aktuelle Spielzustand übernommen.
-	 * 
-	 * Zusätzlich wird ein <code>repaint</code> aufgerufen.
-	 */
-	@Override
-	public void gameUpdate() {
-		Question curr = duell.getCurrentQuestion();
-		if (duell.getCurrentTeam() == 1) {
-			contentPane.setImage(team1);
-		}
-		else if (duell.getCurrentTeam() == 2) {
-			contentPane.setImage(team2);
-		}
-		else {
-			contentPane.setImage(noteam);
-		}
-		contentPane.repaint();
-
-		// Anzeige der Labels der Antworten
-		showAnswerLabels();
-		// Anzeigen der Antworten
-		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
-			if (curr.getAnswer(i).isRevealed()) {
-				revealAnswer(i);
-			}
-			else {
-				showBlank(i);
-			}
-		}
-		switch (duell.getCurrentLives()) {
-		case 0:
-			lblLeben.setText("XXX");
-			break;
-		case 1:
-			lblLeben.setText("XX ");
-			break;
-		case 2:
-			lblLeben.setText("X  ");
-			break;
-		case 3:
-			lblLeben.setText("   ");
-			break;
-		}
-		lblSumme.setText(String.valueOf(duell.getCurrentScore()));
-		txtFTeam1.setText(String.valueOf(duell.getTeam1Score()));
-		txtFTeam2.setText(String.valueOf(duell.getTeam2Score()));
-		lblTeam1.setText(duell.getTeam1Name());
-		lblTeam2.setText(duell.getTeam2Name());
-
-		String currText = curr.getText();
-		if (duell.getCurrentQuestionIndex() != 0) {
-			if (currText.length() > 50) {
-				int schnitt = 50;
-				String sub = currText.substring(0, schnitt);
-				if (sub.contains(" ")) {
-					schnitt = sub.lastIndexOf(" ");
-				}
-				lblFrageZ1.setText(currText.substring(0, schnitt));
-				lblFrageZ2.setText(currText.substring(schnitt));
-			}
-			else {
-				lblFrageZ1.setText(currText);
-				lblFrageZ2.setText("");
-			}
-		}
-		else {
-			lblFrageZ1.setText("Physikerduell");
-			lblFrageZ2.setText("");
-		}
-		repaint();
-	}
-
-	/**
-	 * Zeigt auf der Spielanzeige für ein mit dem Parameter bestimmte Antwortmöglichkeit
-	 * nur die Maske für eine unbekannte Antwort an.
-	 * 
-	 * @param index
-	 *            Der Index der Antwortmöglichkeit von 0 bis 5
-	 */
-	private void showBlank(int index) {
-		JLabel antwort = (JLabel) getComponentByName("lblAntwort" + (index + 1));
-		JLabel punkte = (JLabel) getComponentByName("lblPunkte" + (index + 1));
-		antwort.setText("_______________________________");
-		punkte.setText("____");
-	}
-
-	/**
-	 * Returns the value of a field in this instance, specified by name (as a String).
-	 * 
-	 * @param name
-	 *            The name of the field
-	 * @return The field's value, or null if the field was not found or could not be
-	 *         accessed.
-	 */
-	private Object getComponentByName(String name) {
-		try {
-			return getClass().getDeclaredField(name).get(this);
-		}
-		catch (Exception ex) {
-			System.err.println("Could not get UI component: " + ex);
-		}
-		return null;
-	}
-
-	/**
-	 * Zeigt die Antwort und Punkte einer Antwortmöglichkeit auf der Spielanzeige an.
-	 * 
-	 * @param index
-	 *            Index der Antwortmöglichkeit von 0 bis 5.
-	 */
-	private void revealAnswer(int index) {
-		Question curr = duell.getCurrentQuestion();
-		JLabel antwort = (JLabel) getComponentByName("lblAntwort" + (index + 1));
-		JLabel punkte = (JLabel) getComponentByName("lblPunkte" + (index + 1));
-		antwort.setText(curr.getAnswerText(index));
-		punkte.setText(String.valueOf(curr.getAnswerScore(index)));
-	}
-
-	/**
-	 * Blendet die entsprechende Anzahl an Antwortmöglichkeiten ein. Dies geschieht
-	 * abgestimmt auf die Rundenzahl.
-	 */
-	private void showAnswerLabels() {
-		int numberOfAnswers = duell.numberOfAnswers();
-		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
-			boolean visible = i < numberOfAnswers;
-			JLabel antwort = (JLabel) getComponentByName("lblAntwort" + (i + 1));
-			JLabel punkte = (JLabel) getComponentByName("lblPunkte" + (i + 1));
-			antwort.setVisible(visible);
-			punkte.setVisible(visible);
-		}
-	}
-
-	/**
-	 * Die Methode <code>playIntro</code> ist der Methode <code>resume</code> übergeordnet
-	 * und spielt die Intromusik ab, bzw. wechselt von dem Pausenbild oder auch Startbild
-	 * zur Spielanzeige.
-	 */
-	public void playIntro() {
-		if (pause) {
-			if (musikPlayer == false) {
-				soundplayer.start(getClass().getResourceAsStream("/res/Intro.mp3"));
-				musikPlayer = true;
-			}
-			else {
-				resume();
-				musikPlayer = false;
-			}
-		}
-		else {
-			soundplayer.stop();
-			musikPlayer = false;
-		}
-	}
-
-	/**
-	 * Die Methode <code>playOutro</code> versetzt die Anzeige in ein Pausenbildschirm. Es
-	 * wird abgeblendet.
-	 */
-	public void playOutro() {
-		if (!pause) {
-			pause();
-		}
-	}
-
-	/**
-	 * Methode zum Anzeigen des Pausenlabels.
-	 */
-	public void pause() {
-		setContentPane(outerPanelLabel);
-		outerPanelLabel.setVisible(true);
-		outerPanelLabel.repaint();
-		outerPanelLabel.revalidate();
-		setVisible(true);
-		pause = true;
-	}
-
-	/**
-	 * Methode zum Anzeigen der Spielanzeige.
-	 */
-	public void resume() {
-		setContentPane(outerPanel);
-		outerPanel.setVisible(true);
-		outerPanel.repaint();
-		outerPanel.revalidate();
-		setVisible(true);
-		pause = false;
-	}
-
-	/**
-	 * Die Klasse ImagePanel wird zum Verwalten der Anzeigen Spiel und Pause verwendet.
-	 * 
-	 * @author Lutz Althüser
-	 * 
-	 */
-	private static class ImagePanel extends JPanel {
-
-		private static final long serialVersionUID = 1L;
-		private Image img;
-
-		public ImagePanel() {
-			this(null);
-		}
-
-		public ImagePanel(Image img) {
-			if (img != null) {
-				setImage(img);
-			}
-			setLayout(null);
-		}
-
-		public void setImage(Image img) {
-			this.img = img;
-			Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
-			setPreferredSize(size);
-			setMinimumSize(size);
-			setMaximumSize(size);
-			setSize(size);
-		}
-
-		@Override
-		protected void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			g.drawImage(img, 0, 0, this);
-		}
-
-	}
 }

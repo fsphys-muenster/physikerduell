@@ -40,7 +40,7 @@ public class Answer implements Comparable<Answer> {
 	 * 
 	 * @return The Answer's text
 	 */
-	public String getText() {
+	public String text() {
 		return text;
 	}
 
@@ -49,7 +49,7 @@ public class Answer implements Comparable<Answer> {
 	 * 
 	 * @return The Answer's score
 	 */
-	public int getScore() {
+	public int score() {
 		return score;
 	}
 

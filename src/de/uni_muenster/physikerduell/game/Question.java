@@ -6,6 +6,9 @@ import java.util.List;
 
 /**
  * 
+ * The <code>Question</code> class contains the information about a question, i.e. the
+ * question text and all of the possible <code>Answer</code>s to the question.
+ * 
  * @author Simon May
  * 
  */
@@ -14,6 +17,18 @@ public class Question {
 	private final String text;
 	private final List<Answer> answers;
 
+	/**
+	 * Creates a Question whose text is given by <code>question</code> and all of whose
+	 * possible answers are given by <code>answers</code>. The list of answers is copied,
+	 * so the original can be modified afterwards.
+	 * <p>
+	 * Neither argument can be <code>null</code>.
+	 * 
+	 * @param question
+	 *            The question's text
+	 * @param answers
+	 *            All of the question's possible answers
+	 */
 	public Question(String question, List<Answer> answers) {
 		if (question == null || answers == null) {
 			throw new IllegalArgumentException("An argument was null");
@@ -24,23 +39,58 @@ public class Question {
 		Collections.sort(this.answers, Collections.reverseOrder());
 	}
 
-	public String getText() {
+	/**
+	 * Returns the actual question in text form.
+	 * 
+	 * @return This question's text
+	 */
+	public String text() {
 		return text;
 	}
 
-	public Answer getAnswer(int index) {
+	/**
+	 * Returns the possible answer to this question specified by <code>index</code>.
+	 * Answers are sorted by their point value.
+	 * 
+	 * @param index
+	 *            The answer's index
+	 * @return An Answer to this question corresponding to the given index
+	 */
+	public Answer answer(int index) {
 		return answers.get(index);
 	}
 
-	public String getAnswerText(int index) {
-		return answers.get(index).getText();
+	/**
+	 * Returns the possible answer to this question in text form specified by
+	 * <code>index</code>.
+	 * 
+	 * @param index
+	 *            The answer's index
+	 * @return An answer in text form to this question corresponding to the given index
+	 */
+	public String answerText(int index) {
+		return answers.get(index).text();
 	}
 
-	public int getAnswerScore(int index) {
-		return answers.get(index).getScore();
+	/**
+	 * Returns the score of a possible answer to this question specified by
+	 * <code>index</code>.
+	 * 
+	 * @param index
+	 *            The answer's index
+	 * @return The score of an answer score to this question corresponding to the given
+	 *         index
+	 */
+	public int answerScore(int index) {
+		return answers.get(index).score();
 	}
 
-	public List<Answer> getAnswers() {
+	/**
+	 * Returns a read-only list of all possible answers to this question.
+	 * 
+	 * @return A read-only list of answers
+	 */
+	public List<Answer> allAnswers() {
 		return Collections.unmodifiableList(answers);
 	}
 
