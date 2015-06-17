@@ -59,6 +59,10 @@ public class Question {
 	public Answer answer(int index) {
 		return answers.get(index);
 	}
+	
+	public int answerCount() {
+		return answers.size();
+	}
 
 	/**
 	 * Returns the possible answer to this question in text form specified by
@@ -92,6 +96,12 @@ public class Question {
 	 */
 	public List<Answer> allAnswers() {
 		return Collections.unmodifiableList(answers);
+	}
+	
+	public void setRevealedAllAnswers(boolean reveal) {
+		for (Answer a : answers) {
+			a.setRevealed(reveal);
+		}
 	}
 
 	@Override

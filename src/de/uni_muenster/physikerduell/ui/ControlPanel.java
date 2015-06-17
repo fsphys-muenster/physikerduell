@@ -2,17 +2,26 @@ package de.uni_muenster.physikerduell.ui;
 
 import java.awt.Color;
 import java.awt.Desktop;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,17 +29,25 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
-import javazoom.jl.player.PlayerApplet;
+import javax.swing.SwingUtilities;
+import org.newdawn.easyogg.OggClip;
 import de.uni_muenster.physikerduell.game.Answer;
 import de.uni_muenster.physikerduell.game.Game;
-import de.uni_muenster.physikerduell.game.Game.GameException;
+import de.uni_muenster.physikerduell.game.Game.RoundState;
+import de.uni_muenster.physikerduell.game.GameException;
 import de.uni_muenster.physikerduell.game.GameListener;
+import de.uni_muenster.physikerduell.game.GameLog;
 import de.uni_muenster.physikerduell.game.Question;
 
 /**
- * Hauptklasse des Physikerduells der Fachschaft Physik an der WWU Münster am <br>
- * 12.06.2013, 02.06.2014
+ * Hauptklasse des Physikerduells der Fachschaft Physik an der WWU Münster am
+ * <ul>
+ * <li>12.06.2013</li>
+ * <li>05.06.2014</li>
+ * <li>18.06.2015</li>
+ * </ul>
  * <p>
  * 
  * Die Klasse ControlPanel verwaltet die Spielanzeige und den Spielstand (Klassen Anzeige
@@ -41,27 +58,41 @@ import de.uni_muenster.physikerduell.game.Question;
  */
 public class ControlPanel implements ActionListener, GameListener {
 
-	// Frame/Fenster der Bediener/Benutzeroberfläche des Physikerduells
-	private JFrame frmBedienoberflche;
+	private static final String QUESTIONS_PATH_EXT = "fragen.csv";
+	private static final String QUESTIONS_PATH_INT = "/res/fragen.csv";
+	private static final Action PLAY_BUZZER = new AbstractAction() {
+		private static final long serialVersionUID = 1L;
+		private OggClip ogg;
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (ogg == null) {
+				try {
+					ogg = new OggClip(getClass().getResourceAsStream("/res/buzzer.ogg"));
+				} catch (IOException ex) {
+					System.err.println("Buzzer sound could not be loaded: " + ex);
+				}
+			}
+			if (ogg.stopped()) {
+				ogg.play();
+			}
+		}
+	};
+	private JFrame frmControl;
 	private JTextField txtTeam1Name;
 	private JTextField txtTeam2Name;
 	private JTextField txtTeam1GPunkte;
 	private JTextField txtTeam2GPunkte;
-	private JLabel txtAPunkte;
 	private JTextField txtALeben;
 	private JButton btnFalscheAntwort;
 	private JButton btnAbspannWechsel;
 	private JButton btnNaechsteFrage;
 	private JButton btnStart;
 	private JButton btnOpenLog;
+	private JButton btnOpenQuestions;
+	private JButton btnBuzzer;
 	private JComboBox<String> cbFragenauswahl;
-	private JPanel pTeamauswahl;
-	private JCheckBox chckbxAntwort1;
-	private JCheckBox chckbxAntwort2;
-	private JCheckBox chckbxAntwort3;
-	private JCheckBox chckbxAntwort4;
-	private JCheckBox chckbxAntwort5;
-	private JCheckBox chckbxAntwort6;
+	private JLabel lblMultiplier;
+	private JLabel txtAPunkte;
 	private JLabel lblAntwort1;
 	private JLabel lblAntwort2;
 	private JLabel lblAntwort3;
@@ -70,24 +101,28 @@ public class ControlPanel implements ActionListener, GameListener {
 	private JLabel lblAntwort6;
 	private JRadioButton rdbtnTeam1;
 	private JRadioButton rdbtnTeam2;
+	private JRadioButton rdbtnNoTeam;
+	private JRadioButton rdbtnPunkteklau;
+	private JRadioButton rdbtnRundenende;
+	private JRadioButton rdbtnNormaleRunde;
+	private JRadioButton rdbtnBuzzermodus;
 	private JRadioButton rdbtnRunde1;
 	private JRadioButton rdbtnRunde2;
 	private JRadioButton rdbtnRunde3;
 	private JRadioButton rdbtnRunde4;
 	private JRadioButton rdbtnRunde5;
-	private JRadioButton rdbtnNoTeam;
-	// Zwei ButtonGroups, in denen die Radiobuttons organisiert werden.
-	// Es kann nur ein Radiobutton pro Gruppe selektiert sein.
+	private JCheckBox chckbxAntwort1;
+	private JCheckBox chckbxAntwort2;
+	private JCheckBox chckbxAntwort3;
+	private JCheckBox chckbxAntwort4;
+	private JCheckBox chckbxAntwort5;
+	private JCheckBox chckbxAntwort6;
+	private JTextPane txtpnImpressum;
 	private ButtonGroup activeTeam;
 	private ButtonGroup activeRound;
-	// Die beiden Objekte der Spielmechanik
-	private Game duell;
-	private Display fenster;
-	// Das Objekt des SoundPlayers
-	private PlayerApplet soundplayer;
-	private JCheckBox chckbxPunkteklau;
-	private JCheckBox chckbxRundenende;
-	private JLabel lblMultiplier;
+	private ButtonGroup roundStatus;
+	private Game game;
+	private final Display display;
 
 	/**
 	 * Die <code>main</code>-Methode soll zum Anstoß geben, dass die Objekte initialisiert
@@ -96,12 +131,12 @@ public class ControlPanel implements ActionListener, GameListener {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
 				try {
 					ControlPanel window = new ControlPanel();
-					window.frmBedienoberflche.setVisible(true);
+					window.frmControl.setVisible(true);
 				}
 				catch (GameException ex) {
 					System.err.println("Game could not be started: " + ex);
@@ -119,23 +154,37 @@ public class ControlPanel implements ActionListener, GameListener {
 	 */
 	public ControlPanel() throws GameException {
 		initializeUI();
-		// Spielstand initialisieren
-		duell = new Game(getClass().getResourceAsStream("/res/Katalog.csv"));
-		duell.setLogging(true);
-		soundplayer = new PlayerApplet();
+		// register key combo for buzzer sound (CTRL + SHIFT + B)
+		InputMap im = btnBuzzer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+		im.put(KeyStroke.getKeyStroke("control shift B"), "play_buzzer");
+		btnBuzzer.getActionMap().put("play_buzzer", PLAY_BUZZER);
+		// initialize game state
+		InputStream questionFile;
+		try {
+			questionFile = Files.newInputStream(Paths.get(QUESTIONS_PATH_EXT));
+		}
+		catch (IOException ex) {
+			questionFile = getClass().getResourceAsStream(QUESTIONS_PATH_INT);
+		}
+		// create display window
+		display = new Display();
+		resetGame(questionFile);
+		display.setUndecorated(true);
+		display.setAlwaysOnTop(!frmControl.isAlwaysOnTop());
+		display.setVisible(true);
+		display.setGame(game);
+	}
+	
+	private void resetGame(InputStream questionFile) throws GameException {
+		game = new Game(questionFile);
+		game.setLogging(true);
 		// ComboBox mit Fragen auffüllen
 		cbFragenauswahl.removeAllItems();
-		for (int i = 0; i < duell.questionCount(); i++) {
-			cbFragenauswahl.addItem(duell.getQuestion(i).text());
+		for (int i = 0; i < game.questionCount(); i++) {
+			cbFragenauswahl.addItem(game.getQuestion(i).text());
 		}
-		// Spielfenster erstellen
-		fenster = new Display(duell);
-		fenster.setUndecorated(true);
-		fenster.setAlwaysOnTop(!frmBedienoberflche.isAlwaysOnTop());
-		fenster.setVisible(true);
-		// Anzeige und Bedienoberfläche erhalten Spiel-Updates
-		duell.addListener(fenster);
-		duell.addListener(this);
+		// Bedienoberfläche erhält Spiel-Updates
+		game.addListener(this);
 	}
 
 	/**
@@ -145,91 +194,114 @@ public class ControlPanel implements ActionListener, GameListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnStart) {
 			btnAbspannWechsel.setEnabled(true);
-			fenster.playIntro();
+			display.playIntro();
 		}
 		else if (e.getSource() == btnAbspannWechsel) {
-			fenster.playOutro();
+			display.playOutro();
 		}
 		else if (e.getSource() == btnFalscheAntwort) {
-			duell.wrongAnswer();
-			playSound("Wrong.mp3");
+			game.wrongAnswer();
+			Sound.playOgg("wrong.ogg");
 		}
 		else if (e.getSource() == btnNaechsteFrage) {
-			int currIndex = duell.getCurrentQuestionIndex();
-			if (currIndex + 1 < duell.questionCount()) {
+			int currIndex = game.getCurrentQuestionIndex();
+			if (currIndex + 1 < game.questionCount()) {
 				// introduce next question
-				duell.setCurrentQuestionIndex(currIndex + 1);
+				game.setCurrentQuestionIndex(currIndex + 1);
 			}
 		}
-		else if (e.getSource() == rdbtnTeam1 || e.getSource() == rdbtnTeam2) {
-			if (e.getSource() == rdbtnTeam1) {
-				duell.setCurrentTeam(1);
-			}
-			else {
-				duell.setCurrentTeam(2);
-			}
-			duell.setCurrentLives(Game.MAX_LIVES);
+		else if (e.getSource() == rdbtnTeam1) {
+			game.setCurrentTeam(1);
+		}
+		else if (e.getSource() == rdbtnTeam2) {
+			game.setCurrentTeam(2);
 		}
 		else if (e.getSource() == rdbtnNoTeam) {
-			duell.setCurrentTeam(-1);
-			duell.setCurrentLives(Game.MAX_LIVES);
+			game.setCurrentTeam(Game.NO_TEAM);
 		}
 		else if (e.getSource() == txtTeam1Name || e.getSource() == txtTeam2Name) {
 			checkTeamNameInput();
 		}
 		else if (e.getSource() == txtTeam1GPunkte) {
-			duell.setTeam1Score(Integer.parseInt(txtTeam1GPunkte.getText()));
+			game.setTeam1Score(Integer.parseInt(txtTeam1GPunkte.getText()));
 		}
 		else if (e.getSource() == txtTeam2GPunkte) {
-			duell.setTeam2Score(Integer.parseInt(txtTeam2GPunkte.getText()));
+			game.setTeam2Score(Integer.parseInt(txtTeam2GPunkte.getText()));
 		}
 		else if (e.getSource() == txtALeben) {
-			duell.setCurrentLives(Integer.parseInt(txtALeben.getText()));
-		}
-		else if (e.getSource() == chckbxPunkteklau) {
-			System.out.println("blagh");
-			System.out.println(chckbxPunkteklau.isSelected());
-			duell.setStealingPoints(chckbxPunkteklau.isSelected());
-		}
-		else if (e.getSource() == btnOpenLog) {
-			try {
-				Desktop.getDesktop().open(new File(Game.LOG_FILE_PATH));
+			int input = Integer.parseInt(txtALeben.getText());
+			if (input >= 0 && input <= 3) {
+				game.setCurrentLives(input);
 			}
-			catch (Exception ex) {
-				System.err.println("Error reading log file: " + ex);
-				JOptionPane.showMessageDialog(frmBedienoberflche,
-					"Could not read log file!");
+			else {
+				txtALeben.setText(Integer.toString(input));
 			}
+		}
+		else if (e.getSource() == rdbtnBuzzermodus) {
+			game.setRoundState(RoundState.BUZZER);
+		}
+		else if (e.getSource() == rdbtnNormaleRunde) {
+			game.setRoundState(RoundState.NORMAL);
+		}
+		else if (e.getSource() == rdbtnPunkteklau) {
+			game.setRoundState(RoundState.STEALING_POINTS);
 		}
 		else if (e.getSource() == cbFragenauswahl) {
 			int selected = cbFragenauswahl.getSelectedIndex();
 			// choose selected question if selected question changed
-			if (selected >= 0 && selected != duell.getCurrentQuestionIndex()) {
-				duell.setCurrentQuestionIndex(selected);
+			if (selected >= 0 && selected != game.getCurrentQuestionIndex()) {
+				game.setCurrentQuestionIndex(selected);
+			}
+		}
+		else if (e.getSource() == btnOpenQuestions) {
+			try {
+				JFileChooser chooser = new JFileChooser(".");
+				int returnVal = chooser.showOpenDialog(this.display);
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					Path questionPath = chooser.getSelectedFile().toPath();
+					resetGame(Files.newInputStream(questionPath));
+				}
+			}
+			catch (Exception ex) {
+				System.err.println("Error reading question file: " + ex);
+				JOptionPane.showMessageDialog(frmControl, "Could not read question file!");
+			}
+		}
+		else if (e.getSource() == btnOpenLog) {
+			try {
+				Desktop.getDesktop().open(new File(GameLog.LOG_FILE_PATH));
+			}
+			catch (Exception ex) {
+				System.err.println("Error reading log file: " + ex);
+				JOptionPane.showMessageDialog(frmControl, "Could not read log file!", "File not found", 
+						JOptionPane.WARNING_MESSAGE);
 			}
 		}
 		// RadioButtons (rounds)
 		for (int i = 1; i <= Game.NUM_ROUNDS; i++) {
 			JRadioButton rdo = (JRadioButton) getComponentByName("rdbtnRunde" + i);
 			if (e.getSource().equals(rdo)) {
-				duell.setCurrentRound(i);
+				game.setCurrentRound(i);
 				break;
 			}
 		}
 		// CheckBoxes (answers)
 		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
 			JCheckBox chkbx = (JCheckBox) getComponentByName("chckbxAntwort" + (i + 1));
+			Question currentQ = game.currentQuestion();
 			if (e.getSource() == chkbx) {
 				boolean selected = chkbx.isSelected();
 				if (selected) {
-					// if correct: play sound; no sound if round ended!
-					if (!duell.roundEnded()) {
-						playSound("Right.mp3");
+					Sound.playOgg("right.ogg");
+					if (game.getRoundState() == RoundState.ROUND_ENDED) {
+						currentQ.answer(i).setRevealed(true);
 					}
-					duell.correctAnswer(i);
+					else {
+						game.correctAnswer(i);
+					}
 				}
 				else {
-					duell.currentQuestion().answer(i).setRevealed(false);
+					currentQ.answer(i).setRevealed(false);
 				}
 				break;
 			}
@@ -241,18 +313,32 @@ public class ControlPanel implements ActionListener, GameListener {
 	 */
 	@Override
 	public void gameUpdate() {
+		boolean roundEnd = game.getRoundState() == RoundState.ROUND_ENDED;
 		// insert data into corresponding fields
-		txtTeam1Name.setText(duell.getTeam1Name());
-		txtTeam2Name.setText(duell.getTeam2Name());
-		txtTeam1GPunkte.setText(String.valueOf(duell.getTeam1Score()));
-		txtTeam2GPunkte.setText(String.valueOf(duell.getTeam2Score()));
-		txtALeben.setText(String.valueOf(duell.getCurrentLives()));
-		txtAPunkte.setText(String.valueOf(duell.currentScore()));
-		lblMultiplier.setText(String.format("×%d", duell.roundMultiplier()));
-		chckbxPunkteklau.setSelected(duell.isStealingPoints());
-		chckbxRundenende.setSelected(duell.roundEnded());
+		txtTeam1Name.setText(game.getTeam1Name());
+		txtTeam2Name.setText(game.getTeam2Name());
+		txtTeam1GPunkte.setText(String.valueOf(game.getTeam1Score()));
+		txtTeam2GPunkte.setText(String.valueOf(game.getTeam2Score()));
+		txtALeben.setText(String.valueOf(game.getCurrentLives()));
+		txtAPunkte.setText(String.valueOf(game.currentScore()));
+		lblMultiplier.setText(String.format("×%d", game.roundMultiplier()));
+		// select appropriate round state radio button
+		switch (game.getRoundState()) {
+		case BUZZER:
+			roundStatus.setSelected(rdbtnBuzzermodus.getModel(), true);
+			break;
+		case NORMAL:
+			roundStatus.setSelected(rdbtnNormaleRunde.getModel(), true);
+			break;
+		case STEALING_POINTS:
+			roundStatus.setSelected(rdbtnPunkteklau.getModel(), true);
+			break;
+		case ROUND_ENDED:
+			roundStatus.setSelected(rdbtnRundenende.getModel(), true);
+			break;
+		}
 		// select team RadioButton according to selected team
-		int currTeam = duell.getCurrentTeam();
+		int currTeam = game.getCurrentTeam();
 		switch (currTeam) {
 		case 1:
 			activeTeam.setSelected(rdbtnTeam1.getModel(), true);
@@ -265,66 +351,70 @@ public class ControlPanel implements ActionListener, GameListener {
 			break;
 		}
 		// disable team buttons if round ended
-		rdbtnTeam1.setEnabled(!duell.roundEnded());
-		rdbtnTeam2.setEnabled(!duell.roundEnded());
-		rdbtnNoTeam.setEnabled(!duell.roundEnded());
-		// select round RadioButton according to selected round
+		rdbtnTeam1.setEnabled(!roundEnd);
+		rdbtnTeam2.setEnabled(!roundEnd);
+		rdbtnNoTeam.setEnabled(!roundEnd);
+		// select round radiobutton according to selected round
 		JRadioButton rdoRound =
-			(JRadioButton) getComponentByName("rdbtnRunde" + duell.getCurrentRound());
+			(JRadioButton) getComponentByName("rdbtnRunde" + game.getCurrentRound());
 		activeRound.setSelected(rdoRound.getModel(), true);
-		// disable point stealing checkbox if no team is selected
-		chckbxPunkteklau.setEnabled(duell.getCurrentTeam() != -1);
+		// disable point stealing radiobutton if no team is selected
+		rdbtnPunkteklau.setEnabled(game.getCurrentTeam() != -1);
 		// select ComboBox item according to selected question
-		int currIndex = duell.getCurrentQuestionIndex();
+		int currIndex = game.getCurrentQuestionIndex();
 		cbFragenauswahl.setSelectedIndex(currIndex);
 		// set answer CheckBox text and score Label text
 		// enable/disable and select/deselect answer CheckBoxes
-		Question currQuestion = duell.currentQuestion();
+		Question currQuestion = game.currentQuestion();
 		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
 			JCheckBox chkAns = (JCheckBox) getComponentByName("chckbxAntwort" + (i + 1));
 			JLabel lblAns = (JLabel) getComponentByName("lblAntwort" + (i + 1));
-			Answer ans = currQuestion.answer(i);
-			String chkText = ans.text();
-			String lblText = String.valueOf(ans.score());
-			// No text if question 0 (test question)
-			if (currIndex == 0) {
-				chkText = lblText = "";
+			boolean answersLeft = i < currQuestion.answerCount();
+			if (answersLeft) {
+				Answer ans = currQuestion.answer(i);
+				String chkText = ans.text();
+				String lblText = String.valueOf(ans.score());
+				// No text if question 0 (test question)
+				if (currIndex == 0) {
+					chkText = lblText = "";
+				}
+				chkAns.setText(chkText);
+				chkAns.setSelected(ans.isRevealed());
+				lblAns.setText(lblText);
 			}
-			boolean roundEnd = duell.roundEnded();
-			boolean validAnswer = i < duell.numberOfAnswers() && currIndex != 0;
+			boolean validAnswer = i < game.numberOfAnswers() && currIndex != 0 && answersLeft;
 			// Activate if valid answer and during a round with a team selected
 			// or at round end (so the answers can still be revealed to the audience)
 			boolean enabled = validAnswer && ((!roundEnd && currTeam != -1) || roundEnd);
-			chkAns.setText(chkText);
 			chkAns.setEnabled(enabled);
-			chkAns.setSelected(ans.isRevealed());
-			lblAns.setText(lblText);
 		}
 		// Enable/disable button for next question
-		boolean nextQ = duell.getCurrentQuestionIndex() + 1 < duell.questionCount();
+		boolean nextQ = game.getCurrentQuestionIndex() + 1 < game.questionCount();
 		btnNaechsteFrage.setEnabled(nextQ);
+		// Enable/disable lives text field
+		txtALeben.setEnabled(currTeam != Game.NO_TEAM);
 	}
 
 	/**
 	 * Checks if the inputted team names are valid.
 	 */
 	private void checkTeamNameInput() {
+		int MAX_NAME_LEN = 18;
 		txtTeam1Name.setBackground(Color.WHITE);
 		txtTeam2Name.setBackground(Color.WHITE);
 		String team1Name = txtTeam1Name.getText();
 		String team2Name = txtTeam2Name.getText();
-		boolean valid =
-			!team1Name.isEmpty() && !team2Name.isEmpty() && team1Name.length() <= 20
-				&& team2Name.length() <= 20;
+		boolean valid = !team1Name.isEmpty() && !team2Name.isEmpty() && team1Name.length() <= MAX_NAME_LEN
+				&& team2Name.length() <= MAX_NAME_LEN;
 		if (valid) {
-			duell.setTeam1Name(team1Name);
-			duell.setTeam2Name(team2Name);
+			game.setTeam1Name(team1Name);
+			game.setTeam2Name(team2Name);
 		}
 		else {
-			if (team1Name.isEmpty() || team1Name.length() >= 20) {
+			if (team1Name.isEmpty() || team1Name.length() > MAX_NAME_LEN) {
 				txtTeam1Name.setBackground(Color.RED);
 			}
-			if (team2Name.isEmpty() || team2Name.length() >= 20) {
+			if (team2Name.isEmpty() || team2Name.length() > MAX_NAME_LEN) {
 				txtTeam2Name.setBackground(Color.RED);
 			}
 		}
@@ -334,6 +424,8 @@ public class ControlPanel implements ActionListener, GameListener {
 		btnFalscheAntwort.setEnabled(valid);
 		btnNaechsteFrage.setEnabled(valid);
 		btnStart.setEnabled(valid);
+		rdbtnBuzzermodus.setEnabled(valid);
+		rdbtnNormaleRunde.setEnabled(valid);
 		for (int i = 1; i <= Game.NUM_ROUNDS; i++) {
 			JRadioButton rdo = (JRadioButton) getComponentByName("rdbtnRunde" + i);
 			rdo.setEnabled(valid);
@@ -359,37 +451,22 @@ public class ControlPanel implements ActionListener, GameListener {
 	}
 
 	/**
-	 * 
-	 * Plays the specified audio file.
-	 * 
-	 * @param name
-	 *            Audio file name (in the "res" directory)
-	 */
-	private void playSound(String name) {
-		final String resource = "/res/" + name;
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				soundplayer.start(getClass().getResourceAsStream(resource));
-			}
-		}).start();
-	}
-
-	/**
-	 * (Automatisch generiert) Hilfsmethode des Konstruktors. Erzeugt die Elemente der
+	 * <strong>(Automatisch generiert!)</strong>
+	 * <p>
+	 * Hilfsmethode des Konstruktors. Erzeugt die Elemente der
 	 * GUI.
 	 */
 	private void initializeUI() {
-		frmBedienoberflche = new JFrame();
-		frmBedienoberflche.setIconImage(Toolkit.getDefaultToolkit().getImage(
-			ControlPanel.class.getResource("/res/Physikerduell-0.png")));
-		frmBedienoberflche.setAlwaysOnTop(true);
-		frmBedienoberflche.setTitle("Physikerduell - Bedienoberfläche");
-		frmBedienoberflche.setResizable(false);
-		frmBedienoberflche.getContentPane().setBackground(Color.WHITE);
-		frmBedienoberflche.setBounds(100, 100, 1024, 716);
-		frmBedienoberflche.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmBedienoberflche.setLocationRelativeTo(null);
+		frmControl = new JFrame();
+		frmControl.setIconImage(Toolkit.getDefaultToolkit().getImage(
+			getClass().getResource("/res/Physikerduell-0.png")));
+		frmControl.setAlwaysOnTop(true);
+		frmControl.setTitle("Physikerduell – Bedienoberfläche");
+		frmControl.setResizable(false);
+		frmControl.getContentPane().setBackground(Color.WHITE);
+		frmControl.setBounds(100, 100, 1024, 716);
+		frmControl.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmControl.setLocationRelativeTo(null);
 
 		cbFragenauswahl = new JComboBox<String>();
 		cbFragenauswahl.setEnabled(false);
@@ -458,89 +535,81 @@ public class ControlPanel implements ActionListener, GameListener {
 		btnFalscheAntwort = new JButton("Falsche Antwort");
 		btnFalscheAntwort.setEnabled(false);
 		btnFalscheAntwort.setBounds(10, 610, 492, 30);
-		frmBedienoberflche.getContentPane().setLayout(null);
+		frmControl.getContentPane().setLayout(null);
 
 		JLabel lblHeadline = new JLabel("Bedienoberfläche des Physikerduells");
-		lblHeadline.setBounds(0, 0, 1018, 38);
-		lblHeadline.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblHeadline.setBounds(12, 0, 1000, 38);
+		lblHeadline.setFont(new Font("Dialog", Font.BOLD, 20));
 		lblHeadline.setHorizontalAlignment(SwingConstants.CENTER);
-		frmBedienoberflche.getContentPane().add(lblHeadline);
+		frmControl.getContentPane().add(lblHeadline);
 
 		JLabel lblTeam1Name = new JLabel("Teamname von Team 1");
-		lblTeam1Name.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblTeam1Name.setFont(new Font("Dialog", Font.BOLD, 11));
 		lblTeam1Name.setBounds(10, 38, 150, 25);
-		frmBedienoberflche.getContentPane().add(lblTeam1Name);
+		frmControl.getContentPane().add(lblTeam1Name);
 
 		txtTeam1Name = new JTextField();
-		txtTeam1Name
-			.setToolTipText("Teamname von Team 1 - Mit ENTER die Eingabe bestätigen!");
+		txtTeam1Name.setToolTipText("Teamname von Team 1 – Mit ENTER die Eingabe bestätigen!");
 		txtTeam1Name.setBounds(20, 60, 472, 25);
-		txtTeam1Name.setColumns(1);
-		txtTeam1Name.setText("");
-		frmBedienoberflche.getContentPane().add(txtTeam1Name);
+		frmControl.getContentPane().add(txtTeam1Name);
 
-		JLabel lblTeam1GPunkte = new JLabel("Gesamtpunkte von Team 1");
-		lblTeam1GPunkte.setFont(new Font("Tahoma", Font.BOLD, 11));
+		JLabel lblTeam1GPunkte = new JLabel("Gesamtpunkte von Team 1:");
+		lblTeam1GPunkte.setFont(new Font("Dialog", Font.BOLD, 11));
 		lblTeam1GPunkte.setBounds(10, 100, 180, 25);
-		frmBedienoberflche.getContentPane().add(lblTeam1GPunkte);
+		frmControl.getContentPane().add(lblTeam1GPunkte);
 
 		txtTeam1GPunkte = new JTextField();
 		txtTeam1GPunkte.setEnabled(false);
 		txtTeam1GPunkte.setToolTipText("Mit ENTER die Eingabe bestätigen!");
 		txtTeam1GPunkte.setText("0");
 		txtTeam1GPunkte.setHorizontalAlignment(SwingConstants.CENTER);
-		txtTeam1GPunkte.setFont(new Font("Tahoma", Font.BOLD, 15));
-		txtTeam1GPunkte.setBounds(200, 100, 100, 25);
-		txtTeam1GPunkte.setColumns(1);
-		frmBedienoberflche.getContentPane().add(txtTeam1GPunkte);
+		txtTeam1GPunkte.setFont(new Font("Dialog", Font.BOLD, 15));
+		txtTeam1GPunkte.setBounds(190, 100, 100, 25);
+		frmControl.getContentPane().add(txtTeam1GPunkte);
 
 		JLabel lblTeam2Name = new JLabel("Teamname von Team 2");
-		lblTeam2Name.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblTeam2Name.setFont(new Font("Dialog", Font.BOLD, 11));
 		lblTeam2Name.setBounds(522, 38, 150, 25);
-		frmBedienoberflche.getContentPane().add(lblTeam2Name);
+		frmControl.getContentPane().add(lblTeam2Name);
 
 		txtTeam2Name = new JTextField();
-		txtTeam2Name
-			.setToolTipText("Teamname von Team 2 - Mit ENTER die Eingabe bestätigen!");
+		txtTeam2Name.setToolTipText("Teamname von Team 2 – Mit ENTER die Eingabe bestätigen!");
 		txtTeam2Name.setBounds(532, 60, 472, 25);
-		txtTeam2Name.setColumns(1);
-		txtTeam2Name.setText("");
-		frmBedienoberflche.getContentPane().add(txtTeam2Name);
+		frmControl.getContentPane().add(txtTeam2Name);
 
-		JLabel lblTeam2GPunkte = new JLabel("Gesamtpunkte von Team 2");
-		lblTeam2GPunkte.setFont(new Font("Tahoma", Font.BOLD, 11));
+		JLabel lblTeam2GPunkte = new JLabel("Gesamtpunkte von Team 2:");
+		lblTeam2GPunkte.setFont(new Font("Dialog", Font.BOLD, 11));
 		lblTeam2GPunkte.setBounds(522, 100, 180, 25);
-		frmBedienoberflche.getContentPane().add(lblTeam2GPunkte);
+		frmControl.getContentPane().add(lblTeam2GPunkte);
 
 		txtTeam2GPunkte = new JTextField();
 		txtTeam2GPunkte.setEnabled(false);
 		txtTeam2GPunkte.setToolTipText(" Mit ENTER die Eingabe bestätigen!");
 		txtTeam2GPunkte.setText("0");
 		txtTeam2GPunkte.setHorizontalAlignment(SwingConstants.CENTER);
-		txtTeam2GPunkte.setFont(new Font("Tahoma", Font.BOLD, 15));
-		txtTeam2GPunkte.setBounds(712, 100, 100, 25);
-		txtTeam2GPunkte.setColumns(1);
-		frmBedienoberflche.getContentPane().add(txtTeam2GPunkte);
+		txtTeam2GPunkte.setFont(new Font("Dialog", Font.BOLD, 15));
+		txtTeam2GPunkte.setBounds(702, 100, 100, 25);
+		frmControl.getContentPane().add(txtTeam2GPunkte);
 
 		btnStart = new JButton("Vorspann und Start (Mehrfachfunktion)");
 		btnStart.setEnabled(false);
 		btnStart.setBounds(10, 150, 390, 50);
-		frmBedienoberflche.getContentPane().add(btnStart);
+		frmControl.getContentPane().add(btnStart);
 
 		btnAbspannWechsel = new JButton("Abspann");
 		btnAbspannWechsel.setEnabled(false);
 		btnAbspannWechsel.setBounds(10, 211, 390, 50);
-		frmBedienoberflche.getContentPane().add(btnAbspannWechsel);
+		frmControl.getContentPane().add(btnAbspannWechsel);
 
 		JLabel lblAktuellesTeam = new JLabel("Aktuelles Team");
 		lblAktuellesTeam.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAktuellesTeam.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblAktuellesTeam.setBounds(410, 150, 100, 25);
-		frmBedienoberflche.getContentPane().add(lblAktuellesTeam);
+		lblAktuellesTeam.setFont(new Font("Dialog", Font.BOLD, 11));
+		lblAktuellesTeam.setBounds(457, 137, 116, 25);
+		frmControl.getContentPane().add(lblAktuellesTeam);
 
-		pTeamauswahl = new JPanel();
-		pTeamauswahl.setBounds(410, 175, 100, 90);
-		frmBedienoberflche.getContentPane().add(pTeamauswahl);
+		JPanel pTeamauswahl = new JPanel();
+		pTeamauswahl.setBounds(457, 162, 116, 90);
+		frmControl.getContentPane().add(pTeamauswahl);
 
 		rdbtnTeam1 = new JRadioButton("Team 1");
 		rdbtnTeam1.setEnabled(false);
@@ -550,94 +619,92 @@ public class ControlPanel implements ActionListener, GameListener {
 		rdbtnTeam2.setEnabled(false);
 		pTeamauswahl.add(rdbtnTeam2);
 
-		JLabel lblAPunkte = new JLabel("Punkte des Aktuellen Teams");
+		JLabel lblAPunkte = new JLabel("Punkte des aktuellen Teams");
 		lblAPunkte.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAPunkte.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblAPunkte.setBounds(522, 150, 195, 25);
-		frmBedienoberflche.getContentPane().add(lblAPunkte);
+		lblAPunkte.setFont(new Font("Dialog", Font.BOLD, 11));
+		lblAPunkte.setBounds(614, 137, 188, 25);
+		frmControl.getContentPane().add(lblAPunkte);
 
 		txtAPunkte = new JLabel();
 		txtAPunkte.setToolTipText("");
 		txtAPunkte.setHorizontalAlignment(SwingConstants.CENTER);
 		txtAPunkte.setText("0");
-		txtAPunkte.setFont(new Font("Tahoma", Font.BOLD, 15));
-		txtAPunkte.setBounds(522, 175, 195, 25);
-		frmBedienoberflche.getContentPane().add(txtAPunkte);
+		txtAPunkte.setFont(new Font("Dialog", Font.BOLD, 15));
+		txtAPunkte.setBounds(614, 162, 188, 25);
+		frmControl.getContentPane().add(txtAPunkte);
 
-		JLabel lblALeben = new JLabel("Leben des Aktuellen Teams");
+		JLabel lblALeben = new JLabel("Leben des aktuellen Teams");
 		lblALeben.setHorizontalAlignment(SwingConstants.CENTER);
-		lblALeben.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblALeben.setBounds(522, 202, 195, 25);
-		frmBedienoberflche.getContentPane().add(lblALeben);
+		lblALeben.setFont(new Font("Dialog", Font.BOLD, 11));
+		lblALeben.setBounds(614, 189, 188, 25);
+		frmControl.getContentPane().add(lblALeben);
 
 		txtALeben = new JTextField();
 		txtALeben.setToolTipText("Mit ENTER die Eingabe bestätigen!");
 		txtALeben.setEnabled(false);
 		txtALeben.setHorizontalAlignment(SwingConstants.CENTER);
-		txtALeben.setText("0");
-		txtALeben.setFont(new Font("Tahoma", Font.BOLD, 15));
-		txtALeben.setBounds(570, 224, 100, 25);
+		txtALeben.setText("3");
+		txtALeben.setFont(new Font("Dialog", Font.BOLD, 15));
+		txtALeben.setBounds(614, 212, 188, 25);
 		txtALeben.setColumns(1);
-		frmBedienoberflche.getContentPane().add(txtALeben);
+		frmControl.getContentPane().add(txtALeben);
 
 		JPanel pRundenauswahl = new JPanel();
-		pRundenauswahl.setBounds(10, 280, 1000, 90);
-		frmBedienoberflche.getContentPane().add(pRundenauswahl);
+		pRundenauswahl.setBounds(10, 280, 530, 90);
+		frmControl.getContentPane().add(pRundenauswahl);
 		pRundenauswahl.setLayout(null);
 
 		JLabel lblRundenauswahl = new JLabel("Rundenauswahl");
-		lblRundenauswahl.setBounds(412, 5, 174, 14);
+		lblRundenauswahl.setBounds(200, 5, 130, 14);
 		lblRundenauswahl.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRundenauswahl.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblRundenauswahl.setFont(new Font("Dialog", Font.BOLD, 11));
 		pRundenauswahl.add(lblRundenauswahl);
 
 		rdbtnRunde1 = new JRadioButton("Runde 1");
 		rdbtnRunde1.setSelected(true);
 		rdbtnRunde1.setEnabled(false);
-		rdbtnRunde1.setBounds(110, 32, 100, 25);
+		rdbtnRunde1.setBounds(8, 33, 100, 25);
 		pRundenauswahl.add(rdbtnRunde1);
 
 		rdbtnRunde2 = new JRadioButton("Runde 2");
 		rdbtnRunde2.setEnabled(false);
-		rdbtnRunde2.setBounds(288, 33, 100, 25);
+		rdbtnRunde2.setBounds(112, 33, 100, 25);
 		pRundenauswahl.add(rdbtnRunde2);
 
 		rdbtnRunde3 = new JRadioButton("Runde 3");
 		rdbtnRunde3.setEnabled(false);
-		rdbtnRunde3.setBounds(466, 33, 100, 25);
+		rdbtnRunde3.setBounds(216, 33, 100, 25);
 		pRundenauswahl.add(rdbtnRunde3);
 
 		rdbtnRunde4 = new JRadioButton("Runde 4");
 		rdbtnRunde4.setEnabled(false);
-		rdbtnRunde4.setBounds(644, 33, 100, 25);
+		rdbtnRunde4.setBounds(320, 33, 100, 25);
 		pRundenauswahl.add(rdbtnRunde4);
 
 		rdbtnRunde5 = new JRadioButton("Runde 5");
 		rdbtnRunde5.setEnabled(false);
-		rdbtnRunde5.setBounds(822, 33, 100, 25);
+		rdbtnRunde5.setBounds(424, 33, 100, 25);
 		pRundenauswahl.add(rdbtnRunde5);
 
-		frmBedienoberflche.getContentPane().add(cbFragenauswahl);
-		frmBedienoberflche.getContentPane().add(pAntwortmoeglichkeiten);
-		frmBedienoberflche.getContentPane().add(btnFalscheAntwort);
+		frmControl.getContentPane().add(cbFragenauswahl);
+		frmControl.getContentPane().add(pAntwortmoeglichkeiten);
+		frmControl.getContentPane().add(btnFalscheAntwort);
 
 		btnNaechsteFrage = new JButton(">> Nächste Frage <<");
 		btnNaechsteFrage.setEnabled(false);
 		btnNaechsteFrage.setBounds(10, 645, 492, 30);
-		frmBedienoberflche.getContentPane().add(btnNaechsteFrage);
+		frmControl.getContentPane().add(btnNaechsteFrage);
 
 		rdbtnNoTeam = new JRadioButton("Kein Team");
 		rdbtnNoTeam.setSelected(true);
 		rdbtnNoTeam.setEnabled(false);
 		pTeamauswahl.add(rdbtnNoTeam);
 
-		// Gruppierung der RadioButtons zur Auswahl des Teams
 		activeTeam = new ButtonGroup();
 		activeTeam.add(rdbtnNoTeam);
 		activeTeam.add(rdbtnTeam1);
 		activeTeam.add(rdbtnTeam2);
 
-		// Gruppierung der RadioButtons zur Auswahl der Runde
 		activeRound = new ButtonGroup();
 		activeRound.add(rdbtnRunde1);
 		activeRound.add(rdbtnRunde2);
@@ -645,91 +712,114 @@ public class ControlPanel implements ActionListener, GameListener {
 		activeRound.add(rdbtnRunde4);
 		activeRound.add(rdbtnRunde5);
 
-		// Initialisierung der verschiedenen Komponenten 
-		chckbxAntwort1.setText("");
-		chckbxAntwort2.setText("");
-		chckbxAntwort3.setText("");
-		chckbxAntwort4.setText("");
-		chckbxAntwort5.setText("");
-		chckbxAntwort6.setText("");
-
-		lblAntwort1.setText("");
-		lblAntwort2.setText("");
-		lblAntwort3.setText("");
-		lblAntwort4.setText("");
-		lblAntwort5.setText("");
-		lblAntwort6.setText("");
-
 		btnOpenLog = new JButton("Log-Datei öffnen");
 		btnOpenLog.setBounds(824, 625, 180, 23);
-		frmBedienoberflche.getContentPane().add(btnOpenLog);
+		frmControl.getContentPane().add(btnOpenLog);
 		btnOpenLog.addActionListener(this);
 
 		JTextPane txtpnBeschreibung = new JTextPane();
 		txtpnBeschreibung.setEditable(false);
-		txtpnBeschreibung.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		txtpnBeschreibung.setText("Physikerduell 2014:\n\n"
+		txtpnBeschreibung.setFont(new Font("Dialog", Font.PLAIN, 13));
+		txtpnBeschreibung.setText("Physikerduell:\n\n"
 			+ "Alle Eingaben müssen mit der ENTER-Taste bestätigt werden!\n"
-			+ "Auflösung sollte 1024x768 sein!\n\nAblauf:\n"
+			+ "Auflösung sollte 1024×768 sein!\n\nAblauf:\n"
 			+ "1) Eintragen der Teamnamen.\n"
-			+ "2) Starten des Spiels -> Nur Musik -> Spieloberfläche -> ggf. "
-			+ "Musik aus.\n"
-			+ "3) Frage wählen/Nächste Frage drücken. (Runden passen sich "
-			+ "automatisch an.)\n" + "4) ggf. Teams wechseln\n"
+			+ "2) Starten des Spiels → Nur Musik → Spieloberfläche → ggf. Musik aus.\n"
+			+ "3) Frage wählen/Nächste Frage drücken. (Runden passen sich automatisch an.)\n"
+			+ "4) ggf. Teams wechseln\n"
 			+ "5) Zwischen zwei Spielen den Abspann anzeigen.\n\n\n\n\n");
-		txtpnBeschreibung.setBounds(512, 381, 496, 248);
-		frmBedienoberflche.getContentPane().add(txtpnBeschreibung);
+		txtpnBeschreibung.setBounds(512, 381, 496, 228);
+		frmControl.getContentPane().add(txtpnBeschreibung);
 
-		JTextPane tytpnImpressum = new JTextPane();
-		tytpnImpressum.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		tytpnImpressum.setEditable(false);
-		tytpnImpressum.setText("Version 2014"
-			+ "\t\t  Lutz Althüser, Maik Stappers, Simon May");
-		tytpnImpressum.setBounds(512, 651, 496, 25);
-		frmBedienoberflche.getContentPane().add(tytpnImpressum);
+		txtpnImpressum = new JTextPane();
+		txtpnImpressum.setFont(new Font("Dialog", Font.PLAIN, 13));
+		txtpnImpressum.setEditable(false);
+		txtpnImpressum.setText("Version 2015\t\t  Lutz Althüser, Simon May");
+		txtpnImpressum.setBounds(512, 651, 496, 25);
+		frmControl.getContentPane().add(txtpnImpressum);
 
 		JLabel lblMultiplierText = new JLabel("Multiplikator");
 		lblMultiplierText.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMultiplierText.setFont(new Font("Dialog", Font.BOLD, 11));
-		lblMultiplierText.setBounds(733, 150, 110, 25);
-		frmBedienoberflche.getContentPane().add(lblMultiplierText);
+		lblMultiplierText.setBounds(814, 137, 85, 25);
+		frmControl.getContentPane().add(lblMultiplierText);
 
 		lblMultiplier = new JLabel();
 		lblMultiplier.setToolTipText("");
 		lblMultiplier.setText("×1");
 		lblMultiplier.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMultiplier.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblMultiplier.setBounds(733, 175, 110, 25);
-		frmBedienoberflche.getContentPane().add(lblMultiplier);
+		lblMultiplier.setBounds(814, 162, 85, 25);
+		frmControl.getContentPane().add(lblMultiplier);
+		
+		JPanel pRundenstatus = new JPanel();
+		pRundenstatus.setBounds(552, 280, 332, 90);
+		frmControl.getContentPane().add(pRundenstatus);
+		pRundenstatus.setLayout(null);
 
-		chckbxPunkteklau = new JCheckBox("Punkteklau");
-		chckbxPunkteklau.setEnabled(false);
-		chckbxPunkteklau.setBackground(Color.WHITE);
-		chckbxPunkteklau.setBounds(733, 211, 119, 23);
-		frmBedienoberflche.getContentPane().add(chckbxPunkteklau);
+		JLabel lblRundenstatus = new JLabel("Rundenstatus");
+		lblRundenstatus.setBounds(0, 5, 332, 14);
+		pRundenstatus.add(lblRundenstatus);
+		lblRundenstatus.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRundenstatus.setFont(new Font("Dialog", Font.BOLD, 11));
+		
+		roundStatus = new ButtonGroup();
+		rdbtnBuzzermodus = new JRadioButton("Buzzer-Modus");
+		rdbtnBuzzermodus.setBounds(10, 32, 133, 23);
+		roundStatus.add(rdbtnBuzzermodus);
+		rdbtnBuzzermodus.setSelected(true);
+		rdbtnBuzzermodus.setEnabled(false);
+		pRundenstatus.add(rdbtnBuzzermodus);
 
-		chckbxRundenende = new JCheckBox("Rundenende");
-		chckbxRundenende.setEnabled(false);
-		chckbxRundenende.setBackground(Color.WHITE);
-		chckbxRundenende.setBounds(733, 238, 119, 23);
+		rdbtnNormaleRunde = new JRadioButton("Normale Runde");
+		rdbtnNormaleRunde.setBounds(10, 59, 133, 23);
+		rdbtnNormaleRunde.setEnabled(false);
+		roundStatus.add(rdbtnNormaleRunde);
+		pRundenstatus.add(rdbtnNormaleRunde);
 
+		rdbtnPunkteklau = new JRadioButton("Punkteklau");
+		rdbtnPunkteklau.setBounds(203, 32, 115, 23);
+		roundStatus.add(rdbtnPunkteklau);
+		rdbtnPunkteklau.setEnabled(false);
+		pRundenstatus.add(rdbtnPunkteklau);
+
+		rdbtnRundenende = new JRadioButton("Rundenende");
+		rdbtnRundenende.setBounds(203, 59, 115, 23);
+		roundStatus.add(rdbtnRundenende);
+		rdbtnRundenende.setEnabled(false);
+		pRundenstatus.add(rdbtnRundenende);
+		
+		btnOpenQuestions = new JButton("Fragenkatalog öffnen");
+		btnOpenQuestions.setBounds(514, 624, 200, 23);
+		frmControl.getContentPane().add(btnOpenQuestions);
+	
+		btnBuzzer = new JButton("Buzzer");
+		btnBuzzer.setBounds(895, 297, 109, 55);
+		frmControl.getContentPane().add(btnBuzzer);
+
+		btnBuzzer.addActionListener(PLAY_BUZZER);
+		btnOpenQuestions.addActionListener(this);
 		btnStart.addActionListener(this);
 		btnAbspannWechsel.addActionListener(this);
 		btnFalscheAntwort.addActionListener(this);
 		btnNaechsteFrage.addActionListener(this);
-		rdbtnTeam1.addActionListener(this);
-		rdbtnTeam2.addActionListener(this);
 		txtTeam1Name.addActionListener(this);
 		txtTeam2Name.addActionListener(this);
 		txtTeam1GPunkte.addActionListener(this);
 		txtTeam2GPunkte.addActionListener(this);
 		txtALeben.addActionListener(this);
+		rdbtnTeam1.addActionListener(this);
+		rdbtnTeam2.addActionListener(this);
 		rdbtnRunde1.addActionListener(this);
 		rdbtnRunde2.addActionListener(this);
 		rdbtnRunde3.addActionListener(this);
 		rdbtnRunde4.addActionListener(this);
 		rdbtnRunde5.addActionListener(this);
 		rdbtnNoTeam.addActionListener(this);
+		rdbtnBuzzermodus.addActionListener(this);
+		rdbtnNormaleRunde.addActionListener(this);
+		rdbtnPunkteklau.addActionListener(this);
+		rdbtnRundenende.addActionListener(this);
 		chckbxAntwort1.addActionListener(this);
 		chckbxAntwort2.addActionListener(this);
 		chckbxAntwort3.addActionListener(this);
@@ -737,9 +827,6 @@ public class ControlPanel implements ActionListener, GameListener {
 		chckbxAntwort5.addActionListener(this);
 		chckbxAntwort6.addActionListener(this);
 		cbFragenauswahl.addActionListener(this);
-		chckbxPunkteklau.addActionListener(this);
-
-		frmBedienoberflche.getContentPane().add(chckbxRundenende);
 	}
 
 }

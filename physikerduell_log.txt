@@ -1,0 +1,830 @@
+
+
+
+[2015-06-17_21:24:56]
+----- Neues Spiel -----
+
+
+[2015-06-17_21:24:58]
+h: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_21:24:58]
+h: 0 | h: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_21:25:27]
+----- Neues Spiel -----
+
+
+[2015-06-17_21:25:28]
+g: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_21:25:28]
+g: 0 | g: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_21:26:02]
+----- Neues Spiel -----
+
+
+[2015-06-17_21:26:04]
+fg: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_21:26:04]
+fg: 0 | g: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_21:26:48]
+----- Neues Spiel -----
+
+
+[2015-06-17_21:26:50]
+k: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_21:26:50]
+k: 0 | l: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_21:27:02]
+----- Neues Spiel -----
+
+
+[2015-06-17_21:27:03]
+;l: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_21:27:03]
+;l: 0 | l: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_21:54:24]
+----- Neues Spiel -----
+
+
+
+[2015-06-17_21:54:41]
+----- Neues Spiel -----
+
+
+
+[2015-06-17_21:54:50]
+----- Neues Spiel -----
+
+
+[2015-06-17_21:54:53]
+k: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_21:54:53]
+k: 0 | k: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_21:55:57]
+----- Neues Spiel -----
+
+
+
+[2015-06-17_21:56:24]
+----- Neues Spiel -----
+
+
+[2015-06-17_21:56:25]
+;: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_21:56:25]
+;: 0 | l: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_21:57:13]
+----- Neues Spiel -----
+
+
+[2015-06-17_21:57:15]
+j: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_21:57:15]
+j: 0 | j: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_21:58:02]
+----- Neues Spiel -----
+
+
+[2015-06-17_21:58:05]
+j: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_21:58:05]
+j: 0 | l;: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_21:59:36]
+----- Neues Spiel -----
+
+
+[2015-06-17_21:59:38]
+,: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_21:59:38]
+,: 0 | ,: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_21:59:52]
+l,: 0 | ,: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_22:00:17]
+----- Neues Spiel -----
+
+
+[2015-06-17_22:00:18]
+j: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_22:00:18]
+j: 0 | j: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_22:01:31]
+----- Neues Spiel -----
+
+
+[2015-06-17_22:01:33]
+l: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_22:01:33]
+l: 0 | l: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_22:02:12]
+----- Neues Spiel -----
+
+
+[2015-06-17_22:02:14]
+;: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_22:02:14]
+;: 0 | ;: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_22:02:33]
+----- Neues Spiel -----
+
+
+[2015-06-17_22:02:34]
+,: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_22:02:34]
+,: 0 | ,: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_22:09:20]
+----- Neues Spiel -----
+
+
+[2015-06-17_22:09:24]
+j: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_22:09:24]
+j: 0 | j: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_22:11:33]
+----- Neues Spiel -----
+
+
+[2015-06-17_22:11:34]
+d: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_22:11:34]
+d: 0 | d: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_22:21:02]
+----- Neues Spiel -----
+
+
+[2015-06-17_22:21:03]
+h: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_22:21:03]
+h: 0 | h: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_22:21:17]
+----- Neues Spiel -----
+
+
+[2015-06-17_22:21:18]
+f: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_22:21:18]
+f: 0 | f: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_23:00:42]
+----- Neues Spiel -----
+
+
+[2015-06-17_23:00:44]
+g: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_23:00:44]
+g: 0 | g: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_23:00:49]
+g: 0 | g: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+  e-Funktion [17]
+  x [11]
+  Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-17_23:00:55]
+g: 0 | g: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+  e-Funktion [17]
+  x [11]
+  Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-17_23:00:55]
+g: 0 | g: 0 | CurrentScore:    0 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+  e-Funktion [17]
+  x [11]
+  Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-17_23:00:57]
+g: 0 | g: 0 | CurrentScore:    29 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+X Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+  e-Funktion [17]
+  x [11]
+  Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-17_23:00:57]
+g: 0 | g: 0 | CurrentScore:    55 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+X Ausländer/Migranten/Asylbewerber [29]
+X Funktionen (allgemein) [26]
+  e-Funktion [17]
+  x [11]
+  Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-17_23:00:58]
+g: 0 | g: 0 | CurrentScore:    72 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+X Ausländer/Migranten/Asylbewerber [29]
+X Funktionen (allgemein) [26]
+X e-Funktion [17]
+  x [11]
+  Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-17_23:00:58]
+g: 0 | g: 0 | CurrentScore:    83 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+X Ausländer/Migranten/Asylbewerber [29]
+X Funktionen (allgemein) [26]
+X e-Funktion [17]
+X x [11]
+  Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-17_23:00:59]
+g: 0 | g: 0 | CurrentScore:    93 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+X Ausländer/Migranten/Asylbewerber [29]
+X Funktionen (allgemein) [26]
+X e-Funktion [17]
+X x [11]
+X Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-17_23:01:02]
+g: 0 | g: 0 | CurrentScore:    93 | CurrentTeam:     1 | CurrentLives:    2 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+X Ausländer/Migranten/Asylbewerber [29]
+X Funktionen (allgemein) [26]
+X e-Funktion [17]
+X x [11]
+X Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-17_23:01:03]
+g: 0 | g: 0 | CurrentScore:    93 | CurrentTeam:     1 | CurrentLives:    1 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+X Ausländer/Migranten/Asylbewerber [29]
+X Funktionen (allgemein) [26]
+X e-Funktion [17]
+X x [11]
+X Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-17_23:01:04]
+g: 0 | g: 0 | CurrentScore:    93 | CurrentTeam:     1 | CurrentLives:    0 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+X Ausländer/Migranten/Asylbewerber [29]
+X Funktionen (allgemein) [26]
+X e-Funktion [17]
+X x [11]
+X Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-17_23:01:04]
+g: 0 | g: 0 | CurrentScore:    93 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+X Ausländer/Migranten/Asylbewerber [29]
+X Funktionen (allgemein) [26]
+X e-Funktion [17]
+X x [11]
+X Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-17_23:01:08]
+g: 0 | g: 0 | CurrentScore:    99 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+X Ausländer/Migranten/Asylbewerber [29]
+X Funktionen (allgemein) [26]
+X e-Funktion [17]
+X x [11]
+X Gauß-Funktion [10]
+X Menschen [6]
+
+
+[2015-06-17_23:01:08]
+g: 0 | g: 99 | CurrentScore:    99 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+X Ausländer/Migranten/Asylbewerber [29]
+X Funktionen (allgemein) [26]
+X e-Funktion [17]
+X x [11]
+X Gauß-Funktion [10]
+X Menschen [6]
+
+
+
+[2015-06-17_23:02:55]
+----- Neues Spiel -----
+
+
+[2015-06-17_23:02:58]
+j: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_23:02:58]
+j: 0 | j: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_23:04:35]
+----- Neues Spiel -----
+
+
+
+[2015-06-17_23:05:25]
+----- Neues Spiel -----
+
+
+
+[2015-06-17_23:05:50]
+----- Neues Spiel -----
+
+
+
+[2015-06-17_23:07:12]
+----- Neues Spiel -----
+
+
+[2015-06-17_23:07:15]
+\: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_23:07:15]
+\: 0 | \: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_23:07:53]
+----- Neues Spiel -----
+
+
+[2015-06-17_23:07:55]
+g: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_23:07:55]
+g: 0 | g: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_23:08:06]
+----- Neues Spiel -----
+
+
+[2015-06-17_23:08:07]
+j: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_23:08:07]
+j: 0 | j: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_23:09:12]
+----- Neues Spiel -----
+
+
+[2015-06-17_23:09:14]
+h: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_23:09:14]
+h: 0 | h: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_23:09:27]
+----- Neues Spiel -----
+
+
+[2015-06-17_23:09:28]
+j: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_23:09:28]
+j: 0 | j: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_23:10:37]
+----- Neues Spiel -----
+
+
+[2015-06-17_23:10:39]
+;: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_23:10:39]
+;: 0 | ;: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]

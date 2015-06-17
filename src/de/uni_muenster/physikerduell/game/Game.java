@@ -1,12 +1,12 @@
 package de.uni_muenster.physikerduell.game;
 
-import java.io.File;
-import java.io.FileWriter;
+import static de.uni_muenster.physikerduell.game.Game.RoundState.BUZZER;
+import static de.uni_muenster.physikerduell.game.Game.RoundState.NORMAL;
+import static de.uni_muenster.physikerduell.game.Game.RoundState.ROUND_ENDED;
+import static de.uni_muenster.physikerduell.game.Game.RoundState.STEALING_POINTS;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import de.uni_muenster.physikerduell.csv.CSVReader;
 
@@ -32,25 +32,25 @@ public class Game {
 	 */
 	public static final int NUM_ROUNDS = 5;
 	/**
-	 * File path for the log file.
+	 * Value signifying that no team is selected.
 	 */
-	public static final String LOG_FILE_PATH = "Physikerduell-Log.txt";
+	public static final int NO_TEAM = -1;
 	private final List<GameListener> listeners = new ArrayList<>();
 	private final List<Question> questions = new ArrayList<>();
 	private String team1Name = "Team 1";
 	private String team2Name = "Team 2";
 	private int team1Score;
 	private int team2Score;
-	private int currentLives;
+	private int currentLives = MAX_LIVES;
 	private int currentRound = 1;
 	private int currentScore;
 	private int currentQuestionIndex;
-	private int currentTeam = -1;
-	private boolean roundEnd;
-	private boolean stealingPoints;
-	private String lastLine;
-	private FileWriter logWriter;
+	private int currentTeam = NO_TEAM;
+	private RoundState state = RoundState.BUZZER;
+	// Team which started the last buzzer round
+	private int teamStartedBuzzer = NO_TEAM;
 	private boolean updating = true;
+	private GameLog log;
 
 	/**
 	 * Creates the Game instance and reads the questions from the specified stream. The
@@ -58,7 +58,7 @@ public class Game {
 	 * its own row in the first column (with an empty second column) and the answers are
 	 * given in the following rows with the answer text in the first and the score (a
 	 * positive integer) in the second row. A question is terminated by a single row with
-	 * empty columns.
+	 * empty columns or the end of the file.
 	 * 
 	 * @param questionFile
 	 *            A stream from which the CSV file's characters are read (UTF-8)
@@ -101,6 +101,10 @@ public class Game {
 						+ (row + 1), ex);
 				}
 			}
+		}
+		// If last line wasn't empty, the question still has to be added to the list
+		if (!questionRow) {
+			questions.add(new Question(questionText, answers));
 		}
 	}
 
@@ -177,7 +181,7 @@ public class Game {
 	 * 
 	 * @param index
 	 *            The question's index (has to be a valid question index, i.e. &ge; 0 and
-	 *            < questionCount())
+	 *            &lt; questionCount())
 	 * @return The corresponding question
 	 */
 	public Question getQuestion(int index) {
@@ -226,7 +230,7 @@ public class Game {
 	 * @return The logging status
 	 */
 	public boolean isLogging() {
-		return logWriter != null;
+		return log != null;
 	}
 
 	/**
@@ -258,6 +262,18 @@ public class Game {
 	public int questionCount() {
 		return questions.size();
 	}
+	
+	private void checkAnswerGiven() {
+		if (state == ROUND_ENDED) {
+			throw new IllegalStateException("No answers possible in state ROUND_ENDED!");
+		}
+		if (currentTeam == NO_TEAM) {
+			throw new IllegalStateException("Answer given, but no team selected!");
+		}
+		if (state == BUZZER && teamStartedBuzzer == NO_TEAM) {
+			teamStartedBuzzer = currentTeam;
+		}
+	}
 
 	/**
 	 * Updates the game if a correct answer to the current question has been given.
@@ -266,40 +282,108 @@ public class Game {
 	 *            The index of the correctly given answer to the current question
 	 */
 	public void correctAnswer(int index) {
+		checkAnswerGiven();
+		// index of the previously best revealed answer
+		int best = highestRevealedAnswer();
+		// update answer and score
 		currentQuestion().answer(index).setRevealed(true);
 		updateCurrentScore();
-		// Bei Punkteklau: Erfolgreich geklaut, sonst normale richtige Antwort
-		if (stealingPoints) {
-			endRound(true);
+		if (state == BUZZER) {
+			// if top answer or better than the previous revealed answer:
+			// Current team plays
+			if (index == 0 || index < best) {
+				state = NORMAL;
+			}
+			// current team had a chance, but their answer was worse: other team plays
+			else if (index > best && best != -1) {
+				currentTeam = otherTeam();
+				state = NORMAL;
+			}
+			else if (index == best) {
+				throw new IllegalArgumentException("Answer " + (index + 1)
+					+ " already revealed!");
+			}
+			// First correct answer after other team already gave a wrong one:
+			// Current team plays
+			else if (teamStartedBuzzer != currentTeam) {
+				state = NORMAL;
+			}
+			// first correct answer, but not top answer: other team gets a
+			// chance at the top answer
+			else {
+				currentTeam = otherTeam();
+			}
+		}
+		// not buzzer mode
+		// point steal successful or all answers found? Else normal correct answer
+		else if (state == STEALING_POINTS || revealedAnswers() == numberOfAnswers()) {
+			endRound(true, index);
 		}
 		update();
 	}
 
+	/**
+	 * Returns the index of the currently revealed answer with the highest point value (=>
+	 * lowest index).
+	 * 
+	 * @return the index of the best revealed answer
+	 */
+	private int highestRevealedAnswer() {
+		Question curr = currentQuestion();
+		int num = numberOfAnswers();
+		for (int i = 0; i < num; i++) {
+			if (curr.answer(i).isRevealed()) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	/**
+	 * Updates the game if an incorrect answer to the current question has been given.
+	 */
 	public void wrongAnswer() {
-		// no action if no team selected
-		if (currentTeam == -1) {
+		checkAnswerGiven();
+		// swap teams when given a wrong answer during buzzer mode
+		if (state == BUZZER) {
+			currentTeam = otherTeam();
+			int revealed = revealedAnswers();
+			// if other team had already revealed an answer, it's their turn
+			if (revealed == 1) {
+				setRoundState(NORMAL);
+			}
 			return;
 		}
+		// Not in buzzer mode:
 		// decrease lives; if no lives: change team
-		if (currentLives > 1 && !stealingPoints) {
+		if (currentLives > 1 && state != STEALING_POINTS) {
 			currentLives--;
 		}
-		else if (stealingPoints) {
+		else if (state == STEALING_POINTS) {
 			// points could not be stolen; update score
-			endRound(false);
+			endRound(false, -1);
 		}
 		// 3 lives lost
 		else {
+			currentLives = 0;
+			state = STEALING_POINTS;
+			update();
 			currentLives = MAX_LIVES;
-			stealingPoints = true;
-			if (currentTeam == 1) {
-				currentTeam = 2;
-			}
-			else if (currentTeam == 2) {
-				currentTeam = 1;
-			}
+			currentTeam = otherTeam();
 		}
 		update();
+	}
+
+	private int otherTeam() {
+		if (currentTeam == 1) {
+			return 2;
+		}
+		else if (currentTeam == 2) {
+			return 1;
+		}
+		else {
+			return NO_TEAM;
+		}
 	}
 
 	/**
@@ -353,33 +437,36 @@ public class Game {
 	 * 
 	 * @param currentQuestionIndex
 	 *            The new current question's index (has to be a valid question index, i.e.
-	 *            &ge; 0 and < questionCount())
+	 *            &ge; 0 and &lt; questionCount())
 	 */
 	public void setCurrentQuestionIndex(int currentQuestionIndex) {
-		if (currentQuestionIndex < 0 || currentQuestionIndex > questions.size()) {
-			throw new IndexOutOfBoundsException("Invalid question index: "
-				+ currentQuestionIndex);
+		if (currentQuestionIndex < 0 || currentQuestionIndex >= questions.size()) {
+			throw new IndexOutOfBoundsException("Invalid question index: " + currentQuestionIndex);
+		}
+		if (questions.get(currentQuestionIndex).answerCount() < numberOfAnswers()) {
+			throw new IllegalArgumentException("Selected question does not have enough answers!");
 		}
 		if (currentQuestionIndex != this.currentQuestionIndex) {
 			this.currentQuestionIndex = currentQuestionIndex;
 			updating = false;
-			// New question => no answer revealed
+			// new question => no answer revealed
 			currentScore = 0;
-			for (int i = 0; i < MAX_ANSWERS; i++) {
-				currentQuestion().answer(i).setRevealed(false);
-			}
+			currentQuestion().setRevealedAllAnswers(false);
 			updating = true;
 		}
-		if (roundEnd) {
+		if (state == ROUND_ENDED) {
 			currentRound++;
 			if (currentRound > NUM_ROUNDS) {
 				currentRound = NUM_ROUNDS;
 			}
-			currentTeam = -1;
 			currentLives = MAX_LIVES;
-			stealingPoints = false;
+			state = BUZZER;
 		}
-		roundEnd = false;
+		if (state != BUZZER) {
+			state = NORMAL;
+		}
+		currentTeam = NO_TEAM;
+		teamStartedBuzzer = NO_TEAM;
 		update();
 	}
 
@@ -387,13 +474,14 @@ public class Game {
 	 * Sets the current round.
 	 * 
 	 * @param currentRound
-	 *            The new current round (&ge; 0)
+	 *            The new current round (&ge; 1)
 	 */
 	public void setCurrentRound(int currentRound) {
-		if (currentRound < 0) {
+		if (currentRound < 1) {
 			throw new IllegalArgumentException("Invalid round number: " + currentRound);
 		}
 		this.currentRound = currentRound;
+		teamStartedBuzzer = NO_TEAM;
 		update();
 	}
 
@@ -401,52 +489,44 @@ public class Game {
 	 * Sets the current team.
 	 * 
 	 * @param teamNumber
-	 *            The number of the new current team. Valid values are 1, 2 or -1 (no
-	 *            team)
+	 *            The number of the new current team. Valid values are 1, 2 or
+	 *            <code>NO_TEAM</code>
 	 */
 	public void setCurrentTeam(int teamNumber) {
-		if (teamNumber != 1 && teamNumber != 2 && teamNumber != -1) {
+		if (teamNumber != 1 && teamNumber != 2 && teamNumber != NO_TEAM) {
 			throw new IllegalArgumentException(
-				"Team Number has to be 1, 2 or -1 (no team), was " + teamNumber);
+				"Team Number has to be 1, 2 or NO_TEAM, was " + teamNumber);
 		}
 		this.currentTeam = teamNumber;
 		update();
 	}
 
 	/**
-	 * Activate or deactivate logging changes to the game to a file (
-	 * <code>LOG_FILE_PATH</code>). If logging is activated, the log file is created in
+	 * Activate or deactivate logging changes to the game to a file
+	 * (<code>LOG_FILE_PATH</code>). If logging is activated, the log file is created in
 	 * the current working directory. If it already exists, it is appended to.
 	 * 
 	 * @param logging
 	 *            Activate (true) or deactivate (false) logging
 	 */
 	public void setLogging(boolean logging) {
-		if (logging) {
-			File logFile = new File(LOG_FILE_PATH);
+		if (logging && log == null) {
 			try {
-				// append if file exists
-				logWriter = new FileWriter(logFile, true);
-				String timeStamp =
-					new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss").format(Calendar
-						.getInstance().getTime());
-				String newLine = "\n\n\n[" + timeStamp + "]\n----- Neues Spiel -----\n";
-				logWriter.write(newLine);
-				logWriter.flush();
+				log = new GameLog(this);
 			}
 			catch (IOException ex) {
-				logWriter = null;
+				log = null;
 				System.err.println("Error starting log: " + ex);
 			}
 		}
-		else if (logWriter != null) {
+		else if (!logging && log != null) {
 			try {
-				logWriter.close();
+				log.close();
 			}
 			catch (IOException ex) {
 				System.err.println("Error closing log: " + ex);
 			}
-			logWriter = null;
+			log = null;
 		}
 	}
 
@@ -520,37 +600,14 @@ public class Game {
 	 * Updates the log file with the current state of the game.
 	 */
 	private void updateLog() {
-		Question curr = currentQuestion();
-		String timeStamp =
-			new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss").format(Calendar.getInstance()
-				.getTime());
-		String newLine =
-			"[" + timeStamp + "]\n" + team1Name + ": " + String.valueOf(team1Score)
-				+ " | " + team2Name + ": " + String.valueOf(team2Score)
-				+ " | CurrentScore:    " + String.valueOf(currentScore)
-				+ " | CurrentTeam:     " + String.valueOf(currentTeam)
-				+ " | CurrentLives:    " + String.valueOf(currentLives)
-				+ " | CurrentRound:    " + String.valueOf(currentRound)
-				+ " | CurrentQuestion: " + curr.text() + "\n";
-		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
-			Answer ans = curr.answer(i);
-			String revealed = ans.isRevealed() ? "X" : " ";
-			newLine += revealed + " " + ans.text() + " [" + ans.score() + "]\n";
-		}
-		try {
-			if (!newLine.equals(lastLine)) {
-				logWriter.write("\n\n");
-				logWriter.write(newLine);
+		if (isLogging()) {
+			try {
+				log.update();
 			}
-			//else {
-			//	logWriter.write(newLine);
-			//}
-			logWriter.flush();
+			catch (IOException ex) {
+				System.err.println("Error writing to log: " + ex);
+			}
 		}
-		catch (IOException ex) {
-			System.err.println("Error writing to log: " + ex);
-		}
-		lastLine = newLine;
 	}
 
 	/**
@@ -561,6 +618,7 @@ public class Game {
 		if (!updating) {
 			return;
 		}
+		updateCurrentScore();
 		if (isLogging()) {
 			updateLog();
 		}
@@ -570,50 +628,35 @@ public class Game {
 	}
 
 	/**
-	 * Returns whether the current round has ended (after all answers were found or points
-	 * were successfully or unsuccessully stolen).
-	 * 
-	 * @return The round status
-	 */
-	public boolean roundEnded() {
-		return roundEnd;
-	}
-
-	/**
-	 * Returns whether the currently selected team can steal the current round's points by
-	 * answering correctly.
-	 * 
-	 * @return Whether points can be stolen
-	 */
-	public boolean isStealingPoints() {
-		return stealingPoints;
-	}
-
-	/**
-	 * Sets whether the currently selected team can steal the current round's points by
-	 * answering correctly.
-	 * 
-	 * @param stealingPoints
-	 *            Whether points can be stolen
-	 */
-	public void setStealingPoints(boolean stealingPoints) {
-		this.stealingPoints = stealingPoints;
-		update();
-	}
-
-	/**
 	 * 
 	 * Updates the current round's accumulated score.
 	 */
 	private void updateCurrentScore() {
 		Question curr = currentQuestion();
 		int score = 0;
-		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
-			if (curr.answer(i).isRevealed()) {
-				score += curr.answerScore(i);
+		for (Answer answer : curr.allAnswers()) {
+			if (answer.isRevealed()) {
+				score += answer.score();
 			}
 		}
 		currentScore = score;
+	}
+
+	/**
+	 * Returns the number of currently revealed answers.
+	 * 
+	 * @return The number of currently revealed answers
+	 */
+	private int revealedAnswers() {
+		Question curr = currentQuestion();
+		int numOfAnswers = numberOfAnswers();
+		int revealedanswers = 0;
+		for (int i = 0; i < numOfAnswers; i++) {
+			if (curr.answer(i).isRevealed()) {
+				revealedanswers++;
+			}
+		}
+		return revealedanswers;
 	}
 
 	/**
@@ -622,67 +665,101 @@ public class Game {
 	 * 
 	 * @param stealSuccess
 	 *            Whether points have successfully been stolen
+	 * @param answerIndex
+	 *            Index of the answer that was correctly given
 	 */
-	private void endRound(boolean stealSuccess) {
-		Question curr = currentQuestion();
-		int revealedanswers = 0;
-		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
-			if (curr.answer(i).isRevealed()) {
-				revealedanswers++;
+	private void endRound(boolean stealSuccess, int answerIndex) {
+		boolean allAnswers = revealedAnswers() == numberOfAnswers();
+		if (state != STEALING_POINTS && !allAnswers) {
+			throw new IllegalStateException("Round should not have ended at this point.");
+		}
+		int updScore = totalCurrentScore();
+		// point steal successful or all answers => current team gets points
+		if ((stealSuccess && currentRound == 5) || allAnswers) {
+			if (currentTeam == 1) {
+				team1Score += updScore;
+			}
+			else if (currentTeam == 2) {
+				team2Score += updScore;
 			}
 		}
-		// Gesamtpunkte updaten
-		boolean allAnswers = revealedanswers == numberOfAnswers();
-		if (stealingPoints || allAnswers) {
-			int updScore = totalCurrentScore();
-			// Punkteklau erfolgreich oder alle Antworten => aktuelles Team erhält Punkte
-			if (stealSuccess || allAnswers) {
-				if (currentTeam == 1) {
-					team1Score += updScore;
-				}
-				else if (currentTeam == 2) {
-					team2Score += updScore;
-				}
+		// not last round: point steal does not award points of answered question
+		else if (stealSuccess) {
+			int answerPoints = currentQuestion().answerScore(answerIndex) * roundMultiplier();
+			if (currentTeam == 1) {
+				team1Score += updScore - answerPoints;
 			}
-			// Punkteklau fehlgeschlagen => anderes Team erhält Punkte
-			else {
-				if (currentTeam == 1) {
-					team2Score += updScore;
-				}
-				else if (currentTeam == 2) {
-					team1Score += updScore;
-				}
+			else if (currentTeam == 2) {
+				team2Score += updScore - answerPoints;
 			}
-			currentTeam = -1;
-			roundEnd = true;
-			stealingPoints = false;
 		}
+		// point steal unsuccessful => other team gets points
+		else {
+			if (currentTeam == 1) {
+				team2Score += updScore;
+			}
+			else if (currentTeam == 2) {
+				team1Score += updScore;
+			}
+		}
+		currentTeam = NO_TEAM;
+		state = ROUND_ENDED;
 		update();
 	}
 
 	/**
-	 * A <code>GameException</code> is thrown when a game-specific error occurs, e.g. the
-	 * question file cannot be loaded or is invalid.
+	 * Returns the current state of the round.
+	 * 
+	 * @return Whether current round state
+	 */
+	public RoundState getRoundState() {
+		return state;
+	}
+
+	/**
+	 * Sets the round state.
+	 * 
+	 * @param state
+	 *            The new state of the round (cannot be <code>null</code> or
+	 *            <code>ROUND_ENDED</code>)
+	 */
+	public void setRoundState(RoundState state) {
+		if (state == null) {
+			throw new IllegalArgumentException("Round state cannot be null!");
+		}
+		else if (state == ROUND_ENDED) {
+			throw new IllegalArgumentException("Round state cannot be set to ROUND_ENDED!");
+		}
+		this.state = state;
+		update();
+	}
+
+	/**
+	 * Possible values for the current state of the round.
 	 * 
 	 * @author Simon May
 	 * 
 	 */
-	public static class GameException extends Exception {
-
-		private static final long serialVersionUID = 1L;
-
-		public GameException(String message) {
-			super(message);
-		}
-
-		public GameException(String message, Throwable cause) {
-			super(message, cause);
-		}
-
-		public GameException(Throwable cause) {
-			super(cause);
-		}
-
+	public static enum RoundState {
+		/**
+		 * Buzzer mode, i.e. when a representative of each team is at the buzzer at the
+		 * beginning of a round and it is not yet decided which team will play the round.
+		 */
+		BUZZER,
+		/**
+		 * Normal progress during a round.
+		 */
+		NORMAL,
+		/**
+		 * The currently selected team can steal the current round's points by answering
+		 * correctly.
+		 */
+		STEALING_POINTS,
+		/**
+		 * The current round has ended (after all answers were found or points were
+		 * successfully or unsuccessully stolen).
+		 */
+		ROUND_ENDED;
 	}
 
 }

@@ -206,27 +206,6 @@ public class PlayerApplet extends Applet implements Runnable
 	}	
 	
 	/**
-	 * Starts this applet. An input stream and audio device 
-	 * are created and passed to the play() method.
-	 */
-	public void start(InputStream in)
-	{
-		try
-		{			
-			AudioDevice dev = getAudioDevice();
-			play(in, dev);
-		}
-		catch (JavaLayerException ex)
-		{
-			synchronized (System.err)
-			{
-				System.err.println("Unable to play InputStream");
-				ex.printStackTrace(System.err);
-			}
-		}
-	}	
-	
-	/**
 	 * Stops this applet. If audio is currently playing, it is
 	 * stopped.
 	 */
