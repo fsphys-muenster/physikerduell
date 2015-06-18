@@ -32,7 +32,6 @@ import javax.swing.JTextPane;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import org.newdawn.easyogg.OggClip;
 import de.uni_muenster.physikerduell.game.Answer;
 import de.uni_muenster.physikerduell.game.Game;
 import de.uni_muenster.physikerduell.game.Game.RoundState;
@@ -62,19 +61,9 @@ public class ControlPanel implements ActionListener, GameListener {
 	private static final String QUESTIONS_PATH_INT = "/res/fragen.csv";
 	private static final Action PLAY_BUZZER = new AbstractAction() {
 		private static final long serialVersionUID = 1L;
-		private OggClip ogg;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (ogg == null) {
-				try {
-					ogg = new OggClip(getClass().getResourceAsStream("/res/buzzer.ogg"));
-				} catch (IOException ex) {
-					System.err.println("Buzzer sound could not be loaded: " + ex);
-				}
-			}
-			if (ogg.stopped()) {
-				ogg.play();
-			}
+			Sound.playOgg("buzzer.ogg");
 		}
 	};
 	private JFrame frmControl;

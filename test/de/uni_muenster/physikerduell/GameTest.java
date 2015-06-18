@@ -97,16 +97,18 @@ public class GameTest {
 		assertEquals(81, g.currentScore());
 		assertEquals(0, g.getTeam1Score());
 		assertEquals(0, g.getTeam2Score());
-		// Scenario 2: First team answers correctly (but not top), second incorrectly;
-		// also: further incorrect answers at that point should have no effect
+		// Scenario 2: First team answers correctly (but not top), second incorrectly
 		g = createGame();
 		g.setRoundState(RoundState.BUZZER);
 		g.setCurrentTeam(1);
 		g.correctAnswer(2);
+		assertEquals(2, g.getCurrentTeam());
 		g.wrongAnswer();
+		assertEquals(1, g.getCurrentTeam());
 		g.wrongAnswer();
 		assertEquals(RoundState.NORMAL, g.getRoundState());
 		assertEquals(1, g.getCurrentTeam());
+		assertEquals(2, g.getCurrentLives());
 		assertEquals(61, g.currentScore());
 		assertEquals(0, g.getTeam1Score());
 		assertEquals(0, g.getTeam2Score());
@@ -115,6 +117,7 @@ public class GameTest {
 		g.setRoundState(RoundState.BUZZER);
 		g.setCurrentTeam(1);
 		g.correctAnswer(2);
+		assertEquals(2, g.getCurrentTeam());
 		g.correctAnswer(1);
 		assertEquals(RoundState.NORMAL, g.getRoundState());
 		assertEquals(2, g.getCurrentTeam());
@@ -127,11 +130,14 @@ public class GameTest {
 		g.setRoundState(RoundState.BUZZER);
 		g.setCurrentTeam(2);
 		g.wrongAnswer();
+		assertEquals(1, g.getCurrentTeam());
 		g.wrongAnswer();
+		assertEquals(2, g.getCurrentTeam());
 		g.wrongAnswer();
 		g.correctAnswer(3);
 		assertEquals(RoundState.NORMAL, g.getRoundState());
 		assertEquals(1, g.getCurrentTeam());
+		assertEquals(3, g.getCurrentLives());
 		assertEquals(51, g.currentScore());
 		assertEquals(0, g.getTeam1Score());
 		assertEquals(0, g.getTeam2Score());
@@ -218,7 +224,7 @@ public class GameTest {
 		assertEquals(91, g.currentScore());
 		assertEquals(0, g.getTeam1Score());
 		assertEquals(91 * 2, g.getTeam2Score());
-		// Scenario 2: Stealing points successfully (not last round)
+		// Scenario 2a: Stealing points successfully (not last round)
 		g = createGame();
 		g.setCurrentRound(3);
 		g.setRoundState(RoundState.NORMAL);
@@ -235,6 +241,24 @@ public class GameTest {
 		assertEquals(91 + 44 + 32, g.currentScore());
 		assertEquals(0, g.getTeam1Score());
 		assertEquals((91 + 44) * 2, g.getTeam2Score());
+		// Scenario 2b: Stealing points successfully (not last round);
+		// special case: Stealing answer is also last answer to reveal
+		g = createGame();
+		g.setRoundState(RoundState.NORMAL);
+		g.setCurrentTeam(1);
+		g.correctAnswer(0);
+		g.correctAnswer(1);
+		g.correctAnswer(2);
+		g.correctAnswer(3);
+		g.correctAnswer(4);
+		g.setCurrentTeam(2);
+		g.setRoundState(RoundState.STEALING_POINTS);
+		g.correctAnswer(5);
+		assertEquals(RoundState.ROUND_ENDED, g.getRoundState());
+		assertEquals(Game.NO_TEAM, g.getCurrentTeam());
+		assertEquals(81 + 71 + 61 + 51 + 41 + 31, g.currentScore());
+		assertEquals(0, g.getTeam1Score());
+		assertEquals(81 + 71 + 61 + 51 + 41, g.getTeam2Score());
 		// Scenario 3: Stealing points successfully (last round)
 		g = createGame();
 		g.setCurrentRound(5);

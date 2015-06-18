@@ -347,16 +347,14 @@ public class Game {
 		// swap teams when given a wrong answer during buzzer mode
 		if (state == BUZZER) {
 			currentTeam = otherTeam();
-			int revealed = revealedAnswers();
 			// if other team had already revealed an answer, it's their turn
-			if (revealed == 1) {
+			if (revealedAnswers() == 1) {
 				setRoundState(NORMAL);
 			}
-			return;
 		}
 		// Not in buzzer mode:
 		// decrease lives; if no lives: change team
-		if (currentLives > 1 && state != STEALING_POINTS) {
+		else if (currentLives > 1 && state != STEALING_POINTS) {
 			currentLives--;
 		}
 		else if (state == STEALING_POINTS) {
@@ -669,7 +667,7 @@ public class Game {
 	 *            Index of the answer that was correctly given
 	 */
 	private void endRound(boolean stealSuccess, int answerIndex) {
-		boolean allAnswers = revealedAnswers() == numberOfAnswers();
+		boolean allAnswers = (revealedAnswers() == numberOfAnswers()) && state == NORMAL;
 		if (state != STEALING_POINTS && !allAnswers) {
 			throw new IllegalStateException("Round should not have ended at this point.");
 		}

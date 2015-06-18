@@ -828,3 +828,2098 @@ j: 0 | j: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | Cu
   Es müssen mindestens 6 Antworten [3]
   eingetragen sein [2]
   Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_23:47:34]
+----- Neues Spiel -----
+
+
+[2015-06-17_23:47:36]
+hg: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_23:47:36]
+hg: 0 | j: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_23:47:50]
+----- Neues Spiel -----
+
+
+[2015-06-17_23:47:52]
+j: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_23:47:52]
+j: 0 | j]: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-17_23:48:47]
+----- Neues Spiel -----
+
+
+[2015-06-17_23:48:48]
+h: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_23:48:48]
+h: 0 | h: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_23:53:20]
+h: 0 | h: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+  Stephen Hawking [18]
+  Richard P. Feynman [14]
+  Isaac Newton [14]
+  Niels Bohr [12]
+  Nikola Tesla [12]
+
+
+[2015-06-17_23:53:29]
+h: 0 | h: 0 | CurrentScore:    0 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+  Stephen Hawking [18]
+  Richard P. Feynman [14]
+  Isaac Newton [14]
+  Niels Bohr [12]
+  Nikola Tesla [12]
+
+
+[2015-06-17_23:53:32]
+h: 0 | h: 0 | CurrentScore:    12 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+  Stephen Hawking [18]
+  Richard P. Feynman [14]
+  Isaac Newton [14]
+  Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-17_23:53:32]
+h: 0 | h: 0 | CurrentScore:    12 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+  Stephen Hawking [18]
+  Richard P. Feynman [14]
+  Isaac Newton [14]
+  Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-17_23:53:33]
+h: 0 | h: 0 | CurrentScore:    24 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+  Stephen Hawking [18]
+  Richard P. Feynman [14]
+  Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-17_23:53:35]
+h: 0 | h: 0 | CurrentScore:    38 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+  Stephen Hawking [18]
+  Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-17_23:53:36]
+h: 0 | h: 0 | CurrentScore:    52 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+  Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-17_23:53:36]
+h: 0 | h: 0 | CurrentScore:    70 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-17_23:53:54]
+h: 0 | h: 0 | CurrentScore:    70 | CurrentTeam:     1 | CurrentLives:    2 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-17_23:53:54]
+h: 0 | h: 0 | CurrentScore:    70 | CurrentTeam:     1 | CurrentLives:    1 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-17_23:53:55]
+h: 0 | h: 0 | CurrentScore:    70 | CurrentTeam:     1 | CurrentLives:    0 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-17_23:53:55]
+h: 0 | h: 0 | CurrentScore:    70 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-17_23:53:58]
+h: 0 | h: 0 | CurrentScore:    99 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-17_23:53:58]
+h: 0 | h: 99 | CurrentScore:    99 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+
+[2015-06-17_23:59:23]
+----- Neues Spiel -----
+
+
+[2015-06-17_23:59:27]
+j: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_23:59:27]
+j: 0 | j: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_23:59:30]
+j: 0 | j: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+  Stephen Hawking [18]
+  Richard P. Feynman [14]
+  Isaac Newton [14]
+  Niels Bohr [12]
+  Nikola Tesla [12]
+
+
+[2015-06-17_23:59:31]
+j: 0 | j: 0 | CurrentScore:    0 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+  Stephen Hawking [18]
+  Richard P. Feynman [14]
+  Isaac Newton [14]
+  Niels Bohr [12]
+  Nikola Tesla [12]
+
+
+[2015-06-17_23:59:31]
+j: 0 | j: 0 | CurrentScore:    12 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+  Stephen Hawking [18]
+  Richard P. Feynman [14]
+  Isaac Newton [14]
+  Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-17_23:59:31]
+j: 0 | j: 0 | CurrentScore:    12 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+  Stephen Hawking [18]
+  Richard P. Feynman [14]
+  Isaac Newton [14]
+  Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-17_23:59:31]
+j: 0 | j: 0 | CurrentScore:    24 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+  Stephen Hawking [18]
+  Richard P. Feynman [14]
+  Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-17_23:59:32]
+j: 0 | j: 0 | CurrentScore:    38 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+  Stephen Hawking [18]
+  Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-17_23:59:32]
+j: 0 | j: 0 | CurrentScore:    52 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+  Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-17_23:59:32]
+j: 0 | j: 0 | CurrentScore:    38 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+  Stephen Hawking [18]
+  Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-17_23:59:33]
+j: 0 | j: 0 | CurrentScore:    52 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+  Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-17_23:59:33]
+j: 0 | j: 0 | CurrentScore:    70 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-17_23:59:35]
+j: 0 | j: 0 | CurrentScore:    70 | CurrentTeam:     2 | CurrentLives:    2 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-17_23:59:35]
+j: 0 | j: 0 | CurrentScore:    70 | CurrentTeam:     2 | CurrentLives:    1 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-17_23:59:36]
+j: 0 | j: 0 | CurrentScore:    70 | CurrentTeam:     2 | CurrentLives:    0 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-17_23:59:36]
+j: 0 | j: 0 | CurrentScore:    70 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-17_23:59:43]
+j: 0 | j: 0 | CurrentScore:    99 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-17_23:59:43]
+j: 99 | j: 0 | CurrentScore:    99 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+
+[2015-06-17_23:59:50]
+----- Neues Spiel -----
+
+
+[2015-06-17_23:59:55]
+h: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_23:59:55]
+h: 0 | h: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-17_23:59:59]
+h: 0 | h: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+  Stephen Hawking [18]
+  Richard P. Feynman [14]
+  Isaac Newton [14]
+  Niels Bohr [12]
+  Nikola Tesla [12]
+
+
+[2015-06-18_00:00:00]
+h: 0 | h: 0 | CurrentScore:    0 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+  Stephen Hawking [18]
+  Richard P. Feynman [14]
+  Isaac Newton [14]
+  Niels Bohr [12]
+  Nikola Tesla [12]
+
+
+[2015-06-18_00:00:01]
+h: 0 | h: 0 | CurrentScore:    29 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+  Stephen Hawking [18]
+  Richard P. Feynman [14]
+  Isaac Newton [14]
+  Niels Bohr [12]
+  Nikola Tesla [12]
+
+
+[2015-06-18_00:00:01]
+h: 0 | h: 0 | CurrentScore:    47 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+X Stephen Hawking [18]
+  Richard P. Feynman [14]
+  Isaac Newton [14]
+  Niels Bohr [12]
+  Nikola Tesla [12]
+
+
+[2015-06-18_00:00:02]
+h: 0 | h: 0 | CurrentScore:    61 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+  Isaac Newton [14]
+  Niels Bohr [12]
+  Nikola Tesla [12]
+
+
+[2015-06-18_00:00:02]
+h: 0 | h: 0 | CurrentScore:    75 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+  Niels Bohr [12]
+  Nikola Tesla [12]
+
+
+[2015-06-18_00:00:03]
+h: 0 | h: 0 | CurrentScore:    87 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+  Nikola Tesla [12]
+
+
+[2015-06-18_00:00:06]
+h: 0 | h: 0 | CurrentScore:    87 | CurrentTeam:     2 | CurrentLives:    2 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+  Nikola Tesla [12]
+
+
+[2015-06-18_00:00:06]
+h: 0 | h: 0 | CurrentScore:    87 | CurrentTeam:     2 | CurrentLives:    1 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+  Nikola Tesla [12]
+
+
+[2015-06-18_00:00:06]
+h: 0 | h: 0 | CurrentScore:    87 | CurrentTeam:     2 | CurrentLives:    0 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+  Nikola Tesla [12]
+
+
+[2015-06-18_00:00:06]
+h: 0 | h: 0 | CurrentScore:    87 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+  Nikola Tesla [12]
+
+
+[2015-06-18_00:00:09]
+h: 0 | h: 0 | CurrentScore:    99 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-18_00:00:09]
+h: 99 | h: 0 | CurrentScore:    99 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+
+[2015-06-18_00:00:23]
+----- Neues Spiel -----
+
+
+[2015-06-18_00:00:24]
+h: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-18_00:00:24]
+h: 0 | h: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-18_00:00:27]
+h: 0 | h: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas Spannendes!
+  Physik [31]
+  Strom [20]
+  Feder [15]
+  (Physik-)Vorlesungen [11]
+  Buch [11]
+  Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+[2015-06-18_00:00:28]
+h: 0 | h: 0 | CurrentScore:    0 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas Spannendes!
+  Physik [31]
+  Strom [20]
+  Feder [15]
+  (Physik-)Vorlesungen [11]
+  Buch [11]
+  Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+[2015-06-18_00:00:29]
+h: 0 | h: 0 | CurrentScore:    11 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas Spannendes!
+  Physik [31]
+  Strom [20]
+  Feder [15]
+  (Physik-)Vorlesungen [11]
+  Buch [11]
+X Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+[2015-06-18_00:00:29]
+h: 0 | h: 0 | CurrentScore:    22 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas Spannendes!
+  Physik [31]
+  Strom [20]
+  Feder [15]
+  (Physik-)Vorlesungen [11]
+X Buch [11]
+X Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+[2015-06-18_00:00:29]
+h: 0 | h: 0 | CurrentScore:    33 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas Spannendes!
+  Physik [31]
+  Strom [20]
+  Feder [15]
+X (Physik-)Vorlesungen [11]
+X Buch [11]
+X Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+[2015-06-18_00:00:30]
+h: 0 | h: 0 | CurrentScore:    48 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas Spannendes!
+  Physik [31]
+  Strom [20]
+X Feder [15]
+X (Physik-)Vorlesungen [11]
+X Buch [11]
+X Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+[2015-06-18_00:00:30]
+h: 0 | h: 0 | CurrentScore:    68 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas Spannendes!
+  Physik [31]
+X Strom [20]
+X Feder [15]
+X (Physik-)Vorlesungen [11]
+X Buch [11]
+X Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+[2015-06-18_00:00:31]
+h: 0 | h: 0 | CurrentScore:    68 | CurrentTeam:     2 | CurrentLives:    2 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas Spannendes!
+  Physik [31]
+X Strom [20]
+X Feder [15]
+X (Physik-)Vorlesungen [11]
+X Buch [11]
+X Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+[2015-06-18_00:00:32]
+h: 0 | h: 0 | CurrentScore:    68 | CurrentTeam:     2 | CurrentLives:    1 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas Spannendes!
+  Physik [31]
+X Strom [20]
+X Feder [15]
+X (Physik-)Vorlesungen [11]
+X Buch [11]
+X Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+[2015-06-18_00:00:32]
+h: 0 | h: 0 | CurrentScore:    68 | CurrentTeam:     2 | CurrentLives:    0 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas Spannendes!
+  Physik [31]
+X Strom [20]
+X Feder [15]
+X (Physik-)Vorlesungen [11]
+X Buch [11]
+X Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+[2015-06-18_00:00:32]
+h: 0 | h: 0 | CurrentScore:    68 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas Spannendes!
+  Physik [31]
+X Strom [20]
+X Feder [15]
+X (Physik-)Vorlesungen [11]
+X Buch [11]
+X Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+[2015-06-18_00:00:33]
+h: 0 | h: 0 | CurrentScore:    99 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas Spannendes!
+X Physik [31]
+X Strom [20]
+X Feder [15]
+X (Physik-)Vorlesungen [11]
+X Buch [11]
+X Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+
+[2015-06-18_00:02:40]
+----- Neues Spiel -----
+
+
+[2015-06-18_00:02:41]
+j: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-18_00:02:41]
+j: 0 | j: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-18_00:02:46]
+j: 0 | j: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie ein Experiment!
+  Michelson-Morley-Experiment [25]
+  Gitter-/Spaltexperiment [21]
+  Millikan-Versuch [19]
+  Franck-Hertz-Versuch [16]
+  Stirling-Motor [10]
+  Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_00:02:48]
+j: 0 | j: 0 | CurrentScore:    0 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie ein Experiment!
+  Michelson-Morley-Experiment [25]
+  Gitter-/Spaltexperiment [21]
+  Millikan-Versuch [19]
+  Franck-Hertz-Versuch [16]
+  Stirling-Motor [10]
+  Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_00:02:50]
+j: 0 | j: 0 | CurrentScore:    7 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie ein Experiment!
+  Michelson-Morley-Experiment [25]
+  Gitter-/Spaltexperiment [21]
+  Millikan-Versuch [19]
+  Franck-Hertz-Versuch [16]
+  Stirling-Motor [10]
+X Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_00:02:50]
+j: 0 | j: 0 | CurrentScore:    17 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie ein Experiment!
+  Michelson-Morley-Experiment [25]
+  Gitter-/Spaltexperiment [21]
+  Millikan-Versuch [19]
+  Franck-Hertz-Versuch [16]
+X Stirling-Motor [10]
+X Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_00:02:50]
+j: 0 | j: 0 | CurrentScore:    33 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie ein Experiment!
+  Michelson-Morley-Experiment [25]
+  Gitter-/Spaltexperiment [21]
+  Millikan-Versuch [19]
+X Franck-Hertz-Versuch [16]
+X Stirling-Motor [10]
+X Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_00:02:51]
+j: 0 | j: 0 | CurrentScore:    52 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie ein Experiment!
+  Michelson-Morley-Experiment [25]
+  Gitter-/Spaltexperiment [21]
+X Millikan-Versuch [19]
+X Franck-Hertz-Versuch [16]
+X Stirling-Motor [10]
+X Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_00:02:51]
+j: 0 | j: 0 | CurrentScore:    73 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie ein Experiment!
+  Michelson-Morley-Experiment [25]
+X Gitter-/Spaltexperiment [21]
+X Millikan-Versuch [19]
+X Franck-Hertz-Versuch [16]
+X Stirling-Motor [10]
+X Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_00:02:53]
+j: 0 | j: 0 | CurrentScore:    73 | CurrentTeam:     2 | CurrentLives:    2 | CurrentRound:    1 | CurrentQuestion: Nennen Sie ein Experiment!
+  Michelson-Morley-Experiment [25]
+X Gitter-/Spaltexperiment [21]
+X Millikan-Versuch [19]
+X Franck-Hertz-Versuch [16]
+X Stirling-Motor [10]
+X Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_00:02:53]
+j: 0 | j: 0 | CurrentScore:    73 | CurrentTeam:     2 | CurrentLives:    1 | CurrentRound:    1 | CurrentQuestion: Nennen Sie ein Experiment!
+  Michelson-Morley-Experiment [25]
+X Gitter-/Spaltexperiment [21]
+X Millikan-Versuch [19]
+X Franck-Hertz-Versuch [16]
+X Stirling-Motor [10]
+X Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_00:02:54]
+j: 0 | j: 0 | CurrentScore:    73 | CurrentTeam:     2 | CurrentLives:    0 | CurrentRound:    1 | CurrentQuestion: Nennen Sie ein Experiment!
+  Michelson-Morley-Experiment [25]
+X Gitter-/Spaltexperiment [21]
+X Millikan-Versuch [19]
+X Franck-Hertz-Versuch [16]
+X Stirling-Motor [10]
+X Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_00:02:54]
+j: 0 | j: 0 | CurrentScore:    73 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie ein Experiment!
+  Michelson-Morley-Experiment [25]
+X Gitter-/Spaltexperiment [21]
+X Millikan-Versuch [19]
+X Franck-Hertz-Versuch [16]
+X Stirling-Motor [10]
+X Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_00:03:01]
+j: 0 | j: 0 | CurrentScore:    98 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie ein Experiment!
+X Michelson-Morley-Experiment [25]
+X Gitter-/Spaltexperiment [21]
+X Millikan-Versuch [19]
+X Franck-Hertz-Versuch [16]
+X Stirling-Motor [10]
+X Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_00:03:01]
+j: 73 | j: 0 | CurrentScore:    98 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie ein Experiment!
+X Michelson-Morley-Experiment [25]
+X Gitter-/Spaltexperiment [21]
+X Millikan-Versuch [19]
+X Franck-Hertz-Versuch [16]
+X Stirling-Motor [10]
+X Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_00:03:06]
+j: 73 | j: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    2 | CurrentQuestion: Nennen Sie etwas Spannendes!
+  Physik [31]
+  Strom [20]
+  Feder [15]
+  (Physik-)Vorlesungen [11]
+  Buch [11]
+  Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+[2015-06-18_00:03:06]
+j: 73 | j: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    5 | CurrentQuestion: Nennen Sie etwas Spannendes!
+  Physik [31]
+  Strom [20]
+  Feder [15]
+  (Physik-)Vorlesungen [11]
+  Buch [11]
+  Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+[2015-06-18_00:03:08]
+j: 73 | j: 0 | CurrentScore:    0 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    5 | CurrentQuestion: Nennen Sie etwas Spannendes!
+  Physik [31]
+  Strom [20]
+  Feder [15]
+  (Physik-)Vorlesungen [11]
+  Buch [11]
+  Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+[2015-06-18_00:03:10]
+j: 73 | j: 0 | CurrentScore:    0 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    5 | CurrentQuestion: Nennen Sie etwas Spannendes!
+  Physik [31]
+  Strom [20]
+  Feder [15]
+  (Physik-)Vorlesungen [11]
+  Buch [11]
+  Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+[2015-06-18_00:03:11]
+j: 73 | j: 0 | CurrentScore:    15 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    5 | CurrentQuestion: Nennen Sie etwas Spannendes!
+  Physik [31]
+  Strom [20]
+X Feder [15]
+  (Physik-)Vorlesungen [11]
+  Buch [11]
+  Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+[2015-06-18_00:03:12]
+j: 73 | j: 0 | CurrentScore:    35 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    5 | CurrentQuestion: Nennen Sie etwas Spannendes!
+  Physik [31]
+X Strom [20]
+X Feder [15]
+  (Physik-)Vorlesungen [11]
+  Buch [11]
+  Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+[2015-06-18_00:03:13]
+j: 73 | j: 0 | CurrentScore:    35 | CurrentTeam:     2 | CurrentLives:    2 | CurrentRound:    5 | CurrentQuestion: Nennen Sie etwas Spannendes!
+  Physik [31]
+X Strom [20]
+X Feder [15]
+  (Physik-)Vorlesungen [11]
+  Buch [11]
+  Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+[2015-06-18_00:03:13]
+j: 73 | j: 0 | CurrentScore:    35 | CurrentTeam:     2 | CurrentLives:    1 | CurrentRound:    5 | CurrentQuestion: Nennen Sie etwas Spannendes!
+  Physik [31]
+X Strom [20]
+X Feder [15]
+  (Physik-)Vorlesungen [11]
+  Buch [11]
+  Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+[2015-06-18_00:03:13]
+j: 73 | j: 0 | CurrentScore:    35 | CurrentTeam:     2 | CurrentLives:    0 | CurrentRound:    5 | CurrentQuestion: Nennen Sie etwas Spannendes!
+  Physik [31]
+X Strom [20]
+X Feder [15]
+  (Physik-)Vorlesungen [11]
+  Buch [11]
+  Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+[2015-06-18_00:03:13]
+j: 73 | j: 0 | CurrentScore:    35 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    5 | CurrentQuestion: Nennen Sie etwas Spannendes!
+  Physik [31]
+X Strom [20]
+X Feder [15]
+  (Physik-)Vorlesungen [11]
+  Buch [11]
+  Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+[2015-06-18_00:03:16]
+j: 73 | j: 0 | CurrentScore:    66 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    5 | CurrentQuestion: Nennen Sie etwas Spannendes!
+X Physik [31]
+X Strom [20]
+X Feder [15]
+  (Physik-)Vorlesungen [11]
+  Buch [11]
+  Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+[2015-06-18_00:03:16]
+j: 271 | j: 0 | CurrentScore:    66 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    5 | CurrentQuestion: Nennen Sie etwas Spannendes!
+X Physik [31]
+X Strom [20]
+X Feder [15]
+  (Physik-)Vorlesungen [11]
+  Buch [11]
+  Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+[2015-06-18_00:03:25]
+j: 0 | j: 0 | CurrentScore:    66 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    5 | CurrentQuestion: Nennen Sie etwas Spannendes!
+X Physik [31]
+X Strom [20]
+X Feder [15]
+  (Physik-)Vorlesungen [11]
+  Buch [11]
+  Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+[2015-06-18_00:03:26]
+j: 0 | j: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    5 | CurrentQuestion: Nennen Sie etwas, das man wissen muss!
+  1+1=2 [21]
+  π [21]
+  E=m·c² [18]
+  F=m·a [15]
+  42 [15]
+  a²+b²=c² [9]
+
+
+[2015-06-18_00:03:29]
+j: 0 | j: 0 | CurrentScore:    0 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    5 | CurrentQuestion: Nennen Sie etwas, das man wissen muss!
+  1+1=2 [21]
+  π [21]
+  E=m·c² [18]
+  F=m·a [15]
+  42 [15]
+  a²+b²=c² [9]
+
+
+[2015-06-18_00:03:30]
+j: 0 | j: 0 | CurrentScore:    0 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    5 | CurrentQuestion: Nennen Sie etwas, das man wissen muss!
+  1+1=2 [21]
+  π [21]
+  E=m·c² [18]
+  F=m·a [15]
+  42 [15]
+  a²+b²=c² [9]
+
+
+[2015-06-18_00:03:31]
+j: 0 | j: 0 | CurrentScore:    18 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    5 | CurrentQuestion: Nennen Sie etwas, das man wissen muss!
+  1+1=2 [21]
+  π [21]
+X E=m·c² [18]
+  F=m·a [15]
+  42 [15]
+  a²+b²=c² [9]
+
+
+[2015-06-18_00:03:31]
+j: 0 | j: 0 | CurrentScore:    39 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    5 | CurrentQuestion: Nennen Sie etwas, das man wissen muss!
+  1+1=2 [21]
+X π [21]
+X E=m·c² [18]
+  F=m·a [15]
+  42 [15]
+  a²+b²=c² [9]
+
+
+[2015-06-18_00:03:32]
+j: 0 | j: 0 | CurrentScore:    39 | CurrentTeam:     2 | CurrentLives:    2 | CurrentRound:    5 | CurrentQuestion: Nennen Sie etwas, das man wissen muss!
+  1+1=2 [21]
+X π [21]
+X E=m·c² [18]
+  F=m·a [15]
+  42 [15]
+  a²+b²=c² [9]
+
+
+[2015-06-18_00:03:32]
+j: 0 | j: 0 | CurrentScore:    39 | CurrentTeam:     2 | CurrentLives:    1 | CurrentRound:    5 | CurrentQuestion: Nennen Sie etwas, das man wissen muss!
+  1+1=2 [21]
+X π [21]
+X E=m·c² [18]
+  F=m·a [15]
+  42 [15]
+  a²+b²=c² [9]
+
+
+[2015-06-18_00:03:32]
+j: 0 | j: 0 | CurrentScore:    39 | CurrentTeam:     2 | CurrentLives:    0 | CurrentRound:    5 | CurrentQuestion: Nennen Sie etwas, das man wissen muss!
+  1+1=2 [21]
+X π [21]
+X E=m·c² [18]
+  F=m·a [15]
+  42 [15]
+  a²+b²=c² [9]
+
+
+[2015-06-18_00:03:32]
+j: 0 | j: 0 | CurrentScore:    39 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    5 | CurrentQuestion: Nennen Sie etwas, das man wissen muss!
+  1+1=2 [21]
+X π [21]
+X E=m·c² [18]
+  F=m·a [15]
+  42 [15]
+  a²+b²=c² [9]
+
+
+[2015-06-18_00:03:37]
+j: 0 | j: 0 | CurrentScore:    60 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    5 | CurrentQuestion: Nennen Sie etwas, das man wissen muss!
+X 1+1=2 [21]
+X π [21]
+X E=m·c² [18]
+  F=m·a [15]
+  42 [15]
+  a²+b²=c² [9]
+
+
+[2015-06-18_00:03:37]
+j: 180 | j: 0 | CurrentScore:    60 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    5 | CurrentQuestion: Nennen Sie etwas, das man wissen muss!
+X 1+1=2 [21]
+X π [21]
+X E=m·c² [18]
+  F=m·a [15]
+  42 [15]
+  a²+b²=c² [9]
+
+
+
+[2015-06-18_00:09:10]
+----- Neues Spiel -----
+
+
+[2015-06-18_00:09:12]
+g: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-18_00:09:12]
+g: 0 | g\: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-18_00:12:34]
+----- Neues Spiel -----
+
+
+[2015-06-18_00:12:35]
+h: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-18_00:12:35]
+h: 0 | h: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-18_00:12:38]
+h: 0 | h: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+  e-Funktion [17]
+  x [11]
+  Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-18_00:12:39]
+h: 0 | h: 0 | CurrentScore:    0 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+  e-Funktion [17]
+  x [11]
+  Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-18_00:12:40]
+h: 0 | h: 0 | CurrentScore:    26 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+X Funktionen (allgemein) [26]
+  e-Funktion [17]
+  x [11]
+  Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-18_00:12:40]
+h: 0 | h: 0 | CurrentScore:    26 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+X Funktionen (allgemein) [26]
+  e-Funktion [17]
+  x [11]
+  Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-18_00:12:40]
+h: 0 | h: 0 | CurrentScore:    43 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+X Funktionen (allgemein) [26]
+X e-Funktion [17]
+  x [11]
+  Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-18_00:12:40]
+h: 0 | h: 0 | CurrentScore:    43 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+X Funktionen (allgemein) [26]
+X e-Funktion [17]
+  x [11]
+  Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-18_00:12:42]
+h: 0 | h: 0 | CurrentScore:    72 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+X Ausländer/Migranten/Asylbewerber [29]
+X Funktionen (allgemein) [26]
+X e-Funktion [17]
+  x [11]
+  Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-18_00:12:43]
+h: 0 | h: 0 | CurrentScore:    83 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+X Ausländer/Migranten/Asylbewerber [29]
+X Funktionen (allgemein) [26]
+X e-Funktion [17]
+X x [11]
+  Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-18_00:12:44]
+h: 0 | h: 0 | CurrentScore:    93 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+X Ausländer/Migranten/Asylbewerber [29]
+X Funktionen (allgemein) [26]
+X e-Funktion [17]
+X x [11]
+X Gauß-Funktion [10]
+  Menschen [6]
+
+
+
+[2015-06-18_00:14:52]
+----- Neues Spiel -----
+
+
+
+[2015-06-18_00:15:10]
+----- Neues Spiel -----
+
+
+
+[2015-06-18_00:16:00]
+----- Neues Spiel -----
+
+
+[2015-06-18_00:16:22]
+j: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-18_00:16:22]
+j: 0 | j\: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-18_00:16:23]
+j: 0 | j\: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+  e-Funktion [17]
+  x [11]
+  Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-18_00:16:24]
+j: 0 | j\: 0 | CurrentScore:    0 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+  e-Funktion [17]
+  x [11]
+  Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-18_00:16:25]
+j: 0 | j\: 0 | CurrentScore:    6 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+  e-Funktion [17]
+  x [11]
+  Gauß-Funktion [10]
+X Menschen [6]
+
+
+[2015-06-18_00:16:25]
+j: 0 | j\: 0 | CurrentScore:    6 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+  e-Funktion [17]
+  x [11]
+  Gauß-Funktion [10]
+X Menschen [6]
+
+
+[2015-06-18_00:16:26]
+j: 0 | j\: 0 | CurrentScore:    16 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+  e-Funktion [17]
+  x [11]
+X Gauß-Funktion [10]
+X Menschen [6]
+
+
+[2015-06-18_00:16:26]
+j: 0 | j\: 0 | CurrentScore:    27 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+  e-Funktion [17]
+X x [11]
+X Gauß-Funktion [10]
+X Menschen [6]
+
+
+[2015-06-18_00:16:26]
+j: 0 | j\: 0 | CurrentScore:    44 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+X e-Funktion [17]
+X x [11]
+X Gauß-Funktion [10]
+X Menschen [6]
+
+
+[2015-06-18_00:16:28]
+j: 0 | j\: 0 | CurrentScore:    70 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+X Funktionen (allgemein) [26]
+X e-Funktion [17]
+X x [11]
+X Gauß-Funktion [10]
+X Menschen [6]
+
+
+[2015-06-18_00:16:35]
+j: 0 | j\: 0 | CurrentScore:    70 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+X Funktionen (allgemein) [26]
+X e-Funktion [17]
+X x [11]
+X Gauß-Funktion [10]
+X Menschen [6]
+
+
+[2015-06-18_00:16:40]
+j: 0 | j\: 0 | CurrentScore:    70 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+X Funktionen (allgemein) [26]
+X e-Funktion [17]
+X x [11]
+X Gauß-Funktion [10]
+X Menschen [6]
+
+
+[2015-06-18_00:16:44]
+j: 0 | j\: 0 | CurrentScore:    44 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+X e-Funktion [17]
+X x [11]
+X Gauß-Funktion [10]
+X Menschen [6]
+
+
+[2015-06-18_00:16:44]
+j: 0 | j\: 0 | CurrentScore:    27 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+  e-Funktion [17]
+X x [11]
+X Gauß-Funktion [10]
+X Menschen [6]
+
+
+[2015-06-18_00:16:44]
+j: 0 | j\: 0 | CurrentScore:    16 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+  e-Funktion [17]
+  x [11]
+X Gauß-Funktion [10]
+X Menschen [6]
+
+
+[2015-06-18_00:16:45]
+j: 0 | j\: 0 | CurrentScore:    6 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+  e-Funktion [17]
+  x [11]
+  Gauß-Funktion [10]
+X Menschen [6]
+
+
+[2015-06-18_00:16:45]
+j: 0 | j\: 0 | CurrentScore:    0 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+  e-Funktion [17]
+  x [11]
+  Gauß-Funktion [10]
+  Menschen [6]
+
+
+
+[2015-06-18_00:18:47]
+----- Neues Spiel -----
+
+
+[2015-06-18_00:18:49]
+j: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-18_00:18:49]
+j: 0 | j: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-18_00:18:52]
+j: 0 | j: 0 | CurrentScore:    0 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-18_00:18:54]
+j: 0 | j: 0 | CurrentScore:    0 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-18_00:18:55]
+j: 0 | j: 0 | CurrentScore:    0 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-18_00:18:57]
+j: 0 | j: 0 | CurrentScore:    0 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+
+[2015-06-18_00:27:16]
+----- Neues Spiel -----
+
+
+[2015-06-18_00:27:18]
+g: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-18_00:27:18]
+g: 0 | g: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-18_00:27:21]
+g: 0 | g: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie ein Experiment!
+  Michelson-Morley-Experiment [25]
+  Gitter-/Spaltexperiment [21]
+  Millikan-Versuch [19]
+  Franck-Hertz-Versuch [16]
+  Stirling-Motor [10]
+  Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_00:27:22]
+g: 0 | g: 0 | CurrentScore:    0 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie ein Experiment!
+  Michelson-Morley-Experiment [25]
+  Gitter-/Spaltexperiment [21]
+  Millikan-Versuch [19]
+  Franck-Hertz-Versuch [16]
+  Stirling-Motor [10]
+  Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_00:27:22]
+g: 0 | g: 0 | CurrentScore:    25 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie ein Experiment!
+X Michelson-Morley-Experiment [25]
+  Gitter-/Spaltexperiment [21]
+  Millikan-Versuch [19]
+  Franck-Hertz-Versuch [16]
+  Stirling-Motor [10]
+  Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_00:27:23]
+g: 0 | g: 0 | CurrentScore:    46 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie ein Experiment!
+X Michelson-Morley-Experiment [25]
+X Gitter-/Spaltexperiment [21]
+  Millikan-Versuch [19]
+  Franck-Hertz-Versuch [16]
+  Stirling-Motor [10]
+  Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_00:27:25]
+g: 0 | g: 0 | CurrentScore:    56 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie ein Experiment!
+X Michelson-Morley-Experiment [25]
+X Gitter-/Spaltexperiment [21]
+  Millikan-Versuch [19]
+  Franck-Hertz-Versuch [16]
+X Stirling-Motor [10]
+  Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_00:27:31]
+g: 0 | g: 0 | CurrentScore:    56 | CurrentTeam:     2 | CurrentLives:    2 | CurrentRound:    1 | CurrentQuestion: Nennen Sie ein Experiment!
+X Michelson-Morley-Experiment [25]
+X Gitter-/Spaltexperiment [21]
+  Millikan-Versuch [19]
+  Franck-Hertz-Versuch [16]
+X Stirling-Motor [10]
+  Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_01:02:05]
+g: 0 | g: 0 | CurrentScore:    75 | CurrentTeam:     2 | CurrentLives:    2 | CurrentRound:    1 | CurrentQuestion: Nennen Sie ein Experiment!
+X Michelson-Morley-Experiment [25]
+X Gitter-/Spaltexperiment [21]
+X Millikan-Versuch [19]
+  Franck-Hertz-Versuch [16]
+X Stirling-Motor [10]
+  Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_01:02:07]
+g: 0 | g: 0 | CurrentScore:    75 | CurrentTeam:     2 | CurrentLives:    1 | CurrentRound:    1 | CurrentQuestion: Nennen Sie ein Experiment!
+X Michelson-Morley-Experiment [25]
+X Gitter-/Spaltexperiment [21]
+X Millikan-Versuch [19]
+  Franck-Hertz-Versuch [16]
+X Stirling-Motor [10]
+  Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_01:02:08]
+g: 0 | g: 0 | CurrentScore:    91 | CurrentTeam:     2 | CurrentLives:    1 | CurrentRound:    1 | CurrentQuestion: Nennen Sie ein Experiment!
+X Michelson-Morley-Experiment [25]
+X Gitter-/Spaltexperiment [21]
+X Millikan-Versuch [19]
+X Franck-Hertz-Versuch [16]
+X Stirling-Motor [10]
+  Stern-Gerlach-Versuch [7]
+
+
+
+[2015-06-18_01:41:36]
+----- Neues Spiel -----
+
+
+[2015-06-18_01:41:40]
+ghdf: 0 | Team 2: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-18_01:41:40]
+ghdf: 0 | khjg: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Bitte eine Frage auswählen!
+  Um die Syntax darzustellen [6]
+  Zu verdeutlichen, wie es aussieht [5]
+  , ← Müssen in Anführungszeichen [4]
+  Es müssen mindestens 6 Antworten [3]
+  eingetragen sein [2]
+  Sortiert von Hoch zu Tief [1]
+
+
+[2015-06-18_01:42:43]
+ghdf: 0 | khjg: 0 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+  e-Funktion [17]
+  x [11]
+  Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-18_01:42:53]
+ghdf: 0 | khjg: 0 | CurrentScore:    0 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+  e-Funktion [17]
+  x [11]
+  Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-18_01:42:54]
+ghdf: 0 | khjg: 0 | CurrentScore:    11 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+  e-Funktion [17]
+X x [11]
+  Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-18_01:42:54]
+ghdf: 0 | khjg: 0 | CurrentScore:    11 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+  e-Funktion [17]
+X x [11]
+  Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-18_01:43:00]
+ghdf: 0 | khjg: 0 | CurrentScore:    11 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+  e-Funktion [17]
+X x [11]
+  Gauß-Funktion [10]
+  Menschen [6]
+
+
+[2015-06-18_01:43:03]
+ghdf: 0 | khjg: 0 | CurrentScore:    17 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+  e-Funktion [17]
+X x [11]
+  Gauß-Funktion [10]
+X Menschen [6]
+
+
+[2015-06-18_01:43:06]
+ghdf: 0 | khjg: 0 | CurrentScore:    34 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+X e-Funktion [17]
+X x [11]
+  Gauß-Funktion [10]
+X Menschen [6]
+
+
+[2015-06-18_01:43:08]
+ghdf: 0 | khjg: 0 | CurrentScore:    34 | CurrentTeam:     1 | CurrentLives:    2 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+X e-Funktion [17]
+X x [11]
+  Gauß-Funktion [10]
+X Menschen [6]
+
+
+[2015-06-18_01:43:12]
+ghdf: 0 | khjg: 0 | CurrentScore:    34 | CurrentTeam:     1 | CurrentLives:    1 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+X e-Funktion [17]
+X x [11]
+  Gauß-Funktion [10]
+X Menschen [6]
+
+
+[2015-06-18_01:43:14]
+ghdf: 0 | khjg: 0 | CurrentScore:    34 | CurrentTeam:     1 | CurrentLives:    0 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+X e-Funktion [17]
+X x [11]
+  Gauß-Funktion [10]
+X Menschen [6]
+
+
+[2015-06-18_01:43:14]
+ghdf: 0 | khjg: 0 | CurrentScore:    34 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+X e-Funktion [17]
+X x [11]
+  Gauß-Funktion [10]
+X Menschen [6]
+
+
+[2015-06-18_01:43:27]
+ghdf: 0 | khjg: 0 | CurrentScore:    44 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+X e-Funktion [17]
+X x [11]
+X Gauß-Funktion [10]
+X Menschen [6]
+
+
+[2015-06-18_01:43:27]
+ghdf: 0 | khjg: 34 | CurrentScore:    44 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+  Funktionen (allgemein) [26]
+X e-Funktion [17]
+X x [11]
+X Gauß-Funktion [10]
+X Menschen [6]
+
+
+[2015-06-18_01:43:35]
+ghdf: 0 | khjg: 34 | CurrentScore:    70 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+  Ausländer/Migranten/Asylbewerber [29]
+X Funktionen (allgemein) [26]
+X e-Funktion [17]
+X x [11]
+X Gauß-Funktion [10]
+X Menschen [6]
+
+
+[2015-06-18_01:43:39]
+ghdf: 0 | khjg: 34 | CurrentScore:    99 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    1 | CurrentQuestion: Nennen Sie etwas, das man integrieren kann!
+X Ausländer/Migranten/Asylbewerber [29]
+X Funktionen (allgemein) [26]
+X e-Funktion [17]
+X x [11]
+X Gauß-Funktion [10]
+X Menschen [6]
+
+
+[2015-06-18_01:43:50]
+ghdf: 0 | khjg: 34 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    2 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+  Stephen Hawking [18]
+  Richard P. Feynman [14]
+  Isaac Newton [14]
+  Niels Bohr [12]
+  Nikola Tesla [12]
+
+
+[2015-06-18_01:45:04]
+ghdf: 0 | khjg: 34 | CurrentScore:    0 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    2 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+  Albert Einstein [29]
+  Stephen Hawking [18]
+  Richard P. Feynman [14]
+  Isaac Newton [14]
+  Niels Bohr [12]
+  Nikola Tesla [12]
+
+
+[2015-06-18_01:45:05]
+ghdf: 0 | khjg: 34 | CurrentScore:    29 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    2 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+  Stephen Hawking [18]
+  Richard P. Feynman [14]
+  Isaac Newton [14]
+  Niels Bohr [12]
+  Nikola Tesla [12]
+
+
+[2015-06-18_01:45:14]
+ghdf: 0 | khjg: 34 | CurrentScore:    43 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    2 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+  Stephen Hawking [18]
+X Richard P. Feynman [14]
+  Isaac Newton [14]
+  Niels Bohr [12]
+  Nikola Tesla [12]
+
+
+[2015-06-18_01:45:15]
+ghdf: 0 | khjg: 34 | CurrentScore:    43 | CurrentTeam:     2 | CurrentLives:    2 | CurrentRound:    2 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+  Stephen Hawking [18]
+X Richard P. Feynman [14]
+  Isaac Newton [14]
+  Niels Bohr [12]
+  Nikola Tesla [12]
+
+
+[2015-06-18_01:45:16]
+ghdf: 0 | khjg: 34 | CurrentScore:    55 | CurrentTeam:     2 | CurrentLives:    2 | CurrentRound:    2 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+  Stephen Hawking [18]
+X Richard P. Feynman [14]
+  Isaac Newton [14]
+X Niels Bohr [12]
+  Nikola Tesla [12]
+
+
+[2015-06-18_01:45:18]
+ghdf: 0 | khjg: 34 | CurrentScore:    55 | CurrentTeam:     2 | CurrentLives:    1 | CurrentRound:    2 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+  Stephen Hawking [18]
+X Richard P. Feynman [14]
+  Isaac Newton [14]
+X Niels Bohr [12]
+  Nikola Tesla [12]
+
+
+[2015-06-18_01:45:24]
+ghdf: 0 | khjg: 34 | CurrentScore:    67 | CurrentTeam:     2 | CurrentLives:    1 | CurrentRound:    2 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+  Stephen Hawking [18]
+X Richard P. Feynman [14]
+  Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-18_01:45:28]
+ghdf: 0 | khjg: 34 | CurrentScore:    67 | CurrentTeam:     2 | CurrentLives:    0 | CurrentRound:    2 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+  Stephen Hawking [18]
+X Richard P. Feynman [14]
+  Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-18_01:45:28]
+ghdf: 0 | khjg: 34 | CurrentScore:    67 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    2 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+  Stephen Hawking [18]
+X Richard P. Feynman [14]
+  Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-18_01:45:31]
+ghdf: 0 | khjg: 34 | CurrentScore:    85 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    2 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+  Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-18_01:45:31]
+ghdf: 67 | khjg: 34 | CurrentScore:    85 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    2 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+  Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-18_01:45:35]
+ghdf: 67 | khjg: 34 | CurrentScore:    99 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    2 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-18_01:45:38]
+ghdf: 67 | khjg: 34 | CurrentScore:    85 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    2 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+  Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-18_01:45:41]
+ghdf: 67 | khjg: 34 | CurrentScore:    99 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    2 | CurrentQuestion: Nennen Sie Ihren Lieblingsphysiker!
+X Albert Einstein [29]
+X Stephen Hawking [18]
+X Richard P. Feynman [14]
+X Isaac Newton [14]
+X Niels Bohr [12]
+X Nikola Tesla [12]
+
+
+[2015-06-18_01:46:29]
+ghdf: 67 | khjg: 34 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    3 | CurrentQuestion: Nennen Sie ein Experiment!
+  Michelson-Morley-Experiment [25]
+  Gitter-/Spaltexperiment [21]
+  Millikan-Versuch [19]
+  Franck-Hertz-Versuch [16]
+  Stirling-Motor [10]
+  Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_02:30:55]
+ghdf: 67 | khjg: 34 | CurrentScore:    0 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    3 | CurrentQuestion: Nennen Sie ein Experiment!
+  Michelson-Morley-Experiment [25]
+  Gitter-/Spaltexperiment [21]
+  Millikan-Versuch [19]
+  Franck-Hertz-Versuch [16]
+  Stirling-Motor [10]
+  Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_02:30:56]
+ghdf: 67 | khjg: 34 | CurrentScore:    16 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    3 | CurrentQuestion: Nennen Sie ein Experiment!
+  Michelson-Morley-Experiment [25]
+  Gitter-/Spaltexperiment [21]
+  Millikan-Versuch [19]
+X Franck-Hertz-Versuch [16]
+  Stirling-Motor [10]
+  Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_02:30:56]
+ghdf: 67 | khjg: 34 | CurrentScore:    16 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    3 | CurrentQuestion: Nennen Sie ein Experiment!
+  Michelson-Morley-Experiment [25]
+  Gitter-/Spaltexperiment [21]
+  Millikan-Versuch [19]
+X Franck-Hertz-Versuch [16]
+  Stirling-Motor [10]
+  Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_02:30:59]
+ghdf: 67 | khjg: 34 | CurrentScore:    26 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    3 | CurrentQuestion: Nennen Sie ein Experiment!
+  Michelson-Morley-Experiment [25]
+  Gitter-/Spaltexperiment [21]
+  Millikan-Versuch [19]
+X Franck-Hertz-Versuch [16]
+X Stirling-Motor [10]
+  Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_02:30:59]
+ghdf: 67 | khjg: 34 | CurrentScore:    26 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    3 | CurrentQuestion: Nennen Sie ein Experiment!
+  Michelson-Morley-Experiment [25]
+  Gitter-/Spaltexperiment [21]
+  Millikan-Versuch [19]
+X Franck-Hertz-Versuch [16]
+X Stirling-Motor [10]
+  Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_02:31:01]
+ghdf: 67 | khjg: 34 | CurrentScore:    45 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    3 | CurrentQuestion: Nennen Sie ein Experiment!
+  Michelson-Morley-Experiment [25]
+  Gitter-/Spaltexperiment [21]
+X Millikan-Versuch [19]
+X Franck-Hertz-Versuch [16]
+X Stirling-Motor [10]
+  Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_02:31:03]
+ghdf: 67 | khjg: 34 | CurrentScore:    45 | CurrentTeam:     2 | CurrentLives:    2 | CurrentRound:    3 | CurrentQuestion: Nennen Sie ein Experiment!
+  Michelson-Morley-Experiment [25]
+  Gitter-/Spaltexperiment [21]
+X Millikan-Versuch [19]
+X Franck-Hertz-Versuch [16]
+X Stirling-Motor [10]
+  Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_02:31:06]
+ghdf: 67 | khjg: 34 | CurrentScore:    45 | CurrentTeam:     2 | CurrentLives:    1 | CurrentRound:    3 | CurrentQuestion: Nennen Sie ein Experiment!
+  Michelson-Morley-Experiment [25]
+  Gitter-/Spaltexperiment [21]
+X Millikan-Versuch [19]
+X Franck-Hertz-Versuch [16]
+X Stirling-Motor [10]
+  Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_02:31:08]
+ghdf: 67 | khjg: 34 | CurrentScore:    66 | CurrentTeam:     2 | CurrentLives:    1 | CurrentRound:    3 | CurrentQuestion: Nennen Sie ein Experiment!
+  Michelson-Morley-Experiment [25]
+X Gitter-/Spaltexperiment [21]
+X Millikan-Versuch [19]
+X Franck-Hertz-Versuch [16]
+X Stirling-Motor [10]
+  Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_02:31:10]
+ghdf: 67 | khjg: 34 | CurrentScore:    91 | CurrentTeam:     2 | CurrentLives:    1 | CurrentRound:    3 | CurrentQuestion: Nennen Sie ein Experiment!
+X Michelson-Morley-Experiment [25]
+X Gitter-/Spaltexperiment [21]
+X Millikan-Versuch [19]
+X Franck-Hertz-Versuch [16]
+X Stirling-Motor [10]
+  Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_02:31:10]
+ghdf: 67 | khjg: 216 | CurrentScore:    91 | CurrentTeam:     -1 | CurrentLives:    1 | CurrentRound:    3 | CurrentQuestion: Nennen Sie ein Experiment!
+X Michelson-Morley-Experiment [25]
+X Gitter-/Spaltexperiment [21]
+X Millikan-Versuch [19]
+X Franck-Hertz-Versuch [16]
+X Stirling-Motor [10]
+  Stern-Gerlach-Versuch [7]
+
+
+[2015-06-18_02:31:23]
+ghdf: 67 | khjg: 216 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    4 | CurrentQuestion: Nennen Sie etwas Spannendes!
+  Physik [31]
+  Strom [20]
+  Feder [15]
+  (Physik-)Vorlesungen [11]
+  Buch [11]
+  Gewicht an einem Seil/gespanntes Seil/Fadenpendel [11]
+
+
+[2015-06-18_02:31:41]
+ghdf: 67 | khjg: 216 | CurrentScore:    0 | CurrentTeam:     -1 | CurrentLives:    3 | CurrentRound:    4 | CurrentQuestion: Nennen Sie etwas, das man wissen muss!
+  1+1=2 [21]
+  π [21]
+  E=m·c² [18]
+  F=m·a [15]
+  42 [15]
+  a²+b²=c² [9]
+
+
+[2015-06-18_02:31:43]
+ghdf: 67 | khjg: 216 | CurrentScore:    0 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    4 | CurrentQuestion: Nennen Sie etwas, das man wissen muss!
+  1+1=2 [21]
+  π [21]
+  E=m·c² [18]
+  F=m·a [15]
+  42 [15]
+  a²+b²=c² [9]
+
+
+[2015-06-18_02:31:44]
+ghdf: 67 | khjg: 216 | CurrentScore:    0 | CurrentTeam:     1 | CurrentLives:    3 | CurrentRound:    4 | CurrentQuestion: Nennen Sie etwas, das man wissen muss!
+  1+1=2 [21]
+  π [21]
+  E=m·c² [18]
+  F=m·a [15]
+  42 [15]
+  a²+b²=c² [9]
+
+
+[2015-06-18_02:31:44]
+ghdf: 67 | khjg: 216 | CurrentScore:    0 | CurrentTeam:     2 | CurrentLives:    3 | CurrentRound:    4 | CurrentQuestion: Nennen Sie etwas, das man wissen muss!
+  1+1=2 [21]
+  π [21]
+  E=m·c² [18]
+  F=m·a [15]
+  42 [15]
+  a²+b²=c² [9]

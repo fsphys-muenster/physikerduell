@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import org.newdawn.easyogg.OggClip;
+import javazoom.jl.player.Player;
 import de.uni_muenster.physikerduell.game.Game;
 import de.uni_muenster.physikerduell.game.Game.RoundState;
 import de.uni_muenster.physikerduell.game.GameListener;
@@ -34,7 +34,10 @@ import de.uni_muenster.physikerduell.game.Question;
 public class Display extends JFrame implements GameListener {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPaneLabel;
+	private static final int WINDOW_WIDTH = 1024;
+	private static final int WINDOW_HEIGHT = 768;
+	private static final Dimension WINDOW_SIZE = new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT);
+	private JPanel contentPanePause;
 	private ImagePanel contentPane;
 	private JTextField txtFTeam1;
 	private JTextField txtFTeam2;
@@ -64,7 +67,7 @@ public class Display extends JFrame implements GameListener {
 	private Image team1;
 	private Image team2;
 	private Image noteam;
-	private OggClip introMusic;
+	private Player introMusic;
 	private boolean pause = true;
 	private Game game;
 	private LivesDisplay ldLeben;
@@ -88,12 +91,6 @@ public class Display extends JFrame implements GameListener {
 		}
 		catch (IOException ex) {
 			System.err.println("Error loading images: " + ex);
-		}
-		try {
-			introMusic = new OggClip(getClass().getResourceAsStream("/res/intro.ogg"));
-		}
-		catch (IOException ex) {
-			System.err.println("Error loading intro music: " + ex);
 		}
 		initializeUI();
 	}
@@ -256,8 +253,8 @@ public class Display extends JFrame implements GameListener {
 	 */
 	public void playIntro() {
 		if (pause) {
-			if (introMusic.stopped()) {
-				introMusic.resume();
+			if (introMusic == null) {
+				introMusic = Sound.playMP3("intro.mp3");
 			}
 			else {
 				setContentPane(outerPanel);
@@ -266,8 +263,9 @@ public class Display extends JFrame implements GameListener {
 				pause = false;
 			}
 		}
-		else if (!introMusic.stopped()) {
+		else if (introMusic != null) {
 			introMusic.close();
+			introMusic = null;
 		}
 	}
 
@@ -291,32 +289,32 @@ public class Display extends JFrame implements GameListener {
 	private void initializeUI() {
 		contentPane = new ImagePanel();
 		setIconImage(Toolkit.getDefaultToolkit().getImage(
-			getClass().getResource("/res/Physikerduell-0.png")));
+				getClass().getResource("/res/Physikerduell-0.png")));
 		contentPane.setImage(Toolkit.getDefaultToolkit().getImage(
-			getClass().getResource("/res/Physikerduell-1.png")));
+				getClass().getResource("/res/Physikerduell-1.png")));
 		setBackground(Color.BLACK);
 		setName("Physikerduell-Anzeige");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		DisplayMode dm =
-			GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice()
+		DisplayMode dm = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice()
 				.getDisplayMode();
 		setBounds(100, 100, dm.getWidth(), dm.getHeight());
 		setLocationRelativeTo(null);
 
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setPreferredSize(new Dimension(1024, 768));
-		contentPaneLabel = new JPanel();
-		contentPaneLabel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPaneLabel.setLayout(null);
-		contentPaneLabel.setPreferredSize(new Dimension(1024, 768));
+		contentPane.setPreferredSize(WINDOW_SIZE);
 		contentPane.setLayout(null);
+		
+		contentPanePause = new JPanel();
+		contentPanePause.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanePause.setLayout(null);
+		contentPanePause.setPreferredSize(WINDOW_SIZE);
 
 		outerPanelLabel = new JPanel(new GridBagLayout());
 		outerPanelLabel.setBackground(Color.BLACK);
 		GridBagConstraints gbcLabel = new GridBagConstraints();
-		outerPanelLabel.add(contentPaneLabel, gbcLabel);
+		outerPanelLabel.add(contentPanePause, gbcLabel);
 
 		GridBagLayout gbl_outerPanel = new GridBagLayout();
 		gbl_outerPanel.columnWeights = new double[] {0.0};
@@ -325,11 +323,10 @@ public class Display extends JFrame implements GameListener {
 		GridBagConstraints gbc = new GridBagConstraints();
 		outerPanel.add(contentPane, gbc);
 
-		JLabel lab =
-			new JLabel(new ImageIcon(getClass().getResource("/res/Physikerduell-0.png")));
-		lab.setBounds(0, 0, 1024, 768);
+		JLabel lab = new JLabel(new ImageIcon(getClass().getResource("/res/Physikerduell-0.png")));
+		lab.setBounds(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 		lab.setVisible(true);
-		contentPaneLabel.add(lab);
+		contentPanePause.add(lab);
 
 		lblTeam1 = new JLabel("Team1");
 		lblTeam1.setFont(new Font("Dialog", Font.PLAIN, 36));
@@ -466,12 +463,12 @@ public class Display extends JFrame implements GameListener {
 		txtFTeam1.setForeground(Color.YELLOW);
 		txtFTeam1.setBackground(Color.DARK_GRAY);
 		txtFTeam1.setText("123");
+		txtFTeam1.setColumns(10);
 		txtFTeam1.setFocusable(false);
 		txtFTeam1.setHorizontalAlignment(SwingConstants.CENTER);
 		txtFTeam1.setFont(new Font("Dialog", Font.PLAIN, 30));
 		txtFTeam1.setBounds(105, 580, 90, 40);
 		contentPane.add(txtFTeam1);
-		txtFTeam1.setColumns(10);
 
 		lblAntwort3 = new JLabel("Antwort 3");
 		lblAntwort3.setBounds(10, 229, 700, 37);
@@ -512,4 +509,5 @@ public class Display extends JFrame implements GameListener {
 
 		setContentPane(outerPanelLabel);
 	}
+	
 }
