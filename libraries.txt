@@ -1,2 +1,4 @@
+The following libraries are used in the code:
+
 JavaZOOM:		JLayer v1.0.1
 cokeandcode:	EasyOgg v0.6
