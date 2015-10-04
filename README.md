@@ -19,6 +19,7 @@ lädt das Programm die Fragen aus dieser Datei. Alternativ kann im Programm auch
 dem Button "Fragenkatalog auswählen" eine Datei geladen werden.
 
 Zum Ändern von Sounds und Splashscreens:
+
 1. Die `.jar` in einem Programm öffnen -> Winrar/7zip
 2. Bei Physikerduell.jar/de/uni_muenster/physikerduell die entsprechenden Dateien (`.png`, `.mp3`...) ändern
 
