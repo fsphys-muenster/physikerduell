@@ -18,7 +18,10 @@ Ist die Datei "`fragen.csv`" im gleichen Ordner wie das Programm (`.jar`-Datei) 
 lädt das Programm die Fragen aus dieser Datei. Alternativ kann im Programm auch mit
 dem Button "Fragenkatalog auswählen" eine Datei geladen werden.
 
-Zum Ändern von Sounds und Splashscreens:
+## Buzzer-Modus
+Der Buzzer kann über eine (emulierte) Tastenkombination ausgelöst werden. Bisher implementiert ist dier Kombination: "control shift B"
+
+## Zum Ändern von Sounds und Splashscreens:
 
 1. Die `.jar` in einem Programm öffnen -> Winrar/7zip
 2. Bei Physikerduell.jar/de/uni_muenster/physikerduell die entsprechenden Dateien (`.png`, `.mp3`...) ändern
