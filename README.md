@@ -1,8 +1,8 @@
 # physikerduell
-Source code for the software used for the "Physikerduell" ("Physicists' Feud") which takes place every year during our Summer Festival.
+Source code for the software used for the “Physikerduell” (“Physicists’ Feud”) which takes place every year during our Summer Festival.
 
 ## Regeln des Physikerduells
-Siehe Ordner "`regelwerk`".
+Siehe Ordner `regelwerk`.
 
 ## Zum Ändern des Fragenkatalogs
 Die Fragen in einer regelkonformen (bezogen auf den CSV-Interpreter) Datei aufbereiten.
@@ -14,19 +14,17 @@ da es ja eine CSV-Datei ist!). Am leichtesten lassen sich solche Dateien erstell
 die Tabelle mit den Fragen, Antworten und Punkten wie beschrieben in LibreOffice bzw. Excel
 erstellt und dann als CSV-Datei exportiert.
 
-Ist die Datei "`fragen.csv`" im gleichen Ordner wie das Programm (`.jar`-Datei) enthalten,
+Ist die Datei `fragen.csv` im gleichen Ordner wie das Programm (`.jar`-Datei) enthalten,
 lädt das Programm die Fragen aus dieser Datei. Alternativ kann im Programm auch mit
-dem Button "Fragenkatalog auswählen" eine Datei geladen werden.
+dem Button „Fragenkatalog auswählen“ eine Datei geladen werden.
 
 ## Buzzer-Modus
-Der Buzzer kann über eine (emulierte) Tastenkombination ausgelöst werden. Bisher implementiert ist dier Kombination: "control shift B"
+Der Buzzer kann über eine (emulierte) Tastenkombination ausgelöst werden. Bisher implementiert ist die Kombination: <kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>B</kbd>.
 
 ## Zum Ändern von Sounds und Splashscreens:
-
-1. Die `.jar` in einem Programm öffnen -> Winrar/7zip
-2. Bei Physikerduell.jar/de/uni_muenster/physikerduell die entsprechenden Dateien (`.png`, `.mp3`...) ändern
+1. Die `.jar`-Datei in einem Programm öffnen → z.&nbsp;B. [7-Zip](http://www.7-zip.de/)
+2. Bei `Physikerduell.jar/de/uni_muenster/physikerduell` die entsprechenden Dateien (`.png`, `.mp3`, …) ändern
 
 ## TODO
-- Ein neues Design -> Animationen etc. ...
 - Jedes Jahr: Neuer Fragenkatalog
-
+- Ein neues Design → Animationen etc.
