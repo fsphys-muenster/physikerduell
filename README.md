@@ -19,7 +19,7 @@ lädt das Programm die Fragen aus dieser Datei. Alternativ kann im Programm auch
 dem Button „Fragenkatalog auswählen“ eine Datei geladen werden.
 
 ## Buzzer-Modus
-Der Buzzer kann über eine (emulierte) Tastenkombination ausgelöst werden. Bisher implementiert ist die Kombination: <kbd>Ctrl</kbd>&nbsp;<kbd>Shift</kbd>&nbsp;<kbd>B</kbd>.
+Der Buzzer kann über eine (emulierte) Tastenkombination ausgelöst werden. Bisher implementiert ist die Kombination:<br> <kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>B</kbd>.
 
 ## Zum Ändern von Sounds und Splashscreens:
 1. Die `.jar`-Datei in einem Programm öffnen → z.&nbsp;B. [7-Zip](http://www.7-zip.de/)
