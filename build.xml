@@ -12,9 +12,10 @@
                 <attribute name="Class-Path" value="."/>
             </manifest>
             <fileset dir="${dir.jarfile}/bin"/>
-            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/libs/easyogg.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/libs/jogg-0.0.7.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/libs/jorbis-0.0.15.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/libs/tinysound-1.1.1/lib/jorbis-0.0.17.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/libs/tinysound-1.1.1/lib/tritonus_share.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/libs/tinysound-1.1.1/lib/vorbisspi1.0.3.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/libs/tinysound-1.1.1/tinysound-1.1.1.jar"/>
         </jar>
     </target>
 </project>
