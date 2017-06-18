@@ -46,6 +46,7 @@ import de.uni_muenster.physikerduell.game.Question;
  * <li>12.06.2013</li>
  * <li>05.06.2014</li>
  * <li>18.06.2015</li>
+ * <li>20.06.2017</li>
  * </ul>
  * <p>
  * 
@@ -161,7 +162,6 @@ public class ControlPanel implements ActionListener, GameListener {
 		display.setUndecorated(true);
 		display.setAlwaysOnTop(!frmControl.isAlwaysOnTop());
 		display.setVisible(true);
-		display.setGame(game);
 	}
 	
 	private void resetGame(InputStream questionFile) throws GameException {
@@ -174,6 +174,10 @@ public class ControlPanel implements ActionListener, GameListener {
 		}
 		// Bedienoberfläche erhält Spiel-Updates
 		game.addListener(this);
+		// ControlPanel zurücksetzen
+		gameUpdate();
+		// Game-Objekt dem Anzeigefenster zuordnen
+		display.setGame(game);
 	}
 
 	/**
@@ -723,7 +727,7 @@ public class ControlPanel implements ActionListener, GameListener {
 		txtpnImpressum = new JTextPane();
 		txtpnImpressum.setFont(new Font("Dialog", Font.PLAIN, 13));
 		txtpnImpressum.setEditable(false);
-		txtpnImpressum.setText("Version 2015\t\t  Lutz Althüser, Simon May");
+		txtpnImpressum.setText("Version 2017\tSimon May");
 		txtpnImpressum.setBounds(512, 651, 496, 25);
 		frmControl.getContentPane().add(txtpnImpressum);
 
