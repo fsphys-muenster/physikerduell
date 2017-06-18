@@ -32,6 +32,7 @@ import javax.swing.JTextPane;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import kuusisto.tinysound.TinySound;
 import de.uni_muenster.physikerduell.game.Answer;
 import de.uni_muenster.physikerduell.game.Game;
 import de.uni_muenster.physikerduell.game.Game.RoundState;
@@ -64,7 +65,7 @@ public class ControlPanel implements ActionListener, GameListener {
 		private static final long serialVersionUID = 1L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Sound.playOgg("buzzer.ogg");
+			GameSound.playSound("buzzer.ogg");
 		}
 	};
 	private JFrame frmControl;
@@ -124,6 +125,7 @@ public class ControlPanel implements ActionListener, GameListener {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
+				TinySound.init();
 				try {
 					ControlPanel window = new ControlPanel();
 					window.frmControl.setVisible(true);
@@ -194,7 +196,7 @@ public class ControlPanel implements ActionListener, GameListener {
 		}
 		else if (e.getSource() == btnFalscheAntwort) {
 			game.wrongAnswer();
-			Sound.playOgg("wrong.ogg");
+			GameSound.playSound("wrong.ogg");
 		}
 		else if (e.getSource() == btnNaechsteFrage) {
 			int currIndex = game.getCurrentQuestionIndex();
@@ -285,7 +287,7 @@ public class ControlPanel implements ActionListener, GameListener {
 			if (e.getSource() == chkbx) {
 				boolean selected = chkbx.isSelected();
 				if (selected) {
-					Sound.playOgg("right.ogg");
+					GameSound.playSound("right.ogg");
 					if (game.getRoundState() == RoundState.ROUND_ENDED) {
 						currentQ.answer(i).setRevealed(true);
 					}

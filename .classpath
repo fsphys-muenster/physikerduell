@@ -9,8 +9,9 @@
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="libs/easyogg.jar"/>
-	<classpathentry kind="lib" path="libs/jogg-0.0.7.jar"/>
-	<classpathentry kind="lib" path="libs/jorbis-0.0.15.jar"/>
+	<classpathentry kind="lib" path="libs/tinysound-1.1.1/lib/jorbis-0.0.17.jar"/>
+	<classpathentry kind="lib" path="libs/tinysound-1.1.1/lib/tritonus_share.jar"/>
+	<classpathentry kind="lib" path="libs/tinysound-1.1.1/lib/vorbisspi1.0.3.jar"/>
+	<classpathentry kind="lib" path="libs/tinysound-1.1.1/tinysound-1.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

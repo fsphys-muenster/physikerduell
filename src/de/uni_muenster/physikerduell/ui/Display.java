@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javazoom.jl.player.Player;
+import kuusisto.tinysound.Music;
 import de.uni_muenster.physikerduell.game.Game;
 import de.uni_muenster.physikerduell.game.Game.RoundState;
 import de.uni_muenster.physikerduell.game.GameListener;
@@ -67,7 +67,7 @@ public class Display extends JFrame implements GameListener {
 	private Image team1;
 	private Image team2;
 	private Image noteam;
-	private Player introMusic;
+	private Music introMusic;
 	private boolean pause = true;
 	private Game game;
 	private LivesDisplay ldLeben;
@@ -254,7 +254,7 @@ public class Display extends JFrame implements GameListener {
 	public void playIntro() {
 		if (pause) {
 			if (introMusic == null) {
-				introMusic = Sound.playMP3("intro.mp3");
+				introMusic = GameSound.playMusic("intro.ogg");
 			}
 			else {
 				setContentPane(outerPanel);
@@ -264,7 +264,8 @@ public class Display extends JFrame implements GameListener {
 			}
 		}
 		else if (introMusic != null) {
-			introMusic.close();
+			introMusic.stop();
+			introMusic.unload();
 			introMusic = null;
 		}
 	}

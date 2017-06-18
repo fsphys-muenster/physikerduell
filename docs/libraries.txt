@@ -1,4 +1,5 @@
 The following libraries are used in the code:
 
-JavaZOOM:		JLayer v1.0.1
-cokeandcode:	EasyOgg v0.6
+TinySound v1.1.1 (including dependencies)
+http://finnkuusisto.github.com/TinySound/releases
+
