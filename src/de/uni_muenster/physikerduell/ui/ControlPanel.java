@@ -163,7 +163,7 @@ public class ControlPanel implements ActionListener, GameListener {
 		display.setAlwaysOnTop(!frmControl.isAlwaysOnTop());
 		display.setVisible(true);
 	}
-	
+
 	private void resetGame(InputStream questionFile) throws GameException {
 		game = new Game(questionFile);
 		game.setLogging(true);
@@ -266,7 +266,7 @@ public class ControlPanel implements ActionListener, GameListener {
 			}
 			catch (Exception ex) {
 				System.err.println("Error reading log file: " + ex);
-				JOptionPane.showMessageDialog(frmControl, "Could not read log file!", "File not found", 
+				JOptionPane.showMessageDialog(frmControl, "Could not read log file!", "File not found",
 						JOptionPane.WARNING_MESSAGE);
 			}
 		}
@@ -744,7 +744,7 @@ public class ControlPanel implements ActionListener, GameListener {
 		lblMultiplier.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblMultiplier.setBounds(814, 162, 85, 25);
 		frmControl.getContentPane().add(lblMultiplier);
-		
+
 		JPanel pRundenstatus = new JPanel();
 		pRundenstatus.setBounds(552, 280, 332, 90);
 		frmControl.getContentPane().add(pRundenstatus);
@@ -755,7 +755,7 @@ public class ControlPanel implements ActionListener, GameListener {
 		pRundenstatus.add(lblRundenstatus);
 		lblRundenstatus.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRundenstatus.setFont(new Font("Dialog", Font.BOLD, 11));
-		
+
 		roundStatus = new ButtonGroup();
 		rdbtnBuzzermodus = new JRadioButton("Buzzer-Modus");
 		rdbtnBuzzermodus.setBounds(10, 32, 133, 23);
@@ -781,11 +781,11 @@ public class ControlPanel implements ActionListener, GameListener {
 		roundStatus.add(rdbtnRundenende);
 		rdbtnRundenende.setEnabled(false);
 		pRundenstatus.add(rdbtnRundenende);
-		
+
 		btnOpenQuestions = new JButton("Fragenkatalog öffnen");
 		btnOpenQuestions.setBounds(514, 624, 200, 23);
 		frmControl.getContentPane().add(btnOpenQuestions);
-	
+
 		btnBuzzer = new JButton("Buzzer");
 		btnBuzzer.setBounds(895, 297, 109, 55);
 		frmControl.getContentPane().add(btnBuzzer);
