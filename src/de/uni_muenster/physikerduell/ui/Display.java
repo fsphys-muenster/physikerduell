@@ -295,12 +295,15 @@ public class Display extends JFrame implements GameListener {
 				getClass().getResource("/Physikerduell-1.png")));
 		setBackground(Color.BLACK);
 		setName("Physikerduell-Anzeige");
+		setTitle("Physikerduell");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setUndecorated(true);
 
+		setLocationRelativeTo(null);
 		DisplayMode dm = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice()
 				.getDisplayMode();
-		setBounds(100, 100, dm.getWidth(), dm.getHeight());
-		setLocationRelativeTo(null);
+		setBounds(0, 0, dm.getWidth(), dm.getHeight());
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

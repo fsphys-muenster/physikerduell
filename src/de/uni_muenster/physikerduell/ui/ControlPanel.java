@@ -51,8 +51,9 @@ import de.uni_muenster.physikerduell.game.Question;
  * </ul>
  * <p>
  * 
- * Die Klasse ControlPanel verwaltet die Spielanzeige und den Spielstand (Klassen Anzeige
- * und Game) und stellt eine Benutzeroberfläche zur Verwaltung des Spiels bereit.
+ * Die Klasse ControlPanel verwaltet die Spielanzeige und den Spielstand (Klassen
+ * <code>Display</code> und <code>Game</code>) und stellt eine Benutzeroberfläche zur
+ * Verwaltung des Spiels bereit.
  * 
  * @author Lutz Althüser
  * @author Simon May
@@ -128,6 +129,7 @@ public class ControlPanel implements ActionListener, GameListener {
 				TinySound.init();
 				try {
 					ControlPanel window = new ControlPanel();
+					window.display.setVisible(true);
 					window.frmControl.setVisible(true);
 				}
 				catch (GameException ex) {
@@ -139,13 +141,18 @@ public class ControlPanel implements ActionListener, GameListener {
 	}
 
 	/**
-	 * Konstruktion des ControlPanel.
+	 * Construction of the <code>ControlPanel</code>.
 	 * 
 	 * @throws GameException
 	 *             Falls während der Initialisierung der Klasse ein Fehler auftritt.
 	 */
 	public ControlPanel() throws GameException {
+		// create display window
+		display = new Display();
+		// create control panel window
 		initializeUI();
+		frmControl.setLocationRelativeTo(display);
+		frmControl.toFront();
 		// register key combo for buzzer sound (CTRL + SHIFT + B)
 		InputMap im = btnBuzzer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
 		im.put(KeyStroke.getKeyStroke("control shift B"), "play_buzzer");
@@ -158,12 +165,7 @@ public class ControlPanel implements ActionListener, GameListener {
 		catch (IOException ex) {
 			questionFile = getClass().getResourceAsStream(QUESTIONS_PATH_INT);
 		}
-		// create display window
-		display = new Display();
 		resetGame(questionFile);
-		display.setUndecorated(true);
-		display.setAlwaysOnTop(!frmControl.isAlwaysOnTop());
-		display.setVisible(true);
 	}
 
 	private void resetGame(InputStream questionFile) throws GameException {
@@ -259,7 +261,9 @@ public class ControlPanel implements ActionListener, GameListener {
 			}
 			catch (Exception ex) {
 				System.err.println("Error reading question file: " + ex);
-				JOptionPane.showMessageDialog(frmControl, "Could not read question file!");
+				JOptionPane.showMessageDialog(frmControl, "Could not read question file!\n"
+					+ "Error message: " + ex, "Unable to read question file",
+					JOptionPane.WARNING_MESSAGE);
 			}
 		}
 		else if (e.getSource() == btnOpenLog) {
@@ -268,8 +272,9 @@ public class ControlPanel implements ActionListener, GameListener {
 			}
 			catch (Exception ex) {
 				System.err.println("Error reading log file: " + ex);
-				JOptionPane.showMessageDialog(frmControl, "Could not read log file!", "File not found",
-						JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(frmControl, "Could not read log file!\n"
+					+ "Error message: " + ex, "Unable to read log file",
+					JOptionPane.WARNING_MESSAGE);
 			}
 		}
 		// RadioButtons (rounds)
@@ -399,8 +404,9 @@ public class ControlPanel implements ActionListener, GameListener {
 		txtTeam2Name.setBackground(Color.WHITE);
 		String team1Name = txtTeam1Name.getText();
 		String team2Name = txtTeam2Name.getText();
-		boolean valid = !team1Name.isEmpty() && !team2Name.isEmpty() && team1Name.length() <= MAX_NAME_LEN
-				&& team2Name.length() <= MAX_NAME_LEN;
+		boolean valid = !team1Name.isEmpty() && !team2Name.isEmpty()
+			&& team1Name.length() <= MAX_NAME_LEN
+			&& team2Name.length() <= MAX_NAME_LEN;
 		if (valid) {
 			game.setTeam1Name(team1Name);
 			game.setTeam2Name(team2Name);
@@ -455,7 +461,7 @@ public class ControlPanel implements ActionListener, GameListener {
 		frmControl = new JFrame();
 		frmControl.setIconImage(Toolkit.getDefaultToolkit().getImage(
 			getClass().getResource("/Physikerduell-0.png")));
-		frmControl.setAlwaysOnTop(true);
+//		frmControl.setAlwaysOnTop(true);
 		frmControl.setTitle("Physikerduell – Bedienoberfläche");
 		frmControl.setResizable(false);
 		frmControl.getContentPane().setBackground(Color.WHITE);
@@ -591,7 +597,7 @@ public class ControlPanel implements ActionListener, GameListener {
 		btnStart.setBounds(10, 150, 390, 50);
 		frmControl.getContentPane().add(btnStart);
 
-		btnAbspannWechsel = new JButton("Abspann");
+		btnAbspannWechsel = new JButton("Abspann/Pause");
 		btnAbspannWechsel.setEnabled(false);
 		btnAbspannWechsel.setBounds(10, 211, 390, 50);
 		frmControl.getContentPane().add(btnAbspannWechsel);
