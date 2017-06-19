@@ -61,7 +61,7 @@ public class Game {
 	 * empty columns or the end of the file.
 	 * 
 	 * @param questionFile
-	 *            A stream from which the CSV file's characters are read (UTF-8)
+	 *            A stream from which the CSV file’s characters are read (UTF-8)
 	 * @throws GameException
 	 *             If the question file cannot be read or is invalid
 	 */
@@ -102,9 +102,16 @@ public class Game {
 				}
 			}
 		}
-		// If last line wasn't empty, the question still has to be added to the list
+		// If last line wasn’t empty, the question still has to be added to the list
 		if (!questionRow) {
 			questions.add(new Question(questionText, answers));
+		}
+		// check if all questions have enough answers
+		for (Question question : questions) {
+			if (question.answerCount() < MAX_ANSWERS) {
+				throw new GameException("Some questions don’t have enough answers "
+					+ "(" + MAX_ANSWERS + ")!");
+			}
 		}
 	}
 
@@ -143,7 +150,7 @@ public class Game {
 	/**
 	 * Returns the index of the question which is currently selected.
 	 * 
-	 * @return The current question's index
+	 * @return The current question’s index
 	 */
 	public int getCurrentQuestionIndex() {
 		return currentQuestionIndex;
@@ -180,7 +187,7 @@ public class Game {
 	 * Returns the question specified by its numerical index.
 	 * 
 	 * @param index
-	 *            The question's index (has to be a valid question index, i.e. &ge; 0 and
+	 *            The question’s index (has to be a valid question index, i.e. &ge; 0 and
 	 *            &lt; questionCount())
 	 * @return The corresponding question
 	 */
@@ -347,7 +354,7 @@ public class Game {
 		// swap teams when given a wrong answer during buzzer mode
 		if (state == BUZZER) {
 			currentTeam = otherTeam();
-			// if other team had already revealed an answer, it's their turn
+			// if other team had already revealed an answer, it’s their turn
 			if (revealedAnswers() == 1) {
 				setRoundState(NORMAL);
 			}
@@ -434,7 +441,7 @@ public class Game {
 	 * Sets the current question by specifying its numerical index.
 	 * 
 	 * @param currentQuestionIndex
-	 *            The new current question's index (has to be a valid question index, i.e.
+	 *            The new current question’s index (has to be a valid question index, i.e.
 	 *            &ge; 0 and &lt; questionCount())
 	 */
 	public void setCurrentQuestionIndex(int currentQuestionIndex) {
@@ -627,7 +634,7 @@ public class Game {
 
 	/**
 	 * 
-	 * Updates the current round's accumulated score.
+	 * Updates the current round’s accumulated score.
 	 */
 	private void updateCurrentScore() {
 		Question curr = currentQuestion();
@@ -659,7 +666,7 @@ public class Game {
 
 	/**
 	 * 
-	 * Ends the current round and updates the teams' scores.
+	 * Ends the current round and updates the teams’ scores.
 	 * 
 	 * @param stealSuccess
 	 *            Whether points have successfully been stolen
@@ -749,7 +756,7 @@ public class Game {
 		 */
 		NORMAL,
 		/**
-		 * The currently selected team can steal the current round's points by answering
+		 * The currently selected team can steal the current round’s points by answering
 		 * correctly.
 		 */
 		STEALING_POINTS,

@@ -25,7 +25,7 @@ public class Question {
 	 * Neither argument can be <code>null</code>.
 	 * 
 	 * @param question
-	 *            The question's text
+	 *            The question’s text
 	 * @param answers
 	 *            All of the question's possible answers
 	 */
@@ -42,7 +42,7 @@ public class Question {
 	/**
 	 * Returns the actual question in text form.
 	 * 
-	 * @return This question's text
+	 * @return This question’s text
 	 */
 	public String text() {
 		return text;
@@ -53,7 +53,7 @@ public class Question {
 	 * Answers are sorted by their point value.
 	 * 
 	 * @param index
-	 *            The answer's index
+	 *            The answer’s index
 	 * @return An Answer to this question corresponding to the given index
 	 */
 	public Answer answer(int index) {
@@ -69,7 +69,7 @@ public class Question {
 	 * <code>index</code>.
 	 * 
 	 * @param index
-	 *            The answer's index
+	 *            The answer’s index
 	 * @return An answer in text form to this question corresponding to the given index
 	 */
 	public String answerText(int index) {
@@ -81,7 +81,7 @@ public class Question {
 	 * <code>index</code>.
 	 * 
 	 * @param index
-	 *            The answer's index
+	 *            The answer’s index
 	 * @return The score of an answer score to this question corresponding to the given
 	 *         index
 	 */
