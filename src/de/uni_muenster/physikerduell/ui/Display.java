@@ -85,9 +85,9 @@ public class Display extends JFrame implements GameListener {
 	public Display(Game game) {
 		setGame(game);
 		try {
-			team1 = ImageIO.read(getClass().getResource("/res/Physikerduell-21.png"));
-			team2 = ImageIO.read(getClass().getResource("/res/Physikerduell-22.png"));
-			noteam = ImageIO.read(getClass().getResource("/res/Physikerduell-1.png"));
+			team1 = ImageIO.read(getClass().getResource("/Physikerduell-21.png"));
+			team2 = ImageIO.read(getClass().getResource("/Physikerduell-22.png"));
+			noteam = ImageIO.read(getClass().getResource("/Physikerduell-1.png"));
 		}
 		catch (IOException ex) {
 			System.err.println("Error loading images: " + ex);
@@ -290,9 +290,9 @@ public class Display extends JFrame implements GameListener {
 	private void initializeUI() {
 		contentPane = new ImagePanel();
 		setIconImage(Toolkit.getDefaultToolkit().getImage(
-				getClass().getResource("/res/Physikerduell-0.png")));
+				getClass().getResource("/Physikerduell-0.png")));
 		contentPane.setImage(Toolkit.getDefaultToolkit().getImage(
-				getClass().getResource("/res/Physikerduell-1.png")));
+				getClass().getResource("/Physikerduell-1.png")));
 		setBackground(Color.BLACK);
 		setName("Physikerduell-Anzeige");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -324,7 +324,7 @@ public class Display extends JFrame implements GameListener {
 		GridBagConstraints gbc = new GridBagConstraints();
 		outerPanel.add(contentPane, gbc);
 
-		JLabel lab = new JLabel(new ImageIcon(getClass().getResource("/res/Physikerduell-0.png")));
+		JLabel lab = new JLabel(new ImageIcon(getClass().getResource("/Physikerduell-0.png")));
 		lab.setBounds(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 		lab.setVisible(true);
 		contentPanePause.add(lab);

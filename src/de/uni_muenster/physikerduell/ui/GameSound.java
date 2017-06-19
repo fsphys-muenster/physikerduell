@@ -17,7 +17,7 @@ public class GameSound {
 	 *            Audio file name (resource in the “res” directory)
 	 */
 	public static Music playMusic(String name) {
-		String path = "/res/" + name;
+		String path = "/" + name;
 		Music music = TinySound.loadMusic(path);
 		music.play(false);
 		return music;
@@ -31,7 +31,7 @@ public class GameSound {
 	 *            Audio file name (resource in the “res” directory)
 	 */
 	public static Sound playSound(String name) {
-		String path = "/res/" + name;
+		String path = "/" + name;
 		Sound sound = sounds.get(path);
 		if (sound == null) {
 			sound = TinySound.loadSound(path);

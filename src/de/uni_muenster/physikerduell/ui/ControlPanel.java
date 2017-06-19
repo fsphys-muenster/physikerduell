@@ -60,7 +60,7 @@ import de.uni_muenster.physikerduell.game.Question;
 public class ControlPanel implements ActionListener, GameListener {
 
 	private static final String QUESTIONS_PATH_EXT = "fragen.csv";
-	private static final String QUESTIONS_PATH_INT = "/res/fragen.csv";
+	private static final String QUESTIONS_PATH_INT = "/fragen.csv";
 	private static final Action PLAY_BUZZER = new AbstractAction() {
 		private static final long serialVersionUID = 1L;
 		@Override
@@ -454,7 +454,7 @@ public class ControlPanel implements ActionListener, GameListener {
 	private void initializeUI() {
 		frmControl = new JFrame();
 		frmControl.setIconImage(Toolkit.getDefaultToolkit().getImage(
-			getClass().getResource("/res/Physikerduell-0.png")));
+			getClass().getResource("/Physikerduell-0.png")));
 		frmControl.setAlwaysOnTop(true);
 		frmControl.setTitle("Physikerduell – Bedienoberfläche");
 		frmControl.setResizable(false);
