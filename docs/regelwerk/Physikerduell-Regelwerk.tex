@@ -1,11 +1,11 @@
-\documentclass[a4paper, 12pt, pagesize, headlines=2.1, headsepline, german, ngerman]{scrartcl}
+\documentclass[a4paper, 12pt, headlines=2.1, headsepline, ngerman]{scrartcl}
 
 \usepackage{iftex}
 \ifLuaTeX
 	\usepackage{fontspec}
-	\defaultfontfeatures{Ligatures=TeX}
 	\usepackage{polyglossia}
 	\setmainlanguage{german}
+	\usepackage{selnolig}
 \else
 	\usepackage{babel}
 	\usepackage[T1]{fontenc}
@@ -13,11 +13,9 @@
 	\usepackage{lmodern}
 \fi
 
-\usepackage{fixltx2e}
 \usepackage{microtype}
-\usepackage{selnolig}
 \usepackage{csquotes}
-\usepackage{scrpage2}
+\usepackage{scrlayer-scrpage}
 \usepackage[unicode]{hyperref}
 
 \MakeOuterQuote{"}
@@ -26,32 +24,56 @@
 % right column
 \ohead[]{Fachschaft Physik der WWU\\Lutz Althüser, Simon May}
 % left column
-\ihead[]{Physikerduell Regelwerk\\2015}
+\ihead[]{Physikerduell-Regelwerk\\2017}
 \pagestyle{scrheadings}
 % -- header end
 
 \begin{document}
-\section*{Physikerduell Regelwerk}
+
+\section*{Regelwerk des Physikerduells}
+Siehe auch \url{https://de.wikipedia.org/wiki/Familien-Duell}.
 
 \subsection*{Aufbau}
-Für das Physikerduell wird ein Moderator benötigt, der Gäste und Publikum durch die Show führt und die Entscheidungsmacht über die Gültigkeit von Antworten besitzt. Für den Eins-gegen-Eins-Part wird eine Klingel, ein Button oder Ähnliches benötigt. Das Spiel wird über ein Computerprogramm visualisiert und von einer darin erfahrenen Person administriert.
+Für das Physikerduell wird ein Moderator benötigt, der Gäste und Publikum durch die Show führt und die Entscheidungsmacht über die Gültigkeit von Antworten besitzt.
+Für den Eins-gegen-Eins-Part wird eine Klingel, ein Button oder Ähnliches benötigt.
+Das Spiel wird über ein Computerprogramm visualisiert und von einer darin erfahrenen Person administriert.
 
 \subsection*{Die Teams}
-Es werden zwei oder mehr Teams von fünf Personen gebildet. Jedes dieser Teams besteht aus Mitgliedern einer Arbeitsgruppe und im optimalen Fall dem Professor derselben.
+Es werden zwei oder mehr Teams von fünf Personen gebildet.
+Jedes dieser Teams besteht aus Mitgliedern einer Arbeitsgruppe und im optimalen Fall dem Professor derselben.
 
 Gibt es mehr als zwei Teams, werden zunächst die Gruppensieger und anschließend in einem "Finale" der Gesamtsieger ermittelt.
 
 \subsection*{Spielablauf}
-Es gibt 4 normale Runden und die Finalrunde. Für jeder dieser Runden gelten spezielle Regeln bezüglich der Punktezahlen und Antwortmöglichkeiten.
+Es gibt vier normale Runden und die Finalrunde.
+Für jeder dieser Runden gelten spezielle Regeln bezüglich der Punktzahlen und Antwortmöglichkeiten.
 \begin{itemize}
-	\item Runden 1 und 2: Es gilt, die sechs häufigsten Antworten zu finden. Gespielt wird um die einfache Punktzahl.
-	\item Runde 3: Es gilt, die fünf häufigsten Antworten zu finden. Gespielt wird um die doppelte Punktzahl.
-	\item Runde 4: Es gilt, die vier häufigsten Antworten zu finden. Gespielt wird um die doppelte Punktzahl.
-	\item Finale: Es gilt, die drei häufigsten Antworten zu finden. Gespielt wird um die dreifache Punktzahl. Werden in dieser Runde Punkte gestohlen, werden die Punkte der Antwort, mit der gestohlen wurde, ebenfalls zu den Punkten des stehlenden Teams hinzugefzählt (vgl.\,u.).
+	\item Runden 1 und 2:
+	Es gilt, die \emph{sechs häufigsten} Antworten zu finden.
+	Gespielt wird um die \emph{einfache Punktzahl}.
+	\item Runde~3: Es gilt, die \emph{fünf häufigsten} Antworten zu finden.
+	Gespielt wird um die \emph{doppelte Punktzahl}.
+	\item Runde~4: Es gilt, die \emph{vier häufigsten} Antworten zu finden.
+	Gespielt wird um die \emph{doppelte Punktzahl}.
+	\item Finale: Es gilt, die \emph{drei häufigsten} Antworten zu finden.
+	Gespielt wird um die \emph{dreifache Punktzahl}.
+	Werden in dieser Runde Punkte gestohlen, werden die Punkte der Antwort, mit der gestohlen wurde, ebenfalls zu den Punkten des stehlenden Teams hinzugezählt (vgl.\,u.).
 \end{itemize}
-Zu Beginn jeder Runde kommt ein anderes Teammitglied nach vorne an den "Buzzertisch". Dort kämpfen die Vertreter der beiden Teams darum, bei einer Frage die erste Antwort geben zu dürfen. Derjenige, der zuerst den Buzzer berührt, darf zuerst antworten. Hat dieser die Top-Antwort (höchste Punktzahl) gegeben, geht die Runde an seine Arbeitsgruppe. Wenn er nicht die Top-Antwort gegeben hat, darf der Gegenspieler eine Antwort geben. Gibt diese Antwort mehr Punkte, so geht die Runde an diese Gruppe. Geben beide Teams eine falsche Antwort, wird dieses Vorgehen so lange fortgesetzt, bis die Runde an ein Team geht.
+Zu Beginn jeder Runde kommt ein anderes Teammitglied nach vorne an den "Buzzer-Tisch".
+Dort kämpfen die Vertreter der beiden Teams darum, bei einer Frage die erste Antwort geben zu dürfen.
+Derjenige, der zuerst den Buzzer berührt, darf zuerst antworten.
+Hat dieser die Top-Antwort (höchste Punktzahl) gegeben, geht die Runde an seine Arbeitsgruppe.
+Wenn er nicht die Top-Antwort gegeben hat, darf der Gegenspieler eine Antwort geben.
+Gibt diese Antwort mehr Punkte, so geht die Runde an diese Gruppe.
+Geben beide Teams eine falsche Antwort, wird dieses Vorgehen so lange fortgesetzt, bis die Runde an ein Team geht.
 
-Von jetzt an wird die zuvor ausgewählte Arbeitsgruppe weiter durchgefragt. Sobald zwei falsche Antworten gegeben wurden, darf sich die andere Arbeitsgruppe beraten. Ist schließlich auch die 3.\ falsche Antwort gegeben, so ist es der anderen Arbeitsgruppe nun möglich, die Punkte zu "klauen". Dazu sagt jeder aus der Gruppe eine Antwort und der Gruppenleiter entscheidet über die Antwort, die eingeloggt werden soll. Sollte diese Antwort auf der Liste sein, so konnten alle Punkte geklaut werden, d.\,h.\ die während der Runde erspielten Punkte gehen an das andere Team.\footnote{Die Antwort, mit der die Punkte gestohlen werden, zählt allerdings nicht für die Punktzahl des stehlenden Teams -- außer in der letzten Runde!} Andernfalls behält das vorher spielende Team die erspielten Punkte. Wird die benötigte Zahl an Antworten (s.\,o.) gefunden, erhält das spielende Team einfach alle erspielten Punkte.
+Von jetzt an wird die zuvor ausgewählte Arbeitsgruppe weiter durchgefragt.
+Sobald zwei falsche Antworten gegeben wurden, darf sich die andere Arbeitsgruppe beraten.
+Ist schließlich auch die 3.~falsche Antwort gegeben, so ist es der anderen Arbeitsgruppe nun möglich, die Punkte zu "klauen".
+Dazu sagt jeder aus der Gruppe eine Antwort und der Gruppenleiter entscheidet über die Antwort, die eingeloggt werden soll.
+Sollte diese Antwort auf der Liste sein, so konnten alle Punkte geklaut werden, d.\,h.\ die während der Runde erspielten Punkte gehen an das andere Team.\footnote{Die Antwort, mit der die Punkte gestohlen werden, zählt allerdings nicht für die Punktzahl des stehlenden Teams – außer in der letzten Runde!}
+Andernfalls behält das vorher spielende Team die erspielten Punkte.
+Wird die benötigte Zahl an Antworten (s.\,o.) gefunden, erhält das spielende Team einfach alle erspielten Punkte.
 
 Damit ist die Runde beendet. Es wird wieder per Buzzer über das startende Team entschieden und es folgt die nächste Runde nach dem gleichen Ablauf.
 
