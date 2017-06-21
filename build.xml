@@ -1,21 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project default="create_run_jar" name="Create Runnable Jar for Project Physikerduell">
-    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
-    <!--ANT 1.7 is required                                        -->
-    <!--define folder properties-->
-    <property name="dir.buildfile" value="."/>
-    <property name="dir.jarfile" value="${dir.buildfile}"/>
-    <target name="create_run_jar">
+<project basedir="." default="create_run_jar" name="Physikerduell">
+    <property name="source" value="1.8"/>
+    <property name="target" value="1.8"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="dir.jarfile" value="."/>
+    <path id="Physikerduell.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="libs/tinysound-1.1.1/lib/jorbis-0.0.17.jar"/>
+        <pathelement location="libs/tinysound-1.1.1/lib/tritonus_share.jar"/>
+        <pathelement location="libs/tinysound-1.1.1/lib/vorbisspi1.0.3.jar"/>
+        <pathelement location="libs/tinysound-1.1.1/tinysound-1.1.1.jar"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy todir="bin">
+            <fileset dir="res"/>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="init" name="build">
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="Physikerduell.classpath"/>
+        </javac>
+    </target>
+    <!-- create a runnable .jar file -->
+    <target depends="build" name="create_run_jar">
         <jar destfile="${dir.jarfile}/Physikerduell.jar" filesetmanifest="mergewithoutmain">
             <manifest>
                 <attribute name="Main-Class" value="de.uni_muenster.physikerduell.ui.ControlPanel"/>
                 <attribute name="Class-Path" value="."/>
             </manifest>
-            <fileset dir="${dir.jarfile}/bin"/>
-            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/libs/tinysound-1.1.1/lib/jorbis-0.0.17.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/libs/tinysound-1.1.1/lib/tritonus_share.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/libs/tinysound-1.1.1/lib/vorbisspi1.0.3.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/libs/tinysound-1.1.1/tinysound-1.1.1.jar"/>
+            <fileset dir="bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="libs/tinysound-1.1.1/lib/jorbis-0.0.17.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="libs/tinysound-1.1.1/lib/tritonus_share.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="libs/tinysound-1.1.1/lib/vorbisspi1.0.3.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="libs/tinysound-1.1.1/tinysound-1.1.1.jar"/>
         </jar>
     </target>
 </project>
