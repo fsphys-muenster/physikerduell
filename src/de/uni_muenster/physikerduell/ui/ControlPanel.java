@@ -2,7 +2,10 @@ package de.uni_muenster.physikerduell.ui;
 
 import java.awt.Color;
 import java.awt.Desktop;
+import java.awt.DisplayMode;
 import java.awt.Font;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -50,10 +53,9 @@ import de.uni_muenster.physikerduell.game.Question;
  * <li>20.06.2017</li>
  * </ul>
  * <p>
- * 
- * Die Klasse ControlPanel verwaltet die Spielanzeige und den Spielstand (Klassen
- * <code>Display</code> und <code>Game</code>) und stellt eine Benutzeroberfläche zur
- * Verwaltung des Spiels bereit.
+ * The class ControlPanel manages the game display and the game state (classes
+ * {@link Display} and {@link Game}) and provides a user interface to manage
+ * the game.
  * 
  * @author Lutz Althüser
  * @author Simon May
@@ -134,6 +136,7 @@ public class ControlPanel implements ActionListener, GameListener {
 				}
 				catch (GameException ex) {
 					System.err.println("Game could not be started: " + ex);
+					ex.printStackTrace();
 					System.exit(1);
 				}
 			}
@@ -141,14 +144,27 @@ public class ControlPanel implements ActionListener, GameListener {
 	}
 
 	/**
-	 * Construction of the <code>ControlPanel</code>.
+	 * Construction of the {@link ControlPanel}.
 	 * 
 	 * @throws GameException
-	 *             Falls während der Initialisierung der Klasse ein Fehler auftritt.
+	 *             If an error occurs during the initialization of this class.
 	 */
 	public ControlPanel() throws GameException {
+		GraphicsDevice[] screens = GraphicsEnvironment.getLocalGraphicsEnvironment()
+			.getScreenDevices();
 		// create display window
-		display = new Display();
+		// put the full-screen display on the last screen
+		display = new Display(screens.length - 1);
+		GraphicsDevice lastScreen = screens[screens.length - 1];
+		DisplayMode dm = lastScreen.getDisplayMode();
+		display.setBounds(0, 0, dm.getWidth(), dm.getHeight());
+		display.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		// use full-screen exclusive mode for the display on Linux
+		// this doesn’t work on Windows, because the display and the control panel can’t
+		// be used at the same time if one of them is in full-screen mode
+		if (System.getProperty("os.name").toLowerCase().contains("linux")) {
+			lastScreen.setFullScreenWindow(display);
+		}
 		// create control panel window
 		initializeUI();
 		frmControl.setLocationRelativeTo(display);
@@ -185,7 +201,7 @@ public class ControlPanel implements ActionListener, GameListener {
 	}
 
 	/**
-	 * ActionListener für Buttons und Textfelder.
+	 * {@link ActionListener} for buttons and text fields.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -438,7 +454,7 @@ public class ControlPanel implements ActionListener, GameListener {
 	 * 
 	 * @param name
 	 *            The name of the field
-	 * @return The field's value, or null if the field was not found or could not be
+	 * @return The field’s value, or null if the field was not found or could not be
 	 *         accessed.
 	 */
 	private Object getComponentByName(String name) {
@@ -452,16 +468,14 @@ public class ControlPanel implements ActionListener, GameListener {
 	}
 
 	/**
-	 * <strong>(Automatisch generiert!)</strong>
+	 * <strong>(Automatically generated!)</strong>
 	 * <p>
-	 * Hilfsmethode des Konstruktors. Erzeugt die Elemente der
-	 * GUI.
+	 * Helper method for the constructor. Generates the GUI elements.
 	 */
 	private void initializeUI() {
 		frmControl = new JFrame();
 		frmControl.setIconImage(Toolkit.getDefaultToolkit().getImage(
 			getClass().getResource("/Physikerduell-0.png")));
-//		frmControl.setAlwaysOnTop(true);
 		frmControl.setTitle("Physikerduell – Bedienoberfläche");
 		frmControl.setResizable(false);
 		frmControl.getContentPane().setBackground(Color.WHITE);

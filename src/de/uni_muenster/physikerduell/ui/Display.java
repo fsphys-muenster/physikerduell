@@ -2,9 +2,7 @@ package de.uni_muenster.physikerduell.ui;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.DisplayMode;
 import java.awt.Font;
-import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -72,8 +70,8 @@ public class Display extends JFrame implements GameListener {
 	private Game game;
 	private LivesDisplay ldLeben;
 	
-	public Display() {
-		this(null);
+	public Display(int screen) {
+		this(null, screen);
 	}
 	
 	/**
@@ -82,7 +80,7 @@ public class Display extends JFrame implements GameListener {
 	 * @param game
 	 *            Ein Objekt vom Typ Game.
 	 */
-	public Display(Game game) {
+	public Display(Game game, int screen) {
 		setGame(game);
 		try {
 			team1 = ImageIO.read(getClass().getResource("/Physikerduell-21.png"));
@@ -298,12 +296,7 @@ public class Display extends JFrame implements GameListener {
 		setTitle("Physikerduell");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setUndecorated(true);
-
 		setLocationRelativeTo(null);
-		DisplayMode dm = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice()
-				.getDisplayMode();
-		setBounds(0, 0, dm.getWidth(), dm.getHeight());
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
