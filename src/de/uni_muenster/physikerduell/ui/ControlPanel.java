@@ -205,43 +205,44 @@ public class ControlPanel implements ActionListener, GameListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnStart) {
+		Object source = e.getSource();
+		if (source == btnStart) {
 			btnAbspannWechsel.setEnabled(true);
 			display.playIntro();
 		}
-		else if (e.getSource() == btnAbspannWechsel) {
+		else if (source == btnAbspannWechsel) {
 			display.playOutro();
 		}
-		else if (e.getSource() == btnFalscheAntwort) {
+		else if (source == btnFalscheAntwort) {
 			game.wrongAnswer();
 			GameSound.playSound("wrong.ogg");
 		}
-		else if (e.getSource() == btnNaechsteFrage) {
+		else if (source == btnNaechsteFrage) {
 			int currIndex = game.getCurrentQuestionIndex();
 			if (currIndex + 1 < game.questionCount()) {
 				// introduce next question
 				game.setCurrentQuestionIndex(currIndex + 1);
 			}
 		}
-		else if (e.getSource() == rdbtnTeam1) {
+		else if (source == rdbtnTeam1) {
 			game.setCurrentTeam(1);
 		}
-		else if (e.getSource() == rdbtnTeam2) {
+		else if (source == rdbtnTeam2) {
 			game.setCurrentTeam(2);
 		}
-		else if (e.getSource() == rdbtnNoTeam) {
+		else if (source == rdbtnNoTeam) {
 			game.setCurrentTeam(Game.NO_TEAM);
 		}
-		else if (e.getSource() == txtTeam1Name || e.getSource() == txtTeam2Name) {
+		else if (source == txtTeam1Name || source == txtTeam2Name) {
 			checkTeamNameInput();
 		}
-		else if (e.getSource() == txtTeam1GPunkte) {
+		else if (source == txtTeam1GPunkte) {
 			game.setTeam1Score(Integer.parseInt(txtTeam1GPunkte.getText()));
 		}
-		else if (e.getSource() == txtTeam2GPunkte) {
+		else if (source == txtTeam2GPunkte) {
 			game.setTeam2Score(Integer.parseInt(txtTeam2GPunkte.getText()));
 		}
-		else if (e.getSource() == txtALeben) {
+		else if (source == txtALeben) {
 			int input = Integer.parseInt(txtALeben.getText());
 			if (input >= 0 && input <= 3) {
 				game.setCurrentLives(input);
@@ -250,23 +251,23 @@ public class ControlPanel implements ActionListener, GameListener {
 				txtALeben.setText(Integer.toString(input));
 			}
 		}
-		else if (e.getSource() == rdbtnBuzzermodus) {
+		else if (source == rdbtnBuzzermodus) {
 			game.setRoundState(RoundState.BUZZER);
 		}
-		else if (e.getSource() == rdbtnNormaleRunde) {
+		else if (source == rdbtnNormaleRunde) {
 			game.setRoundState(RoundState.NORMAL);
 		}
-		else if (e.getSource() == rdbtnPunkteklau) {
+		else if (source == rdbtnPunkteklau) {
 			game.setRoundState(RoundState.STEALING_POINTS);
 		}
-		else if (e.getSource() == cbFragenauswahl) {
+		else if (source == cbFragenauswahl) {
 			int selected = cbFragenauswahl.getSelectedIndex();
 			// choose selected question if selected question changed
 			if (selected >= 0 && selected != game.getCurrentQuestionIndex()) {
 				game.setCurrentQuestionIndex(selected);
 			}
 		}
-		else if (e.getSource() == btnOpenQuestions) {
+		else if (source == btnOpenQuestions) {
 			try {
 				JFileChooser chooser = new JFileChooser(".");
 				int returnVal = chooser.showOpenDialog(this.display);
@@ -282,7 +283,7 @@ public class ControlPanel implements ActionListener, GameListener {
 					JOptionPane.WARNING_MESSAGE);
 			}
 		}
-		else if (e.getSource() == btnOpenLog) {
+		else if (source == btnOpenLog) {
 			try {
 				Desktop.getDesktop().open(new File(GameLog.LOG_FILE_PATH));
 			}
@@ -296,7 +297,7 @@ public class ControlPanel implements ActionListener, GameListener {
 		// RadioButtons (rounds)
 		for (int i = 1; i <= Game.NUM_ROUNDS; i++) {
 			JRadioButton rdo = (JRadioButton) getComponentByName("rdbtnRunde" + i);
-			if (e.getSource().equals(rdo)) {
+			if (source.equals(rdo)) {
 				game.setCurrentRound(i);
 				break;
 			}
@@ -305,7 +306,7 @@ public class ControlPanel implements ActionListener, GameListener {
 		for (int i = 0; i < Game.MAX_ANSWERS; i++) {
 			JCheckBox chkbx = (JCheckBox) getComponentByName("chckbxAntwort" + (i + 1));
 			Question currentQ = game.currentQuestion();
-			if (e.getSource() == chkbx) {
+			if (source == chkbx) {
 				boolean selected = chkbx.isSelected();
 				if (selected) {
 					GameSound.playSound("right.ogg");
@@ -358,11 +359,14 @@ public class ControlPanel implements ActionListener, GameListener {
 		switch (currTeam) {
 		case 1:
 			activeTeam.setSelected(rdbtnTeam1.getModel(), true);
+			btnFalscheAntwort.setEnabled(true);
 			break;
 		case 2:
 			activeTeam.setSelected(rdbtnTeam2.getModel(), true);
+			btnFalscheAntwort.setEnabled(true);
 			break;
 		default:
+			btnFalscheAntwort.setEnabled(false);
 			activeTeam.setSelected(rdbtnNoTeam.getModel(), true);
 			break;
 		}
@@ -438,7 +442,6 @@ public class ControlPanel implements ActionListener, GameListener {
 		txtTeam1GPunkte.setEnabled(valid);
 		txtTeam2GPunkte.setEnabled(valid);
 		cbFragenauswahl.setEnabled(valid);
-		btnFalscheAntwort.setEnabled(valid);
 		btnNaechsteFrage.setEnabled(valid);
 		btnStart.setEnabled(valid);
 		rdbtnBuzzermodus.setEnabled(valid);
