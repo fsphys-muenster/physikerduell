@@ -13,9 +13,6 @@ import javax.swing.JLabel;
  * 
  */
 public class GradientLabel extends JLabel {
-
-	private static final long serialVersionUID = 4103606858291583711L;
-
 	public GradientLabel() {
 		super();
 	}

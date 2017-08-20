@@ -30,8 +30,6 @@ import de.uni_muenster.physikerduell.game.Question;
  * @author Simon May
  */
 public class Display extends JFrame implements GameListener {
-
-	private static final long serialVersionUID = 1L;
 	private static final int WINDOW_WIDTH = 1024;
 	private static final int WINDOW_HEIGHT = 768;
 	private static final Dimension WINDOW_SIZE = new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT);

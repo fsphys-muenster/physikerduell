@@ -45,7 +45,8 @@ import de.uni_muenster.physikerduell.game.GameLog;
 import de.uni_muenster.physikerduell.game.Question;
 
 /**
- * Hauptklasse des Physikerduells der Fachschaft Physik an der WWU Münster am
+ * Main class of the “Physikerduell” (“Physicist’s Feud”) by the Physics Student
+ * Council at WWU Münster. This program has been used for the Physikerduell on:
  * <ul>
  * <li>12.06.2013</li>
  * <li>05.06.2014</li>
@@ -61,11 +62,9 @@ import de.uni_muenster.physikerduell.game.Question;
  * @author Simon May
  */
 public class ControlPanel implements ActionListener, GameListener {
-
 	private static final String QUESTIONS_PATH_EXT = "fragen.csv";
 	private static final String QUESTIONS_PATH_INT = "/fragen.csv";
 	private static final Action PLAY_BUZZER = new AbstractAction() {
-		private static final long serialVersionUID = 1L;
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			GameSound.playSound("buzzer.ogg");
@@ -169,10 +168,15 @@ public class ControlPanel implements ActionListener, GameListener {
 		initializeUI();
 		frmControl.setLocationRelativeTo(display);
 		frmControl.toFront();
-		// register key combo for buzzer sound (CTRL + SHIFT + B)
+		// register key combinations for buzzers
+		// (CTRL + SHIFT + 1, CTRL + SHIFT + 2)
 		InputMap im = btnBuzzer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-		im.put(KeyStroke.getKeyStroke("control shift B"), "play_buzzer");
-		btnBuzzer.getActionMap().put("play_buzzer", PLAY_BUZZER);
+		im.put(KeyStroke.getKeyStroke("control shift 1"), "buzzer_1");
+		im.put(KeyStroke.getKeyStroke("control shift 2"), "buzzer_2");
+		im.put(KeyStroke.getKeyStroke("control shift B"), "buzzer_sound");
+		btnBuzzer.getActionMap().put("buzzer_1", buzzerAction(1));
+		btnBuzzer.getActionMap().put("buzzer_2", buzzerAction(2));
+		btnBuzzer.getActionMap().put("buzzer_sound", PLAY_BUZZER);
 		// initialize game state
 		InputStream questionFile;
 		try {
@@ -413,6 +417,19 @@ public class ControlPanel implements ActionListener, GameListener {
 		btnNaechsteFrage.setEnabled(nextQ);
 		// Enable/disable lives text field
 		txtALeben.setEnabled(currTeam != Game.NO_TEAM);
+	}
+
+	private Action buzzerAction(int team) {
+		return new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (game.getRoundState() == RoundState.BUZZER
+					&& game.getCurrentTeam() == Game.NO_TEAM) {
+					game.setCurrentTeam(team);
+				}
+				GameSound.playSound("buzzer.ogg");
+			}
+		};
 	}
 
 	/**

@@ -502,7 +502,7 @@ public class Game {
 			throw new IllegalArgumentException(
 				"Team Number has to be 1, 2 or NO_TEAM, was " + teamNumber);
 		}
-		this.currentTeam = teamNumber;
+		currentTeam = teamNumber;
 		update();
 	}
 

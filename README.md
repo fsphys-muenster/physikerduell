@@ -1,5 +1,6 @@
 # physikerduell
-Source code for the software used for the “Physikerduell” (“Physicists’ Feud”) which takes place every year during our Summer Festival.
+Quelltext für das Programm, das beim „Physikerduell“ eingesetzt wird, welches jedes Jahr bei unserem
+Sommerfest stattfindet.
 
 ## Regeln des Physikerduells
 Siehe Ordner [`docs/regelwerk`](docs/regelwerk).
@@ -25,10 +26,18 @@ dem Button „Fragenkatalog auswählen“ eine Datei geladen werden.
 
 ## Buzzer-Modus
 Der Buzzer kann über eine (emulierte) Tastenkombination ausgelöst werden. Bisher implementiert
-ist die Kombination:<br> <kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>B</kbd>.
+sind die Kombinationen:
+- <kbd>Strg</kbd><kbd>Shift</kbd><kbd>1</kbd> für Team 1,
+- <kbd>Strg</kbd><kbd>Shift</kbd><kbd>2</kbd> für Team 2 und
+- <kbd>Strg</kbd><kbd>Shift</kbd><kbd>B</kbd> (spielt nur das Buzzer-Geräusch ab).
+
 Um den Buzzer mittels Tastenkombination auszulösen, muss das `ControlPanel`-Fenster im
 Vordergrund (fokussiert) sein.
 
+### Umsetzung des Buzzers mittels [MaKey MaKey](http://makeymakey.com)
+Siehe hierzu die Anleitung unter [`docs/buzzer/README.md`](docs/buzzer/README.md).
+
 ## Zum Ändern von Sounds und Splashscreens:
 1. Die `.jar`-Datei in einem Programm öffnen → z. B. [7-Zip](http://www.7-zip.de/)
-2. In der Datei die entsprechenden Dateien (`.png`, `.mp3`, …) ändern
+2. In der Datei die entsprechenden Dateien (`.png`, `.ogg`, …) ändern
+

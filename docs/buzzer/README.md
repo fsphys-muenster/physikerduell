@@ -75,6 +75,7 @@ eingestellt:
 | D3  | `'s'`            | `KEY_LEFT_SHIFT` (linke <kbd>Strg</kbd>-Taste) |
 | D2  | `'d'`            | `'2'`                                          |
 | D1  | `'f'`            | `'1'`                                          |
+| D0  | `'g'`            | `'b'`                                          |
 
 Ansonsten wurden alle Eingänge des MaKey MaKey auf ihren ursprünglichen Werten
 belassen. Die Buzzer müssen nun dementsprechend so mit dem MaKey MaKey
