@@ -1,5 +1,5 @@
 The following libraries are used in the code:
 
 TinySound v1.1.1 (including dependencies)
-http://finnkuusisto.github.com/TinySound/releases
+https://finnkuusisto.github.com/TinySound/releases
 
