@@ -69,13 +69,13 @@ Fehler auftreten, ist die Programmierung abgeschlossen.
 ## Verbinden von Buzzer und MaKey MaKey
 Derzeit ist in [`settings.h`](makey_makey/settings.h) Folgendes eingestellt:
 
-| Pin | Standardbelegung | Neue Belegung                                  |
-| --- | ---------------- | ---------------------------------------------- |
-| D4  | `'a'`            | `KEY_LEFT_CTRL` (linke <kbd>Strg</kbd>-Taste)  |
-| D3  | `'s'`            | `KEY_LEFT_SHIFT` (linke <kbd>Strg</kbd>-Taste) |
-| D2  | `'d'`            | `'2'`                                          |
-| D1  | `'f'`            | `'1'`                                          |
-| D0  | `'g'`            | `'b'`                                          |
+| Pin | Standardbelegung | Neue Belegung                                   |
+| --- | ---------------- | ----------------------------------------------- |
+| D4  | `'a'`            | `KEY_LEFT_CTRL` (linke <kbd>Strg</kbd>-Taste)   |
+| D3  | `'s'`            | `KEY_LEFT_SHIFT` (linke <kbd>Shift</kbd>-Taste) |
+| D2  | `'d'`            | `'2'`                                           |
+| D1  | `'f'`            | `'1'`                                           |
+| D0  | `'g'`            | `'b'`                                           |
 
 Ansonsten wurden alle Eingänge des MaKey MaKey auf ihren ursprünglichen Werten
 belassen. Die Buzzer müssen nun dementsprechend so mit dem MaKey MaKey
