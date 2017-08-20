@@ -1,6 +1,6 @@
 # Die Buzzer und [MaKey MaKey](http://makeymakey.com)
 Die Buzzer bestehen jeweils aus einem physischen Knopf, der an den MaKey MaKey
-der Fachschaft angeschlossen sind. Bei Drücken des Buzzer-Knopfs wird ein
+der Fachschaft angeschlossen ist. Bei Drücken des Buzzer-Knopfs wird ein
 Stromkreis geschlossen, sodass der MaKey MaKey eine bestimmte Tastenkombination
 an den per USB-Kabel angeschlossenen Computer sendet. Zum Zusammenbauen der
 funktionsfähigen Buzzer müssen also zwei Schritte durchgeführt werden:
@@ -16,7 +16,7 @@ funktionsfähigen Buzzer müssen also zwei Schritte durchgeführt werden:
 ## Programmieren des MaKey MaKey
 Für Schritt 1 gibt es
 [einen Hinweis im MaKey MaKey-FAQ](http://makeymakey.com/faq/#h.isayfkigsqoz).
-Leider ist unser MaKey MaKey älter als v1.2, sodass wird die „einfache“
+Leider ist unser MaKey MaKey älter als v1.2, sodass wir die „einfache“
 Methode der Konfiguration über den Browser nicht nutzen können. Stattdessen
 muss der [MaKey MaKey über das Arduino IDE umprogrammiert
 werden](https://learn.sparkfun.com/tutorials/makey-makey-advanced-guide).
@@ -28,10 +28,9 @@ Dazu kann man einfach den Schritten in der verlinkten Anleitung folgen.
 - Unter Linux muss man, falls
   [ModemManager](https://www.freedesktop.org/wiki/Software/ModemManager/)
   installiert ist, entweder das Skript
-  [`disable_modemmanager.sh`](docs/buzzer/disable_modemmanager.sh)
-  ausführen oder ModemManager deinstallieren (leider erfordert beides
-  Administrator-Rechte). Ansonsten kann sich das Ardunio IDE nicht mit dem
-  MaKey MaKey verbinden.
+  [`disable_modemmanager.sh`](disable_modemmanager.sh) ausführen oder
+  ModemManager deinstallieren (leider erfordert beides Administrator-Rechte).
+  Ansonsten kann sich das Ardunio IDE nicht mit dem MaKey MaKey verbinden.
 - Falls beim Upload im Arduino IDE der Fehler
 
   >     avrdude: ser_open(): can't open device "/dev/ttyACM0": Device or resource busy
@@ -57,17 +56,15 @@ Dazu kann man einfach den Schritten in der verlinkten Anleitung folgen.
   auftritt, liegt das wahrscheinlich an ModemManager. Dann sollte wie oben
   beschrieben vorgegangen werden.
 
-Der Arduino-Quelltext ist unter
-[`docs/buzzer/makey_makey/`](docs/buzzer/makey_makey/) oder
+Der Arduino-Quelltext ist unter [`docs/buzzer/makey_makey/`](makey_makey/) oder
 [auf GitHub bei SparkFun](https://github.com/sparkfun/MaKeyMaKey/tree/master/firmware/Arduino/makey_makey/)
-zu finden. In der Datei [`settings.h`](docs/buzzer/makey_makey/settings.h) kann
-man anpassen, welcher Eingang auf dem MaKey MaKey für welche Taste auf der
-Tastatur stehen soll. Wenn nach einem Klick auf den Upload-Knopf im Arduino IDE
-keine Fehler auftreten, ist die Programmierung abgeschlossen.
+zu finden. In der Datei [`settings.h`](makey_makey/settings.h) kann man
+anpassen, welcher Eingang auf dem MaKey MaKey für welche Taste auf der Tastatur
+stehen soll. Wenn nach einem Klick auf den Upload-Knopf im Arduino IDE keine
+Fehler auftreten, ist die Programmierung abgeschlossen.
 
 ## Verbinden von Buzzer und MaKey MaKey
-Derzeit ist in [`settings.h`](docs/buzzer/makey_makey/settings.h) Folgendes
-eingestellt:
+Derzeit ist in [`settings.h`](makey_makey/settings.h) Folgendes eingestellt:
 
 | Pin | Standardbelegung | Neue Belegung                                  |
 | --- | ---------------- | ---------------------------------------------- |
