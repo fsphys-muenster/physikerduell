@@ -17,8 +17,11 @@ funktionsfähigen Buzzer müssen also zwei Schritte durchgeführt werden:
 Für Schritt 1 gibt es
 [einen Hinweis im MaKey MaKey-FAQ](http://makeymakey.com/faq/#h.isayfkigsqoz).
 Leider ist unser MaKey MaKey älter als v1.2, sodass wir die „einfache“
-Methode der Konfiguration über den Browser nicht nutzen können. Stattdessen
-muss der [MaKey MaKey über das Arduino IDE umprogrammiert
+Methode der Konfiguration über den Browser nicht nutzen können. (Allerdings
+scheint man [auf diese Weise Tasten wie <kbd>Strg</kbd> oder <kbd>Shift</kbd>
+ohnehin nicht belegen zu
+können](http://www.makeymakey.com/forums/index.php?topic=15814.0).)
+Stattdessen muss der [MaKey MaKey über das Arduino IDE umprogrammiert
 werden](https://learn.sparkfun.com/tutorials/makey-makey-advanced-guide).
 Dazu kann man einfach den Schritten in der verlinkten Anleitung folgen.
 
