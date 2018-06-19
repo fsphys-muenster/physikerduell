@@ -34,7 +34,8 @@ Dazu kann man einfach den Schritten in der verlinkten Anleitung folgen.
 
       sudo usermod -a -G dialout "$USER"
 
-  (erfordert Administratorrechte).
+  (erfordert Administratorrechte). Danach ist es erforderlich, sich **aus- und
+  wieder einzuloggen**, damit die Änderung wirksam wird.
   [Weitere Informationen in der Arduino-Dokumentation.](https://www.arduino.cc/en/Guide/Linux#toc6)
 - Unter Linux muss man, falls
   [ModemManager](https://www.freedesktop.org/wiki/Software/ModemManager/)
