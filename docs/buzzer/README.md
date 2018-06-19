@@ -28,12 +28,20 @@ Dazu kann man einfach den Schritten in der verlinkten Anleitung folgen.
 **Hinweise:**
 - Die Anleitung funktioniert, auch wenn auf unserem MaKey MaKey nicht das
   SparkFun-Logo aufgedruckt ist.
+- Unter Linux muss man die notwendigen Nutzerrechte haben, um auf den
+  MaKey MaKey (oder allgemein Arduino-Geräte) via serieller Schnittstelle
+  zugreifen zu können. Unter Ubuntu erreicht man das z. B. mit dem Befehl
+
+      sudo usermod -a -G dialout "$USER"
+
+  (erfordert Administratorrechte).
+  [Weitere Informationen in der Arduino-Dokumentation.](https://www.arduino.cc/en/Guide/Linux#toc6)
 - Unter Linux muss man, falls
   [ModemManager](https://www.freedesktop.org/wiki/Software/ModemManager/)
   installiert ist, entweder das Skript
   [`disable_modemmanager.sh`](disable_modemmanager.sh) ausführen oder
   ModemManager deinstallieren (leider erfordert beides Administrator-Rechte).
-  Ansonsten kann sich das Ardunio IDE nicht mit dem MaKey MaKey verbinden.
+  Ansonsten kann sich das Arduino IDE nicht mit dem MaKey MaKey verbinden.
 - Falls beim Upload im Arduino IDE der Fehler
 
   >     avrdude: ser_open(): can't open device "/dev/ttyACM0": Device or resource busy
@@ -56,8 +64,9 @@ Dazu kann man einfach den Schritten in der verlinkten Anleitung folgen.
   >     	at processing.app.Serial.touchForCDCReset(Serial.java:93)
   >     	... 6 more
 
-  auftritt, liegt das wahrscheinlich an ModemManager. Dann sollte wie oben
-  beschrieben vorgegangen werden.
+  auftritt, liegt das wahrscheinlich an den fehlenden Rechten für die serielle
+  Schnittstelle oder an ModemManager. Dann sollte wie oben beschrieben
+  vorgegangen werden.
 
 Der Arduino-Quelltext ist unter [`docs/buzzer/makey_makey/`](makey_makey/) oder
 [auf GitHub bei SparkFun](https://github.com/sparkfun/MaKeyMaKey/tree/master/firmware/Arduino/makey_makey/)
@@ -71,6 +80,10 @@ Derzeit ist in [`settings.h`](makey_makey/settings.h) Folgendes eingestellt:
 
 | Pin | Standardbelegung | Neue Belegung                                   |
 | --- | ---------------- | ----------------------------------------------- |
+| A4  | Maus ↓           | `KEY_LEFT_CTRL` (linke <kbd>Strg</kbd>-Taste)   |
+| A3  | Maus ←           | `KEY_LEFT_SHIFT` (linke <kbd>Shift</kbd>-Taste) |
+| A2  | Maus →           | `'2'`                                           |
+| A1  | Mausklick links  | `'1'`                                           |
 | D4  | `'a'`            | `KEY_LEFT_CTRL` (linke <kbd>Strg</kbd>-Taste)   |
 | D3  | `'s'`            | `KEY_LEFT_SHIFT` (linke <kbd>Shift</kbd>-Taste) |
 | D2  | `'d'`            | `'2'`                                           |
